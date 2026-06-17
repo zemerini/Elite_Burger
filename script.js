@@ -135,4 +135,12 @@
       cardObserver.observe(card);
     }
   }
+
+  // --- Easter Egg: Auto W ↔ M flip ---
+  const easterEggW = document.getElementById('easter-egg-w');
+  if (easterEggW) {
+    setInterval(() => {
+      easterEggW.classList.toggle('flipped');
+    }, 4000);
+  }
 })();

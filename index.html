@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Elite Burger — Premium Smashburger | Bremen</title>
-  <meta name="description" content="Elite Burger — Die Kunst des Smash. Edle Premium Smashburger aus Köln. Handgemacht, perfekt gesmashed, unwiderstehlich.">
+  <meta name="description"
+    content="Elite Burger — Die Kunst des Smash. Edle Premium Smashburger aus Köln. Handgemacht, perfekt gesmashed, unwiderstehlich.">
   <meta name="theme-color" content="#0d0d0d">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
+
 <body>
   <!-- Ambient Cursor Glow -->
   <div class="ambient-glow" id="ambientGlow" aria-hidden="true"></div>
@@ -19,13 +24,7 @@
   <header class="header" id="header">
     <div class="header__inner">
       <a href="#" class="header__logo" id="header-logo" aria-label="Elite Burger Home">
-        <img
-          src="images/Logo.PNG"
-          alt="Elite Burger Logo"
-          class="header__logo-image"
-          width="42"
-          height="42"
-        >
+        <img src="images/Logo.PNG" alt="Elite Burger Logo" class="header__logo-image" width="42" height="42">
         <span class="header__logo-text">Elite Burger</span>
       </a>
     </div>
@@ -35,13 +34,7 @@
     <!-- ==================== HERO ==================== -->
     <section class="hero" id="hero">
       <div class="hero__bg" aria-hidden="true">
-        <img
-          src="images/hero_burger.png"
-          alt=""
-          class="hero__bg-image"
-          loading="eager"
-          fetchpriority="high"
-        >
+        <img src="images/hero_burger.png" alt="" class="hero__bg-image" loading="eager" fetchpriority="high">
         <div class="hero__bg-overlay"></div>
       </div>
 
@@ -73,140 +66,156 @@
       </div>
 
       <div class="menu__grid">
-        <!-- Card 1: Classic Smash -->
-        <article class="menu-card reveal reveal-delay-1" id="menu-classic-smash">
+        <!-- Card 1: Elite Burger -->
+        <article class="menu-card reveal reveal-delay-1" id="menu-elite-burger">
           <div class="menu-card__image-wrapper">
-            <img
-              src="images/classic_smash.png"
-              alt="Classic Smash Burger mit doppeltem Patty und Cheddar"
-              class="menu-card__image"
-              loading="lazy"
-            >
+            <img src="Burger_Bilder/elite_burger.jpeg" alt="Elite Burger" class="menu-card__image" loading="lazy">
             <div class="menu-card__image-overlay" aria-hidden="true"></div>
-            <span class="menu-card__tag">🍔 Klassiker</span>
+            <span class="menu-card__tag menu-card__tag--gold">Signature</span>
           </div>
           <div class="menu-card__body">
             <div class="menu-card__top-row">
-              <h3 class="menu-card__name">Classic Smash</h3>
-              <span class="menu-card__price">11,90 €</span>
+              <h3 class="menu-card__name">Elite Burger</h3>
+              <span class="menu-card__price">10,00 €</span>
             </div>
-            <p class="menu-card__desc">2× Premium Beef, Cheddar Cheese, gehackte Zwiebeln, Pickles & edle Haussauce.</p>
+            <p class="menu-card__desc">Unser absolutes Meisterwerk: Eine geniale Kombination aus rauchigem Bacon,
+              karamellisierten Zwiebeln und feurigen Jalapeños, abgerundet mit BBQ- und Joppiesauce.</p>
             <div class="menu-card__ingredients" aria-label="Zutaten">
-              <span class="menu-card__ingredient">Premium Beef</span>
-              <span class="menu-card__ingredient">Cheddar</span>
+              <span class="menu-card__ingredient">Potato Bun</span>
+              <span class="menu-card__ingredient">2x Smashed Beef</span>
+              <span class="menu-card__ingredient">4x Käse</span>
+              <span class="menu-card__ingredient">Bacon</span>
+              <span class="menu-card__ingredient">Karamellisierte Zwiebeln</span>
+              <span class="menu-card__ingredient">Jalapeños</span>
+              <span class="menu-card__ingredient">BBQ-Sauce</span>
+              <span class="menu-card__ingredient">Joppiesauce</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2: Big Wac -->
+        <article class="menu-card reveal reveal-delay-2" id="menu-big-wac">
+          <div class="menu-card__image-wrapper">
+            <img src="Burger_Bilder/big_wac.jpeg" alt="Big Wac Burger" class="menu-card__image" loading="lazy">
+            <div class="menu-card__image-overlay" aria-hidden="true"></div>
+            <span class="menu-card__tag">Haus-Spezial</span>
+          </div>
+          <div class="menu-card__body">
+            <div class="menu-card__top-row">
+              <h3 class="menu-card__name">Big <span class="wac-perspective"><span class="easter-egg-w" id="easter-egg-w">W</span></span>ac</h3>
+              <span class="menu-card__price">10,00 €</span>
+            </div>
+            <p class="menu-card__desc">Vom goldenen M inspiriert, von uns perfektioniert: So hätte der berühmteste
+              Doppel-Decker der Welt schon immer schmecken sollen.</p>
+            <div class="menu-card__ingredients" aria-label="Zutaten">
+              <span class="menu-card__ingredient">Potato Bun</span>
+              <span class="menu-card__ingredient">2x Smashed Beef</span>
+              <span class="menu-card__ingredient">4x Käse</span>
               <span class="menu-card__ingredient">Zwiebeln</span>
-              <span class="menu-card__ingredient">Pickles</span>
-              <span class="menu-card__ingredient">Haussauce</span>
+              <span class="menu-card__ingredient">Eingelegte Gurke</span>
+              <span class="menu-card__ingredient">Eisbergsalat</span>
+              <span class="menu-card__ingredient">Hausgemachte Soße</span>
             </div>
           </div>
         </article>
 
-        <!-- Card 2: Cheesesmash -->
-        <article class="menu-card reveal reveal-delay-2" id="menu-cheesesmash">
+        <!-- Card 3: Double Cheeseburger -->
+        <article class="menu-card reveal reveal-delay-3" id="menu-double-cheeseburger">
           <div class="menu-card__image-wrapper">
-            <img
-              src="images/cheese_smash.png"
-              alt="Cheesesmash Burger mit extra Cheddar"
-              class="menu-card__image"
-              loading="lazy"
-            >
+            <img src="Burger_Bilder/double_cheese_burger.jpeg" alt="Double Cheeseburger" class="menu-card__image"
+              loading="lazy">
             <div class="menu-card__image-overlay" aria-hidden="true"></div>
-            <span class="menu-card__tag">🧀 Extra Käse</span>
+            <span class="menu-card__tag">Klassiker</span>
           </div>
           <div class="menu-card__body">
             <div class="menu-card__top-row">
-              <h3 class="menu-card__name">Cheesesmash</h3>
-              <span class="menu-card__price">12,00 €</span>
+              <h3 class="menu-card__name">Double Cheeseburger</h3>
+              <span class="menu-card__price">10,00 €</span>
             </div>
-            <p class="menu-card__desc">2× Premium Beef, Extra Cheddar Cheese, geschmorte Zwiebeln & Senf-Mayonnaise.</p>
+            <p class="menu-card__desc">Doppelte Power: Zwei perfekt kross gesmashte Beef-Patties umhüllt von einer
+              wahren Lawine aus cremig geschmolzenem Käse.</p>
             <div class="menu-card__ingredients" aria-label="Zutaten">
-              <span class="menu-card__ingredient">Premium Beef</span>
-              <span class="menu-card__ingredient">Extra Cheddar</span>
-              <span class="menu-card__ingredient">Geschmorte Zwiebeln</span>
-              <span class="menu-card__ingredient">Senf-Mayo</span>
+              <span class="menu-card__ingredient">Potato Bun</span>
+              <span class="menu-card__ingredient">2x Smashed Beef</span>
+              <span class="menu-card__ingredient">4x Käse</span>
+              <span class="menu-card__ingredient">Zwiebeln</span>
+              <span class="menu-card__ingredient">Eingelegte Gurke</span>
+              <span class="menu-card__ingredient">Ketchup</span>
+              <span class="menu-card__ingredient">Senf</span>
             </div>
           </div>
         </article>
 
-        <!-- Card 3: Smoky Bacon -->
-        <article class="menu-card reveal reveal-delay-3" id="menu-smoky-bacon">
+        <!-- Card 4: Double Chili Cheeseburger -->
+        <article class="menu-card reveal reveal-delay-4" id="menu-double-chili-cheeseburger">
           <div class="menu-card__image-wrapper">
-            <img
-              src="images/smoky_bacon.png"
-              alt="Smoky Bacon Burger mit Crispy Bacon und BBQ Sauce"
-              class="menu-card__image"
-              loading="lazy"
-            >
+            <img src="Burger_Bilder/double_chili_cheese_burger.jpeg" alt="Double Chili Cheeseburger"
+              class="menu-card__image" loading="lazy">
             <div class="menu-card__image-overlay" aria-hidden="true"></div>
-            <span class="menu-card__tag">🥓 Bestseller</span>
+            <span class="menu-card__tag">Scharf</span>
           </div>
           <div class="menu-card__body">
             <div class="menu-card__top-row">
-              <h3 class="menu-card__name">Smoky Bacon</h3>
-              <span class="menu-card__price">14,80 €</span>
+              <h3 class="menu-card__name">Double Chili Cheeseburger</h3>
+              <span class="menu-card__price">10,00 €</span>
             </div>
-            <p class="menu-card__desc">2× Premium Beef, Crispy Bacon, Cheddar Cheese, Röstzwiebeln & edle BBQ-Rauchsauce.</p>
+            <p class="menu-card__desc">Feuriger Hochgenuss: Zwei saftige Smash-Patties mit feurigen Jalapeños,
+              abgerundet durch unsere unwiderstehlich cremige Chili-Cheese-Sauce.</p>
             <div class="menu-card__ingredients" aria-label="Zutaten">
-              <span class="menu-card__ingredient">Premium Beef</span>
-              <span class="menu-card__ingredient">Crispy Bacon</span>
-              <span class="menu-card__ingredient">Cheddar</span>
-              <span class="menu-card__ingredient">Röstzwiebeln</span>
-              <span class="menu-card__ingredient">BBQ-Rauchsauce</span>
+              <span class="menu-card__ingredient">Potato Bun</span>
+              <span class="menu-card__ingredient">2x Smashed Beef</span>
+              <span class="menu-card__ingredient">2x Käse</span>
+              <span class="menu-card__ingredient">Jalapeños</span>
+              <span class="menu-card__ingredient">Chili-Cheese-Sauce</span>
             </div>
           </div>
         </article>
 
-        <!-- Card 4: The Truffle -->
-        <article class="menu-card reveal reveal-delay-4" id="menu-the-truffle">
+        <!-- Card 5: Cheeseburger -->
+        <article class="menu-card reveal reveal-delay-5" id="menu-cheeseburger">
           <div class="menu-card__image-wrapper">
-            <img
-              src="images/truffle_burger.png"
-              alt="The Truffle Burger mit Wildpilzen und Trüffel-Mayonnaise"
-              class="menu-card__image"
-              loading="lazy"
-            >
+            <img src="Burger_Bilder/cheese_burger.jpeg" alt="Cheeseburger" class="menu-card__image" loading="lazy">
             <div class="menu-card__image-overlay" aria-hidden="true"></div>
-            <span class="menu-card__tag">🍄 Premium</span>
+            <span class="menu-card__tag">Beliebt</span>
           </div>
           <div class="menu-card__body">
             <div class="menu-card__top-row">
-              <h3 class="menu-card__name">The Truffle</h3>
-              <span class="menu-card__price">16,90 €</span>
+              <h3 class="menu-card__name">Cheeseburger</h3>
+              <span class="menu-card__price">8,50 €</span>
             </div>
-            <p class="menu-card__desc">2× Premium Beef, geschmorte Wildpilze, Schweizer Käse & feine Trüffel-Mayonnaise.</p>
+            <p class="menu-card__desc">Der absolute Klassiker unter den Smashburgern – perfekt auf den Punkt gesmashed
+              mit extra viel geschmolzenem Käse.</p>
             <div class="menu-card__ingredients" aria-label="Zutaten">
-              <span class="menu-card__ingredient">Premium Beef</span>
-              <span class="menu-card__ingredient">Wildpilze</span>
-              <span class="menu-card__ingredient">Schweizer Käse</span>
-              <span class="menu-card__ingredient">Trüffel-Mayo</span>
+              <span class="menu-card__ingredient">Potato Bun</span>
+              <span class="menu-card__ingredient">1x Smashed Beef</span>
+              <span class="menu-card__ingredient">2x Käse</span>
+              <span class="menu-card__ingredient">Zwiebeln</span>
+              <span class="menu-card__ingredient">Eingelegte Gurke</span>
+              <span class="menu-card__ingredient">Ketchup</span>
+              <span class="menu-card__ingredient">Senf</span>
             </div>
           </div>
         </article>
 
-        <!-- Card 5: Veggie Smash -->
-        <article class="menu-card reveal reveal-delay-5" id="menu-veggie-smash">
+        <!-- Card 6: Chicken Burger -->
+        <article class="menu-card reveal reveal-delay-6" id="menu-chicken-burger">
           <div class="menu-card__image-wrapper">
-            <img
-              src="images/veggie_smash.png"
-              alt="Veggie Smash Burger mit pflanzlichem Patty"
-              class="menu-card__image"
-              loading="lazy"
-            >
+            <img src="Burger_Bilder/chicken_burger.jpeg" alt="Chicken Burger" class="menu-card__image" loading="lazy">
             <div class="menu-card__image-overlay" aria-hidden="true"></div>
-            <span class="menu-card__tag">🌿 Vegetarisch</span>
+            <span class="menu-card__tag">Knusprig</span>
           </div>
           <div class="menu-card__body">
             <div class="menu-card__top-row">
-              <h3 class="menu-card__name">Veggie Smash</h3>
-              <span class="menu-card__price">13,90 €</span>
+              <h3 class="menu-card__name">Chicken Burger</h3>
+              <span class="menu-card__price">8,50 €</span>
             </div>
-            <p class="menu-card__desc">Plant-based Patty, Cheddar Cheese, frischer Lollo Bionda, Tomate & Haussauce.</p>
+            <p class="menu-card__desc">Die knusprige Alternative: Goldgelb paniertes Hähnchenfilet mit knackigem Salat, frischen Tomatenscheiben und cremiger Knoblauch-Mayonnaise.</p>
             <div class="menu-card__ingredients" aria-label="Zutaten">
-              <span class="menu-card__ingredient">Plant-based Patty</span>
-              <span class="menu-card__ingredient">Cheddar</span>
-              <span class="menu-card__ingredient">Lollo Bionda</span>
+              <span class="menu-card__ingredient">Potato Bun</span>
+              <span class="menu-card__ingredient">Crispy Chicken</span>
+              <span class="menu-card__ingredient">Salat</span>
               <span class="menu-card__ingredient">Tomate</span>
-              <span class="menu-card__ingredient">Haussauce</span>
+              <span class="menu-card__ingredient">Knoblauchmajo</span>
             </div>
           </div>
         </article>
@@ -223,7 +232,13 @@
       <div class="info__grid">
         <!-- Opening Hours -->
         <div class="info-block reveal reveal-delay-1" id="info-hours">
-          <div class="info-block__icon" aria-hidden="true">🕒</div>
+          <div class="info-block__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+          </div>
           <h3 class="info-block__title">Öffnungszeiten</h3>
           <div class="info-block__row">
             <span class="info-block__day">Montag – Freitag</span>
@@ -237,19 +252,20 @@
 
         <!-- Location -->
         <div class="info-block reveal reveal-delay-2" id="info-location">
-          <div class="info-block__icon" aria-hidden="true">📍</div>
+          <div class="info-block__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </div>
           <h3 class="info-block__title">Anschrift & Anfahrt</h3>
           <p class="info-block__address">
             Marktstraße 4<br>
             50667 Köln
           </p>
-          <a
-            href="https://maps.google.com/?q=Marktstraße+4,+50667+Köln"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="info-block__link"
-            id="info-maps-link"
-          >
+          <a href="https://maps.google.com/?q=Marktstraße+4,+50667+Köln" target="_blank" rel="noopener noreferrer"
+            class="info-block__link" id="info-maps-link">
             Auf Google Maps anzeigen
             <span class="info-block__link-arrow" aria-hidden="true">→</span>
           </a>
@@ -261,25 +277,33 @@
   <!-- ==================== FOOTER ==================== -->
   <footer class="footer" id="footer">
     <div class="footer__social">
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer__social-link" id="social-instagram" aria-label="Elite Burger auf Instagram">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer__social-link"
+        id="social-instagram" aria-label="Elite Burger auf Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" />
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+        </svg>
       </a>
-      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer__social-link" id="social-facebook" aria-label="Elite Burger auf Facebook">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer__social-link"
+        id="social-facebook" aria-label="Elite Burger auf Facebook">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+        </svg>
       </a>
-      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer__social-link" id="social-tiktok" aria-label="Elite Burger auf TikTok">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer__social-link"
+        id="social-tiktok" aria-label="Elite Burger auf TikTok">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+        </svg>
       </a>
     </div>
 
     <div class="footer__brand">
-      <img
-        src="images/Logo.PNG"
-        alt="Elite Burger Logo"
-        class="footer__brand-logo"
-        width="34"
-        height="34"
-      >
+      <img src="images/Logo.PNG" alt="Elite Burger Logo" class="footer__brand-logo" width="34" height="34">
       <span class="footer__brand-name">Elite Burger</span>
     </div>
     <p class="footer__copyright">© 2026 Elite Burger. Alle Rechte vorbehalten.</p>
@@ -290,6 +314,7 @@
     </nav>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
 </body>
+
 </html>
