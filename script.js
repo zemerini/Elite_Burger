@@ -143,4 +143,33 @@
       easterEggW.classList.toggle('flipped');
     }, 4000);
   }
+
+  // --- Menu Toggle (Single / Menü) ---
+  const menuTogglePill = document.getElementById('menuTogglePill');
+  const btnSingle = document.getElementById('btn-single');
+  const btnMenu = document.getElementById('btn-menu');
+  const menuSection = document.getElementById('menu');
+
+  if (menuTogglePill && btnSingle && btnMenu && menuSection) {
+    function setMenuMode(mode) {
+      if (mode === 'menu') {
+        menuTogglePill.setAttribute('data-active', 'menu');
+        btnSingle.classList.remove('active');
+        btnSingle.setAttribute('aria-pressed', 'false');
+        btnMenu.classList.add('active');
+        btnMenu.setAttribute('aria-pressed', 'true');
+        menuSection.classList.add('menu--show-menu');
+      } else {
+        menuTogglePill.setAttribute('data-active', 'single');
+        btnSingle.classList.add('active');
+        btnSingle.setAttribute('aria-pressed', 'true');
+        btnMenu.classList.remove('active');
+        btnMenu.setAttribute('aria-pressed', 'false');
+        menuSection.classList.remove('menu--show-menu');
+      }
+    }
+
+    btnSingle.addEventListener('click', () => setMenuMode('single'));
+    btnMenu.addEventListener('click', () => setMenuMode('menu'));
+  }
 })();

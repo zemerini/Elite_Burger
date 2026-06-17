@@ -13,6 +13,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800;900&display=swap"
     rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
   <link rel="stylesheet" href="style.css?v=2">
 </head>
 
@@ -24,7 +27,7 @@
   <header class="header" id="header">
     <div class="header__inner">
       <a href="#" class="header__logo" id="header-logo" aria-label="Elite Burger Home">
-        <img src="images/Logo.PNG" alt="Elite Burger Logo" class="header__logo-image" width="42" height="42">
+        <img src="images/Logo_transparent.png" alt="Elite Burger Logo" class="header__logo-image" width="42" height="42">
         <span class="header__logo-text">Elite Burger</span>
       </a>
     </div>
@@ -34,13 +37,14 @@
     <!-- ==================== HERO ==================== -->
     <section class="hero" id="hero">
       <div class="hero__bg" aria-hidden="true">
-        <img src="images/hero_burger.png" alt="" class="hero__bg-image" loading="eager" fetchpriority="high">
+        <video class="hero__bg-video" autoplay loop muted playsinline poster="images/hero_burger.png">
+          <source src="Burger_Bilder/burger_background.mp4" type="video/mp4">
+        </video>
         <div class="hero__bg-overlay"></div>
       </div>
 
       <div class="hero__content reveal">
         <div class="hero__badge">
-          <span class="hero__badge-dot" aria-hidden="true"></span>
           Premium Smashburger · Bremen
         </div>
         <h1 class="hero__title">Die Kunst<br>des Smash.</h1>
@@ -65,18 +69,37 @@
         <div class="menu__divider" aria-hidden="true"></div>
       </div>
 
+      <!-- Toggle Switch for Single/Menü -->
+      <div class="menu__toggle-container reveal reveal-delay-1">
+        <div class="menu__toggle-pill" id="menuTogglePill" data-active="single">
+          <button class="menu__toggle-btn active" id="btn-single" type="button" aria-pressed="true">Single</button>
+          <button class="menu__toggle-btn" id="btn-menu" type="button" aria-pressed="false">Menü</button>
+          <div class="menu__toggle-slider" aria-hidden="true"></div>
+        </div>
+      </div>
+
       <div class="menu__grid">
         <!-- Card 1: Elite Burger -->
-        <article class="menu-card reveal reveal-delay-1" id="menu-elite-burger">
+        <article class="menu-card reveal reveal-delay-2" id="menu-elite-burger">
           <div class="menu-card__image-wrapper">
             <img src="Burger_Bilder/elite_burger.jpeg" alt="Elite Burger" class="menu-card__image" loading="lazy">
             <div class="menu-card__image-overlay" aria-hidden="true"></div>
             <span class="menu-card__tag menu-card__tag--gold">Signature</span>
+            <span class="menu-card__menu-tag">Menü-Deal</span>
           </div>
           <div class="menu-card__body">
             <div class="menu-card__top-row">
               <h3 class="menu-card__name">Elite Burger</h3>
-              <span class="menu-card__price">10,00 €</span>
+              <div class="menu-card__price-wrapper">
+                <span class="menu-card__price menu-card__price--single">10,00 €</span>
+                <span class="menu-card__price menu-card__price--menu">15,00 €</span>
+              </div>
+            </div>
+            <div class="menu-card__menu-badge">
+              <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Inkl. Pommes und Getränk
             </div>
             <p class="menu-card__desc">Unser absolutes Meisterwerk: Eine geniale Kombination aus rauchigem Bacon,
               karamellisierten Zwiebeln und feurigen Jalapeños, abgerundet mit BBQ- und Joppiesauce.</p>
@@ -94,16 +117,26 @@
         </article>
 
         <!-- Card 2: Big Wac -->
-        <article class="menu-card reveal reveal-delay-2" id="menu-big-wac">
+        <article class="menu-card reveal reveal-delay-3" id="menu-big-wac">
           <div class="menu-card__image-wrapper">
             <img src="Burger_Bilder/big_wac.jpeg" alt="Big Wac Burger" class="menu-card__image" loading="lazy">
             <div class="menu-card__image-overlay" aria-hidden="true"></div>
             <span class="menu-card__tag">Haus-Spezial</span>
+            <span class="menu-card__menu-tag">Menü-Deal</span>
           </div>
           <div class="menu-card__body">
             <div class="menu-card__top-row">
               <h3 class="menu-card__name">Big <span class="wac-perspective"><span class="easter-egg-w" id="easter-egg-w">W</span></span>ac</h3>
-              <span class="menu-card__price">10,00 €</span>
+              <div class="menu-card__price-wrapper">
+                <span class="menu-card__price menu-card__price--single">10,00 €</span>
+                <span class="menu-card__price menu-card__price--menu">15,00 €</span>
+              </div>
+            </div>
+            <div class="menu-card__menu-badge">
+              <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Inkl. Pommes und Getränk
             </div>
             <p class="menu-card__desc">Vom goldenen M inspiriert, von uns perfektioniert: So hätte der berühmteste
               Doppel-Decker der Welt schon immer schmecken sollen.</p>
@@ -120,17 +153,27 @@
         </article>
 
         <!-- Card 3: Double Cheeseburger -->
-        <article class="menu-card reveal reveal-delay-3" id="menu-double-cheeseburger">
+        <article class="menu-card reveal reveal-delay-4" id="menu-double-cheeseburger">
           <div class="menu-card__image-wrapper">
             <img src="Burger_Bilder/double_cheese_burger.jpeg" alt="Double Cheeseburger" class="menu-card__image"
               loading="lazy">
             <div class="menu-card__image-overlay" aria-hidden="true"></div>
             <span class="menu-card__tag">Klassiker</span>
+            <span class="menu-card__menu-tag">Menü-Deal</span>
           </div>
           <div class="menu-card__body">
             <div class="menu-card__top-row">
               <h3 class="menu-card__name">Double Cheeseburger</h3>
-              <span class="menu-card__price">10,00 €</span>
+              <div class="menu-card__price-wrapper">
+                <span class="menu-card__price menu-card__price--single">10,00 €</span>
+                <span class="menu-card__price menu-card__price--menu">15,00 €</span>
+              </div>
+            </div>
+            <div class="menu-card__menu-badge">
+              <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Inkl. Pommes und Getränk
             </div>
             <p class="menu-card__desc">Doppelte Power: Zwei perfekt kross gesmashte Beef-Patties umhüllt von einer
               wahren Lawine aus cremig geschmolzenem Käse.</p>
@@ -147,17 +190,27 @@
         </article>
 
         <!-- Card 4: Double Chili Cheeseburger -->
-        <article class="menu-card reveal reveal-delay-4" id="menu-double-chili-cheeseburger">
+        <article class="menu-card reveal reveal-delay-5" id="menu-double-chili-cheeseburger">
           <div class="menu-card__image-wrapper">
             <img src="Burger_Bilder/double_chili_cheese_burger.jpeg" alt="Double Chili Cheeseburger"
               class="menu-card__image" loading="lazy">
             <div class="menu-card__image-overlay" aria-hidden="true"></div>
             <span class="menu-card__tag">Scharf</span>
+            <span class="menu-card__menu-tag">Menü-Deal</span>
           </div>
           <div class="menu-card__body">
             <div class="menu-card__top-row">
               <h3 class="menu-card__name">Double Chili Cheeseburger</h3>
-              <span class="menu-card__price">10,00 €</span>
+              <div class="menu-card__price-wrapper">
+                <span class="menu-card__price menu-card__price--single">10,00 €</span>
+                <span class="menu-card__price menu-card__price--menu">15,00 €</span>
+              </div>
+            </div>
+            <div class="menu-card__menu-badge">
+              <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Inkl. Pommes und Getränk
             </div>
             <p class="menu-card__desc">Feuriger Hochgenuss: Zwei saftige Smash-Patties mit feurigen Jalapeños,
               abgerundet durch unsere unwiderstehlich cremige Chili-Cheese-Sauce.</p>
@@ -172,16 +225,26 @@
         </article>
 
         <!-- Card 5: Cheeseburger -->
-        <article class="menu-card reveal reveal-delay-5" id="menu-cheeseburger">
+        <article class="menu-card reveal reveal-delay-6" id="menu-cheeseburger">
           <div class="menu-card__image-wrapper">
             <img src="Burger_Bilder/cheese_burger.jpeg" alt="Cheeseburger" class="menu-card__image" loading="lazy">
             <div class="menu-card__image-overlay" aria-hidden="true"></div>
             <span class="menu-card__tag">Beliebt</span>
+            <span class="menu-card__menu-tag">Menü-Deal</span>
           </div>
           <div class="menu-card__body">
             <div class="menu-card__top-row">
               <h3 class="menu-card__name">Cheeseburger</h3>
-              <span class="menu-card__price">8,50 €</span>
+              <div class="menu-card__price-wrapper">
+                <span class="menu-card__price menu-card__price--single">8,50 €</span>
+                <span class="menu-card__price menu-card__price--menu">14,00 €</span>
+              </div>
+            </div>
+            <div class="menu-card__menu-badge">
+              <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Inkl. Pommes und Getränk
             </div>
             <p class="menu-card__desc">Der absolute Klassiker unter den Smashburgern – perfekt auf den Punkt gesmashed
               mit extra viel geschmolzenem Käse.</p>
@@ -198,16 +261,26 @@
         </article>
 
         <!-- Card 6: Chicken Burger -->
-        <article class="menu-card reveal reveal-delay-6" id="menu-chicken-burger">
+        <article class="menu-card reveal reveal-delay-1" id="menu-chicken-burger">
           <div class="menu-card__image-wrapper">
             <img src="Burger_Bilder/chicken_burger.jpeg" alt="Chicken Burger" class="menu-card__image" loading="lazy">
             <div class="menu-card__image-overlay" aria-hidden="true"></div>
             <span class="menu-card__tag">Knusprig</span>
+            <span class="menu-card__menu-tag">Menü-Deal</span>
           </div>
           <div class="menu-card__body">
             <div class="menu-card__top-row">
               <h3 class="menu-card__name">Chicken Burger</h3>
-              <span class="menu-card__price">8,50 €</span>
+              <div class="menu-card__price-wrapper">
+                <span class="menu-card__price menu-card__price--single">8,50 €</span>
+                <span class="menu-card__price menu-card__price--menu">14,00 €</span>
+              </div>
+            </div>
+            <div class="menu-card__menu-badge">
+              <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Inkl. Pommes und Getränk
             </div>
             <p class="menu-card__desc">Die knusprige Alternative: Goldgelb paniertes Hähnchenfilet mit knackigem Salat, frischen Tomatenscheiben und cremiger Knoblauch-Mayonnaise.</p>
             <div class="menu-card__ingredients" aria-label="Zutaten">
@@ -261,10 +334,10 @@
           </div>
           <h3 class="info-block__title">Anschrift & Anfahrt</h3>
           <p class="info-block__address">
-            Marktstraße 4<br>
-            50667 Köln
+            Kommodore-Johnsen-Boulevard 21<br>
+            28217 Bremen
           </p>
-          <a href="https://maps.google.com/?q=Marktstraße+4,+50667+Köln" target="_blank" rel="noopener noreferrer"
+          <a href="https://maps.google.com/?q=Kommodore-Johnsen-Boulevard+21,+28217+Bremen" target="_blank" rel="noopener noreferrer"
             class="info-block__link" id="info-maps-link">
             Auf Google Maps anzeigen
             <span class="info-block__link-arrow" aria-hidden="true">→</span>
@@ -277,7 +350,7 @@
   <!-- ==================== FOOTER ==================== -->
   <footer class="footer" id="footer">
     <div class="footer__social">
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer__social-link"
+      <a href="https://www.instagram.com/eliteburgerbremen?igsh=MW04aGdyeXQ0bzh0Yw==" target="_blank" rel="noopener noreferrer" class="footer__social-link"
         id="social-instagram" aria-label="Elite Burger auf Instagram">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round">
@@ -286,14 +359,8 @@
           <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
         </svg>
       </a>
-      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="footer__social-link"
-        id="social-facebook" aria-label="Elite Burger auf Facebook">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-        </svg>
-      </a>
-      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="footer__social-link"
+
+      <a href="https://www.tiktok.com/@myburgerbremen" target="_blank" rel="noopener noreferrer" class="footer__social-link"
         id="social-tiktok" aria-label="Elite Burger auf TikTok">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round">
@@ -303,7 +370,7 @@
     </div>
 
     <div class="footer__brand">
-      <img src="images/Logo.PNG" alt="Elite Burger Logo" class="footer__brand-logo" width="34" height="34">
+      <img src="images/Logo_transparent.png" alt="Elite Burger Logo" class="footer__brand-logo" width="34" height="34">
       <span class="footer__brand-name">Elite Burger</span>
     </div>
     <p class="footer__copyright">© 2026 Elite Burger. Alle Rechte vorbehalten.</p>
