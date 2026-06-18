@@ -355,17 +355,8 @@
           </svg>
         </div>
         <h3 class="info-block__title">News & Aktuelles</h3>
-        <div class="info-block__news-grid">
-          <article class="news-card">
-            <div class="news-card__meta">
-              <span class="news-card__badge news-card__badge--accent">Neueröffnung</span>
-              <time class="news-card__date" datetime="2026-08-31">31.08.2026</time>
-            </div>
-            <h4 class="news-card__title">Große Neueröffnung am 31.08.2026!</h4>
-            <p class="news-card__text">
-              Der Countdown läuft! Am 31. August 2026 öffnen wir endlich unseren neuen Laden am Kommodore-Johnsen-Boulevard 21 in Bremen. Freut euch auf erstklassige Smashburger, frisch zubereitete Pommes und vieles mehr!
-            </p>
-          </article>
+        <div class="info-block__news-grid" id="news-container">
+          <p class="news-loading" style="color: var(--text-muted); font-size: 0.95rem; font-style: italic;">News werden geladen...</p>
         </div>
       </div>
     </section>
@@ -399,9 +390,20 @@
     </div>
     <p class="footer__copyright">© 2026 Elite Burger. Alle Rechte vorbehalten.</p>
     <nav class="footer__legal" aria-label="Rechtliche Links">
-      <a href="#" class="footer__legal-link" id="legal-kontakt">Kontakt</a>
-      <a href="#" class="footer__legal-link" id="legal-impressum">Impressum</a>
-      <a href="#" class="footer__legal-link" id="legal-datenschutz">Datenschutz</a>
+      <a href="impressum.html" class="footer__legal-link" id="legal-impressum">
+        Impressum
+        <svg class="wip-gear-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-left: 4px; display: inline-block;">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </a>
+      <a href="datenschutz.html" class="footer__legal-link" id="legal-datenschutz">
+        Datenschutz
+        <svg class="wip-gear-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-left: 4px; display: inline-block;">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </a>
     </nav>
   </footer>
 

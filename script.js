@@ -172,4 +172,53 @@
     btnSingle.addEventListener('click', () => setMenuMode('single'));
     btnMenu.addEventListener('click', () => setMenuMode('menu'));
   }
+
+  // --- Dynamic News Loading ---
+  async function loadNews() {
+    const container = document.getElementById('news-container');
+    if (!container) return;
+
+    try {
+      const response = await fetch('get_news.php');
+      if (!response.ok) throw new Error('Netzwerk-Antwort war nicht ok');
+      const newsList = await response.json();
+
+      if (newsList.length === 0) {
+        container.innerHTML = '<p class="news-empty" style="color: var(--text-muted); font-style: italic;">Zurzeit gibt es keine Neuigkeiten.</p>';
+        return;
+      }
+
+      container.innerHTML = newsList.map(item => `
+        <article class="news-card">
+          <div class="news-card__meta">
+            <span class="news-card__badge news-card__badge--accent">${escapeHtml(item.badge)}</span>
+            <time class="news-card__date" datetime="${escapeHtml(item.news_date)}">${escapeHtml(item.news_date)}</time>
+          </div>
+          <h4 class="news-card__title">${escapeHtml(item.title)}</h4>
+          <p class="news-card__text">${escapeHtml(item.content)}</p>
+        </article>
+      `).join('');
+    } catch (error) {
+      console.error('Fehler beim Laden der News:', error);
+      container.innerHTML = '<p class="news-error" style="color: var(--danger-color); font-size: 0.95rem;">Neuigkeiten konnten nicht geladen werden.</p>';
+    }
+  }
+
+  function escapeHtml(text) {
+    if (!text) return '';
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  // News laden, sobald das DOM bereit ist
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadNews);
+  } else {
+    loadNews();
+  }
 })();
+
