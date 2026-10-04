@@ -596,6 +596,38 @@
     });
   }
 
+  // --- Mobile Legend Category Tabs ---
+  const tabBtnAllergens = document.getElementById('tabBtnAllergens');
+  const tabBtnAdditives = document.getElementById('tabBtnAdditives');
+  const colAllergens = document.getElementById('legendColAllergens');
+  const colAdditives = document.getElementById('legendColAdditives');
+
+  function setLegendTab(tab) {
+    if (!tabBtnAllergens || !tabBtnAdditives || !colAllergens || !colAdditives) return;
+    const isAllergens = tab === 'allergens';
+
+    tabBtnAllergens.classList.toggle('is-active', isAllergens);
+    tabBtnAllergens.setAttribute('aria-selected', isAllergens.toString());
+
+    tabBtnAdditives.classList.toggle('is-active', !isAllergens);
+    tabBtnAdditives.setAttribute('aria-selected', (!isAllergens).toString());
+
+    colAllergens.classList.toggle('is-active', isAllergens);
+    colAdditives.classList.toggle('is-active', !isAllergens);
+  }
+
+  if (tabBtnAllergens && tabBtnAdditives) {
+    tabBtnAllergens.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setLegendTab('allergens');
+    });
+
+    tabBtnAdditives.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setLegendTab('additives');
+    });
+  }
+
   // Click on any allergen code jumps smoothly to the legend and highlights it
   document.addEventListener('click', (e) => {
     const codeEl = e.target.closest('.allergen-code');
@@ -618,6 +650,8 @@
       if (legendContent && legendContent.classList.contains('is-collapsed')) {
         setLegendExpanded(true);
       }
+
+      setLegendTab(isNum ? 'additives' : 'allergens');
 
       targetItem.scrollIntoView({
         behavior: prefersReducedMotion() ? 'auto' : 'smooth',

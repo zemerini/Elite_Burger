@@ -1033,9 +1033,23 @@
           </div>
 
           <div class="legend-card__content is-collapsed" id="legendContent">
+            <!-- Mobile Category Tabs (Allergene / Zusatzstoffe) -->
+            <div class="legend-card__tabs" role="tablist" aria-label="Kategorien Allergene und Zusatzstoffe">
+              <button class="legend-card__tab is-active" id="tabBtnAllergens" type="button" role="tab"
+                aria-selected="true" aria-controls="legendColAllergens">
+                <span>Allergene</span>
+                <span class="legend-card__tab-count">a–n</span>
+              </button>
+              <button class="legend-card__tab" id="tabBtnAdditives" type="button" role="tab"
+                aria-selected="false" aria-controls="legendColAdditives">
+                <span>Zusatzstoffe</span>
+                <span class="legend-card__tab-count">1–12</span>
+              </button>
+            </div>
+
             <div class="legend-card__columns">
               <!-- Allergens column -->
-              <div class="legend-card__col">
+              <div class="legend-card__col is-active" id="legendColAllergens" role="tabpanel" aria-labelledby="tabBtnAllergens">
                 <h4 class="legend-card__col-title">
                   <span class="legend-card__col-badge">a–n</span>
                   Kennzeichnungspflichtige Allergene
@@ -1101,7 +1115,7 @@
               </div>
 
               <!-- Additives column -->
-              <div class="legend-card__col">
+              <div class="legend-card__col" id="legendColAdditives" role="tabpanel" aria-labelledby="tabBtnAdditives">
                 <h4 class="legend-card__col-title">
                   <span class="legend-card__col-badge">1–12</span>
                   Kennzeichnungspflichtige Zusatzstoffe
