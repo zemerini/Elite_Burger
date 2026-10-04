@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impressum — In Arbeit | Elite Burger</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3">
     <style>
         body {
             display: flex;
@@ -55,52 +52,66 @@
 
         .wip-card h1 {
             font-family: var(--font-heading);
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            line-height: 1.1;
+            letter-spacing: var(--tracking-title);
             margin-bottom: 12px;
         }
 
         .wip-card h2 {
             font-family: var(--font-heading);
             color: var(--accent);
-            font-size: 1rem;
+            font-size: 0.78rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: var(--tracking-label);
             margin-bottom: 24px;
         }
 
         .wip-card p {
             color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
+            font-size: 1rem;
+            line-height: 1.55;
             margin-bottom: 35px;
+            text-wrap: pretty;
         }
 
         .btn-wip {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.9rem 2rem;
+            min-height: 52px;
+            padding: 0 1.75rem;
             background: var(--accent);
             color: var(--bg-primary);
             font-family: var(--font-heading);
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            border-radius: 100px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: var(--tracking-ui);
+            border-radius: var(--radius-pill);
             border: none;
             cursor: pointer;
-            transition: all var(--transition-fast);
-            box-shadow: 0 0 20px var(--accent-glow);
+            transition: transform 120ms var(--ease-out), box-shadow var(--transition-smooth), background var(--transition-fast);
+            box-shadow: 0 6px 24px rgba(255, 102, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.25);
         }
 
-        .btn-wip:hover {
-            transform: translateY(-2px);
-            background: var(--accent-hover);
-            box-shadow: 0 0 30px var(--accent-glow-strong);
+        @media (hover: hover) {
+            .btn-wip:hover {
+                background: var(--accent-hover);
+                box-shadow: 0 10px 34px var(--accent-glow-strong), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .btn-wip:active {
+            transform: scale(0.97);
+            background: var(--accent-pressed);
+            transition-duration: 80ms;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .wip-gear { animation: none; }
+            .btn-wip:active { transform: none; }
         }
     </style>
 </head>
