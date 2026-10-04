@@ -1,0 +1,248 @@
+{
+  "categories": [
+    {
+      "id": "burgers",
+      "name": "Smashburger",
+      "description": "Handgemachte Premium Smashburger mit frischem Beef & Brioche Potato Bun"
+    },
+    {
+      "id": "fingerfood",
+      "name": "Fingerfood",
+      "description": "Knusprige Bites & Snacks, perfekt zum Teilen"
+    },
+    {
+      "id": "dips",
+      "name": "Dips & Soßen",
+      "description": "Hausgemachte Dips, frisch zubereitet für Pommes und Burger"
+    }
+  ],
+  "burgers": [
+    {
+      "number": 1,
+      "id": "cheeseburger",
+      "name": "Cheeseburger",
+      "menuName": "Classic Cheese Menü",
+      "singlePrice": 8.00,
+      "menuPrice": 14.00,
+      "allergens": ["a", "f", "j", "k", "l"],
+      "additives": ["9"],
+      "description": "Frisches Beef-Patty mit doppeltem Käse, Gewürzgurken, Ketchup und Senf im saftigen Potato Bun."
+    },
+    {
+      "number": 2,
+      "id": "double-cheeseburger",
+      "name": "Double-Cheeseburger",
+      "menuName": "Double Cheese Menü",
+      "singlePrice": 9.50,
+      "menuPrice": 15.00,
+      "allergens": ["a", "f", "j", "k", "l"],
+      "additives": ["9"],
+      "description": "Zwei kross gesmashte Patties mit vier Scheiben geschmolzenem Käse, Gurken, Ketchup und Senf."
+    },
+    {
+      "number": 3,
+      "id": "chili-cheeseburger",
+      "name": "Chili Cheeseburger",
+      "menuName": "Chili Cheese Single Menü",
+      "singlePrice": 8.50,
+      "menuPrice": 14.50,
+      "allergens": ["a", "f", "c", "l"],
+      "additives": ["9"],
+      "description": "Frisches Patty mit cremiger Chili-Cheese-Sauce, geschmolzenem Käse und feurigen Jalapeños."
+    },
+    {
+      "number": 4,
+      "id": "double-chili-cheeseburger",
+      "name": "Double Chili-Cheeseburger",
+      "menuName": "Chili Cheese Menü",
+      "singlePrice": 9.50,
+      "menuPrice": 15.00,
+      "allergens": ["a", "f", "c", "l"],
+      "additives": ["9"],
+      "description": "Feurig-cremiger Hochgenuss: Zwei saftige Patties mit vier Scheiben Käse, Jalapeños und pikanter Sauce."
+    },
+    {
+      "number": 5,
+      "id": "big-wac",
+      "name": "Big Wac",
+      "menuName": "Big Wac Menü",
+      "singlePrice": 9.50,
+      "menuPrice": 15.00,
+      "allergens": ["a", "f", "j", "k", "l"],
+      "additives": ["9"],
+      "description": "Die Doppel-Decker Ikone: 2x Beef, 4x Käse, Salat, Zwiebeln, Gewürzgurken und unsere Geheimsoße."
+    },
+    {
+      "number": 6,
+      "id": "elite-burger",
+      "originalName": "My Burger",
+      "name": "Elite Burger",
+      "menuName": "Elite Burger Menü",
+      "singlePrice": 10.00,
+      "menuPrice": 15.00,
+      "allergens": ["b", "f", "k", "c", "n", "j", "l"],
+      "additives": ["9"],
+      "description": "Unser Signature Meisterwerk: Rauchiger Bacon, karamellisierte Zwiebeln, Jalapeños, BBQ- & Joppiesauce."
+    },
+    {
+      "number": 7,
+      "id": "chickenburger",
+      "name": "Chickenburger",
+      "menuName": "Crispy Chicken Menü",
+      "singlePrice": 8.50,
+      "menuPrice": 14.00,
+      "allergens": ["a", "f", "g", "j", "c", "k", "n"],
+      "additives": ["9"],
+      "description": "Goldgelb paniertes Hähnchenfilet mit knackigem Salat, frischen Tomaten und cremiger Knoblauch-Mayonnaise."
+    },
+    {
+      "number": 8,
+      "id": "chilli-chickenburger",
+      "name": "Chilli Chickenburger",
+      "menuName": "Chilli Chicken Menü",
+      "singlePrice": 9.00,
+      "menuPrice": 14.50,
+      "allergens": ["a", "f", "g", "j", "b", "c", "l"],
+      "additives": ["9"],
+      "description": "Knuspriges Crispy Chicken Filet verfeinert mit feuriger Chili-Sauce und geschmolzenem Käse."
+    }
+  ],
+  "fingerfood": [
+    {
+      "number": 10,
+      "id": "pommes-rot-weiss",
+      "name": "Pommes rot/weiß",
+      "price": 5.00,
+      "allergens": ["j", "c", "k"],
+      "additives": [],
+      "description": "Ketchup und Mayonnaise"
+    },
+    {
+      "number": 11,
+      "id": "chili-cheesepommes",
+      "name": "Chili Cheesepommes",
+      "price": 6.50,
+      "allergens": ["f", "c", "l"],
+      "additives": ["9"],
+      "description": "Chili Cheesesoße und Jalapenos"
+    },
+    {
+      "number": 20,
+      "id": "nuggets-9",
+      "name": "9x Nuggets",
+      "price": 7.00,
+      "allergens": ["a", "j"],
+      "additives": [],
+      "description": "9 goldbraun und kross ausgebackene Hähnchen-Nuggets."
+    },
+    {
+      "number": 21,
+      "id": "chicken-wings-6",
+      "name": "6x Chicken Wings",
+      "price": 7.00,
+      "allergens": ["a", "c", "n", "f", "j", "k"],
+      "additives": [],
+      "description": "6 saftig marinierte, kross gebackene Chicken Wings."
+    }
+  ],
+  "dips": [
+    {
+      "number": 30,
+      "id": "kaesedip",
+      "name": "Käsedip",
+      "price": 3.00,
+      "allergens": ["f"],
+      "additives": [],
+      "description": "Cremig geschmolzener, herzhafter Käsedip mit feiner Schärfenote."
+    },
+    {
+      "number": 31,
+      "id": "ketchup",
+      "name": "Ketchup",
+      "price": 1.00,
+      "allergens": ["j"],
+      "additives": [],
+      "description": "Fruchtiger Tomatenketchup aus sonnengereiften Tomaten mit feinen Gewürzen."
+    },
+    {
+      "number": 32,
+      "id": "mayonnaise",
+      "name": "Mayonnaise",
+      "price": 1.00,
+      "allergens": ["c", "f"],
+      "additives": [],
+      "description": "Klassisch cremige Delikatess-Mayonnaise nach traditioneller Rezeptur."
+    },
+    {
+      "number": 33,
+      "id": "knoblauchmayo",
+      "name": "Knoblauchmayo",
+      "price": 1.00,
+      "allergens": ["c", "f"],
+      "additives": [],
+      "description": "Hausgemachte Mayonnaise mit feinem frischem Knoblauch aromatisiert."
+    },
+    {
+      "number": 34,
+      "id": "bbq",
+      "name": "BBQ",
+      "price": 1.00,
+      "allergens": ["k"],
+      "additives": [],
+      "description": "Rauchig-süße Barbecue-Sauce mit aromatischer Hickory-Holznote."
+    },
+    {
+      "number": 35,
+      "id": "joppie",
+      "name": "Joppie",
+      "price": 1.00,
+      "allergens": ["a", "c", "j", "n"],
+      "additives": [],
+      "description": "Kult-Sauce aus den Niederlanden mit Zwiebelnote und milder Kräuter-Curry-Würze."
+    },
+    {
+      "number": 36,
+      "id": "sour-cream",
+      "name": "Sour-Cream",
+      "price": 1.00,
+      "allergens": ["c", "f", "k"],
+      "additives": [],
+      "description": "Frische, samtige Sauerrahm-Creme mit frischen Schnittlauchspitzen."
+    }
+  ],
+  "legend": {
+    "allergens": {
+      "a": "Glutenhaltiges Getreide (Weizen)",
+      "b": "Krebstiere",
+      "c": "Eier",
+      "d": "Fisch",
+      "e": "Erdnüsse",
+      "f": "Milch und Laktose",
+      "g": "Schalenfrüchte (Walnüsse)",
+      "h": "Lupine",
+      "i": "Weichtiere",
+      "j": "Sellerie",
+      "k": "Senf",
+      "l": "Sesamsamen",
+      "m": "Schwefeldioxid und Sulfate",
+      "n": "Sojabohnen"
+    },
+    "additives": {
+      "1": "mit Konservierungsstoff(en)",
+      "2": "chininhaltig",
+      "3": "mit Phosphat",
+      "4": "mit Antioxidationsmittel",
+      "5": "geschwefelt",
+      "6": "koffeinhaltig",
+      "7": "mit Farbstoff(en)",
+      "8": "mit Süßungsmitteln",
+      "9": "mit Geschmacksverstärker(n)",
+      "10": "geschwärzt",
+      "11": "Säuerungsmittel",
+      "12": "Stabilisatoren"
+    },
+    "extraNotes": [
+      "Extra Zutat: Käse enthält (f) Milch und Laktose"
+    ]
+  }
+}

@@ -156,6 +156,10 @@
   for (const btn of document.querySelectorAll('.menu__toggle-btn')) {
     makePressable(btn, { pressScale: 0.94 });
   }
+  const legendHeaderEl = document.getElementById('legendCardHeader') || document.getElementById('legendToggleBtn');
+  if (legendHeaderEl) {
+    makePressable(legendHeaderEl, { pressScale: 0.99 });
+  }
 
   // --- Scroll Reveal with IntersectionObserver ---
   // Stagger pro Batch: was gleichzeitig sichtbar wird, kaskadiert kurz hintereinander.
@@ -449,6 +453,7 @@
       card.addEventListener('click', (e) => {
         if (isDragScroll) return;
         if (e.target.closest('a')) return;
+        if (e.target.closest('.allergen-code, .product-allergens')) return;
         toggleFlip();
       });
 
@@ -526,6 +531,117 @@
     }
   }
 
+  // --- Legend Accordion & Allergen Jump Handler ---
+  const legendCard = document.getElementById('legendCard') || document.querySelector('.legend-card');
+  const legendHeader = document.getElementById('legendCardHeader') || document.querySelector('.legend-card__header');
+  const legendToggleBtn = document.getElementById('legendToggleBtn');
+  const legendContent = document.getElementById('legendContent');
+  const legendSubtitle = document.getElementById('legendSubtitle') || (legendCard ? legendCard.querySelector('.legend-card__subtitle') : null);
+
+  function setLegendExpanded(expanded) {
+    if (!legendContent) return;
+    legendContent.classList.toggle('is-collapsed', !expanded);
+
+    if (legendHeader) {
+      legendHeader.setAttribute('aria-expanded', expanded.toString());
+      legendHeader.setAttribute('aria-label', expanded ? 'Allergene & Zusatzstoffe Legende einklappen' : 'Allergene & Zusatzstoffe Legende aufklappen');
+    }
+    if (legendCard) {
+      legendCard.setAttribute('data-expanded', expanded.toString());
+    }
+    if (legendToggleBtn) {
+      legendToggleBtn.setAttribute('aria-expanded', expanded.toString());
+      const textSpan = legendToggleBtn.querySelector('.legend-card__toggle-text');
+      if (textSpan) {
+        textSpan.textContent = expanded ? 'Legende einklappen' : 'Legende ausklappen';
+      }
+    }
+    if (legendSubtitle) {
+      legendSubtitle.textContent = expanded ? 'Tippen zum Einklappen' : 'Tippen zum Aufklappen';
+    }
+  }
+
+  function toggleLegend() {
+    if (!legendContent) return;
+    const isCurrentlyCollapsed = legendContent.classList.contains('is-collapsed');
+    setLegendExpanded(isCurrentlyCollapsed);
+  }
+
+  if (legendHeader) {
+    legendHeader.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleLegend();
+    });
+
+    legendHeader.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleLegend();
+      }
+    });
+  }
+
+  // Also clicking anywhere on the card when collapsed expands it smoothly
+  if (legendCard) {
+    legendCard.addEventListener('click', (e) => {
+      // If header was clicked, it's already handled with e.stopPropagation()
+      // If clicked inside content while open, don't collapse (user selecting text or reading)
+      if (legendContent && !legendContent.classList.contains('is-collapsed') && e.target.closest('#legendContent')) {
+        return;
+      }
+      // If collapsed, clicking anywhere on the card opens it!
+      if (legendContent && legendContent.classList.contains('is-collapsed')) {
+        setLegendExpanded(true);
+      }
+    });
+  }
+
+  // Click on any allergen code jumps smoothly to the legend and highlights it
+  document.addEventListener('click', (e) => {
+    const codeEl = e.target.closest('.allergen-code');
+    if (!codeEl) return;
+
+    let code = codeEl.getAttribute('data-code');
+    if (!code) {
+      const raw = codeEl.textContent.trim().replace(/[()]/g, '');
+      const match = raw.match(/^[a-z0-9]+/i);
+      code = match ? match[0].toLowerCase() : '';
+    }
+
+    if (!code) return;
+
+    const isNum = /^\d+$/.test(code);
+    const targetId = isNum ? `additive-item-${code}` : `allergen-item-${code}`;
+    const targetItem = document.getElementById(targetId);
+
+    if (targetItem) {
+      if (legendContent && legendContent.classList.contains('is-collapsed')) {
+        setLegendExpanded(true);
+      }
+
+      targetItem.scrollIntoView({
+        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+        block: 'center'
+      });
+
+      targetItem.classList.remove('is-highlighted');
+      void targetItem.offsetWidth;
+      targetItem.classList.add('is-highlighted');
+      setTimeout(() => {
+        targetItem.classList.remove('is-highlighted');
+      }, 2500);
+    }
+  });
+
+  // --- Menu Data State ---
+  // Expose menu data globally for state inspection and client applications
+  fetch('menu-data.json')
+    .then((res) => (res.ok ? res.json() : null))
+    .then((data) => {
+      if (data) window.MENU_DATA = data;
+    })
+    .catch(() => { });
+
   // --- Dynamic News Loading ---
   async function loadNews() {
     const container = document.getElementById('news-container');
@@ -574,3 +690,4 @@
     loadNews();
   }
 })();
+
