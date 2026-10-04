@@ -22,7 +22,8 @@
   <header class="header" id="header">
     <div class="header__inner">
       <a href="#" class="header__logo" id="header-logo" aria-label="Elite Burger Home">
-        <img src="images/Logo_transparent.png" alt="Elite Burger Logo" class="header__logo-image" width="42" height="42">
+        <img src="images/Logo_transparent.png" alt="Elite Burger Logo" class="header__logo-image" width="42"
+          height="42">
         <span class="header__logo-text">Elite Burger</span>
       </a>
     </div>
@@ -75,215 +76,556 @@
 
       <div class="menu__grid">
         <!-- Card 1: Elite Burger -->
-        <article class="menu-card reveal reveal-delay-2" id="menu-elite-burger">
-          <div class="menu-card__image-wrapper">
-            <img src="Burger_Bilder/elite_burger.jpeg" alt="Elite Burger" class="menu-card__image" loading="lazy">
-            <div class="menu-card__image-overlay" aria-hidden="true"></div>
-            <span class="menu-card__tag menu-card__tag--gold">Signature</span>
-            <span class="menu-card__menu-tag">Menü-Deal</span>
-          </div>
-          <div class="menu-card__body">
-            <div class="menu-card__top-row">
-              <h3 class="menu-card__name">Elite Burger</h3>
-              <div class="menu-card__price-wrapper">
-                <span class="menu-card__price menu-card__price--single">10,00 €</span>
-                <span class="menu-card__price menu-card__price--menu">15,00 €</span>
+        <article class="menu-card reveal reveal-delay-2" id="menu-elite-burger" role="button" tabindex="0"
+          aria-label="Elite Burger — Tippen um zwischen Single und Menü zu wechseln" aria-expanded="false" data-mode="single">
+          <div class="menu-card__inner">
+            <!-- FRONT: SINGLE -->
+            <div class="menu-card__face menu-card__face--front">
+              <div class="menu-card__image-wrapper">
+                <img src="Burger_Bilder/elite_burger.jpeg" alt="Elite Burger Single" class="menu-card__image" loading="lazy">
+                <div class="menu-card__image-overlay" aria-hidden="true"></div>
+                <span class="menu-card__tag menu-card__tag--gold">Signature</span>
+                <div class="menu-card__flip-pill" aria-hidden="true">
+                  <svg class="menu-card__flip-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                    <path d="M16 21h5v-5"/>
+                  </svg>
+                  <span>Menü ansehen</span>
+                </div>
               </div>
+              <div class="menu-card__body">
+                <div class="menu-card__top-row">
+                  <h3 class="menu-card__name">Elite Burger</h3>
+                  <div class="menu-card__price-wrapper">
+                    <span class="menu-card__price">10,00 €</span>
+                  </div>
+                </div>
+                <p class="menu-card__desc">Unser absolutes Meisterwerk: Eine geniale Kombination aus rauchigem Bacon, karamellisierten Zwiebeln und feurigen Jalapeños, abgerundet mit BBQ- und Joppiesauce.</p>
+                <div class="menu-card__ingredients" aria-label="Zutaten">
+                  <span class="menu-card__ingredient">Potato Bun</span>
+                  <span class="menu-card__ingredient">2x Smashed Beef</span>
+                  <span class="menu-card__ingredient">4x Käse</span>
+                  <span class="menu-card__ingredient">Bacon</span>
+                  <span class="menu-card__ingredient">Karamellisierte Zwiebeln</span>
+                  <span class="menu-card__ingredient">Jalapeños</span>
+                  <span class="menu-card__ingredient">BBQ-Sauce</span>
+                  <span class="menu-card__ingredient">Joppiesauce</span>
+                </div>
+                <div class="menu-card__footer-hint" aria-hidden="true">
+                  <span class="menu-card__footer-hint-icon">↻</span>
+                  <span>Tippen für Menü-Ansicht mit Pommes & Fritz-Kola</span>
+                </div>
+              </div>
+              <div class="menu-card__glass-sheen" aria-hidden="true"></div>
             </div>
-            <div class="menu-card__menu-badge">
-              <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Inkl. Pommes und Getränk
-            </div>
-            <p class="menu-card__desc">Unser absolutes Meisterwerk: Eine geniale Kombination aus rauchigem Bacon,
-              karamellisierten Zwiebeln und feurigen Jalapeños, abgerundet mit BBQ- und Joppiesauce.</p>
-            <div class="menu-card__ingredients" aria-label="Zutaten">
-              <span class="menu-card__ingredient">Potato Bun</span>
-              <span class="menu-card__ingredient">2x Smashed Beef</span>
-              <span class="menu-card__ingredient">4x Käse</span>
-              <span class="menu-card__ingredient">Bacon</span>
-              <span class="menu-card__ingredient">Karamellisierte Zwiebeln</span>
-              <span class="menu-card__ingredient">Jalapeños</span>
-              <span class="menu-card__ingredient">BBQ-Sauce</span>
-              <span class="menu-card__ingredient">Joppiesauce</span>
+
+            <!-- BACK: MENÜ -->
+            <div class="menu-card__face menu-card__face--back">
+              <div class="menu-card__image-wrapper">
+                <img src="Burger_Bilder/Menu_Bilder/web/eliteburger_menu.jpg"
+                  srcset="Burger_Bilder/Menu_Bilder/web/eliteburger_menu.jpg 1200w, Burger_Bilder/Menu_Bilder/eliteburger_menu.jpg 2048w"
+                  sizes="(max-width: 768px) 100vw, 500px"
+                  alt="Elite Burger Menü mit Pommes und Fritz-Kola" class="menu-card__image menu-card__image--menu" loading="lazy">
+                <div class="menu-card__image-overlay" aria-hidden="true"></div>
+                <span class="menu-card__tag menu-card__tag--menu">Menü-Deal</span>
+                <div class="menu-card__flip-pill menu-card__flip-pill--menu" aria-hidden="true">
+                  <svg class="menu-card__flip-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                    <path d="M16 21h5v-5"/>
+                  </svg>
+                  <span>Single ansehen</span>
+                </div>
+              </div>
+              <div class="menu-card__body">
+                <div class="menu-card__top-row">
+                  <h3 class="menu-card__name">Elite Burger <span class="menu-card__name-badge">Menü</span></h3>
+                  <div class="menu-card__price-wrapper">
+                    <span class="menu-card__price menu-card__price--menu">15,00 €</span>
+                  </div>
+                </div>
+                <div class="menu-card__menu-badge">
+                  <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Inkl. Pommes & Fritz-Kola / Softdrink
+                </div>
+                <p class="menu-card__desc">Das vollständige Meisterwerk: Der saftige Elite Burger serviert als Menü mit knusprigen Pommes Frites und einer eiskalten Fritz-Kola deiner Wahl.</p>
+                <div class="menu-card__combo-pills" aria-label="Menü-Bestandteile">
+                  <span class="menu-card__combo-pill">🍟 Knusprige Pommes</span>
+                  <span class="menu-card__combo-pill">🥤 0,33l Fritz-Kola / Softdrink</span>
+                  <span class="menu-card__combo-pill">🥫 Joppie- & BBQ-Dip</span>
+                </div>
+                <div class="menu-card__footer-hint" aria-hidden="true">
+                  <span class="menu-card__footer-hint-icon">↺</span>
+                  <span>Tippen für Single-Burger Ansicht</span>
+                </div>
+              </div>
+              <div class="menu-card__glass-sheen" aria-hidden="true"></div>
             </div>
           </div>
         </article>
 
         <!-- Card 2: Big Wac -->
-        <article class="menu-card reveal reveal-delay-3" id="menu-big-wac">
-          <div class="menu-card__image-wrapper">
-            <img src="Burger_Bilder/big_wac.jpeg" alt="Big Wac Burger" class="menu-card__image" loading="lazy">
-            <div class="menu-card__image-overlay" aria-hidden="true"></div>
-            <span class="menu-card__tag">Haus-Spezial</span>
-            <span class="menu-card__menu-tag">Menü-Deal</span>
-          </div>
-          <div class="menu-card__body">
-            <div class="menu-card__top-row">
-              <h3 class="menu-card__name">Big <span class="wac-perspective"><span class="easter-egg-w" id="easter-egg-w">W</span></span>ac</h3>
-              <div class="menu-card__price-wrapper">
-                <span class="menu-card__price menu-card__price--single">10,00 €</span>
-                <span class="menu-card__price menu-card__price--menu">15,00 €</span>
+        <article class="menu-card reveal reveal-delay-3" id="menu-big-wac" role="button" tabindex="0"
+          aria-label="Big Wac — Tippen um zwischen Single und Menü zu wechseln" aria-expanded="false" data-mode="single">
+          <div class="menu-card__inner">
+            <!-- FRONT: SINGLE -->
+            <div class="menu-card__face menu-card__face--front">
+              <div class="menu-card__image-wrapper">
+                <img src="Burger_Bilder/big_wac.jpeg" alt="Big Wac Burger Single" class="menu-card__image" loading="lazy">
+                <div class="menu-card__image-overlay" aria-hidden="true"></div>
+                <span class="menu-card__tag">Haus-Spezial</span>
+                <div class="menu-card__flip-pill" aria-hidden="true">
+                  <svg class="menu-card__flip-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                    <path d="M16 21h5v-5"/>
+                  </svg>
+                  <span>Menü ansehen</span>
+                </div>
               </div>
+              <div class="menu-card__body">
+                <div class="menu-card__top-row">
+                  <h3 class="menu-card__name">Big <span class="wac-perspective"><span class="easter-egg-w" id="easter-egg-w">W</span></span>ac</h3>
+                  <div class="menu-card__price-wrapper">
+                    <span class="menu-card__price">10,00 €</span>
+                  </div>
+                </div>
+                <p class="menu-card__desc">Vom goldenen M inspiriert, von uns perfektioniert: So hätte der berühmteste Doppel-Decker der Welt schon immer schmecken sollen.</p>
+                <div class="menu-card__ingredients" aria-label="Zutaten">
+                  <span class="menu-card__ingredient">Potato Bun</span>
+                  <span class="menu-card__ingredient">2x Smashed Beef</span>
+                  <span class="menu-card__ingredient">4x Käse</span>
+                  <span class="menu-card__ingredient">Zwiebeln</span>
+                  <span class="menu-card__ingredient">Eingelegte Gurke</span>
+                  <span class="menu-card__ingredient">Eisbergsalat</span>
+                  <span class="menu-card__ingredient">Hausgemachte Soße</span>
+                </div>
+                <div class="menu-card__footer-hint" aria-hidden="true">
+                  <span class="menu-card__footer-hint-icon">↻</span>
+                  <span>Tippen für Menü-Ansicht mit Pommes & Fritz-Kola</span>
+                </div>
+              </div>
+              <div class="menu-card__glass-sheen" aria-hidden="true"></div>
             </div>
-            <div class="menu-card__menu-badge">
-              <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Inkl. Pommes und Getränk
-            </div>
-            <p class="menu-card__desc">Vom goldenen M inspiriert, von uns perfektioniert: So hätte der berühmteste
-              Doppel-Decker der Welt schon immer schmecken sollen.</p>
-            <div class="menu-card__ingredients" aria-label="Zutaten">
-              <span class="menu-card__ingredient">Potato Bun</span>
-              <span class="menu-card__ingredient">2x Smashed Beef</span>
-              <span class="menu-card__ingredient">4x Käse</span>
-              <span class="menu-card__ingredient">Zwiebeln</span>
-              <span class="menu-card__ingredient">Eingelegte Gurke</span>
-              <span class="menu-card__ingredient">Eisbergsalat</span>
-              <span class="menu-card__ingredient">Hausgemachte Soße</span>
+
+            <!-- BACK: MENÜ -->
+            <div class="menu-card__face menu-card__face--back">
+              <div class="menu-card__image-wrapper">
+                <img src="Burger_Bilder/Menu_Bilder/web/bigwac_menu.jpg"
+                  srcset="Burger_Bilder/Menu_Bilder/web/bigwac_menu.jpg 1200w, Burger_Bilder/Menu_Bilder/bigwac_menu.jpg 2048w"
+                  sizes="(max-width: 768px) 100vw, 500px"
+                  alt="Big Wac Menü mit Pommes und Fritz-Kola" class="menu-card__image menu-card__image--menu" loading="lazy">
+                <div class="menu-card__image-overlay" aria-hidden="true"></div>
+                <span class="menu-card__tag menu-card__tag--menu">Menü-Deal</span>
+                <div class="menu-card__flip-pill menu-card__flip-pill--menu" aria-hidden="true">
+                  <svg class="menu-card__flip-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                    <path d="M16 21h5v-5"/>
+                  </svg>
+                  <span>Single ansehen</span>
+                </div>
+              </div>
+              <div class="menu-card__body">
+                <div class="menu-card__top-row">
+                  <h3 class="menu-card__name">Big Wac <span class="menu-card__name-badge">Menü</span></h3>
+                  <div class="menu-card__price-wrapper">
+                    <span class="menu-card__price menu-card__price--menu">15,00 €</span>
+                  </div>
+                </div>
+                <div class="menu-card__menu-badge">
+                  <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Inkl. Pommes & Fritz-Kola / Softdrink
+                </div>
+                <p class="menu-card__desc">Die Doppel-Decker Ikone im Menü: 2x Beef, 4x Käse & unsere Geheimsoße im Zusammenspiel mit krossen Pommes und prickelnder Fritz-Kola.</p>
+                <div class="menu-card__combo-pills" aria-label="Menü-Bestandteile">
+                  <span class="menu-card__combo-pill">🍟 Knusprige Pommes</span>
+                  <span class="menu-card__combo-pill">🥤 0,33l Fritz-Kola / Softdrink</span>
+                  <span class="menu-card__combo-pill">🥫 Hausgemachte Spezial-Soße</span>
+                </div>
+                <div class="menu-card__footer-hint" aria-hidden="true">
+                  <span class="menu-card__footer-hint-icon">↺</span>
+                  <span>Tippen für Single-Burger Ansicht</span>
+                </div>
+              </div>
+              <div class="menu-card__glass-sheen" aria-hidden="true"></div>
             </div>
           </div>
         </article>
 
         <!-- Card 3: Double Cheeseburger -->
-        <article class="menu-card reveal reveal-delay-4" id="menu-double-cheeseburger">
-          <div class="menu-card__image-wrapper">
-            <img src="Burger_Bilder/double_cheese_burger.jpeg" alt="Double Cheeseburger" class="menu-card__image"
-              loading="lazy">
-            <div class="menu-card__image-overlay" aria-hidden="true"></div>
-            <span class="menu-card__tag">Klassiker</span>
-            <span class="menu-card__menu-tag">Menü-Deal</span>
-          </div>
-          <div class="menu-card__body">
-            <div class="menu-card__top-row">
-              <h3 class="menu-card__name">Double Cheeseburger</h3>
-              <div class="menu-card__price-wrapper">
-                <span class="menu-card__price menu-card__price--single">10,00 €</span>
-                <span class="menu-card__price menu-card__price--menu">15,00 €</span>
+        <article class="menu-card reveal reveal-delay-4" id="menu-double-cheeseburger" role="button" tabindex="0"
+          aria-label="Double Cheeseburger — Tippen um zwischen Single und Menü zu wechseln" aria-expanded="false" data-mode="single">
+          <div class="menu-card__inner">
+            <!-- FRONT: SINGLE -->
+            <div class="menu-card__face menu-card__face--front">
+              <div class="menu-card__image-wrapper">
+                <img src="Burger_Bilder/double_cheese_burger.jpeg" alt="Double Cheeseburger Single" class="menu-card__image" loading="lazy">
+                <div class="menu-card__image-overlay" aria-hidden="true"></div>
+                <span class="menu-card__tag">Klassiker</span>
+                <div class="menu-card__flip-pill" aria-hidden="true">
+                  <svg class="menu-card__flip-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                    <path d="M16 21h5v-5"/>
+                  </svg>
+                  <span>Menü ansehen</span>
+                </div>
               </div>
+              <div class="menu-card__body">
+                <div class="menu-card__top-row">
+                  <h3 class="menu-card__name">Double Cheeseburger</h3>
+                  <div class="menu-card__price-wrapper">
+                    <span class="menu-card__price">10,00 €</span>
+                  </div>
+                </div>
+                <p class="menu-card__desc">Doppelte Power: Zwei perfekt kross gesmashte Beef-Patties umhüllt von einer wahren Lawine aus cremig geschmolzenem Käse.</p>
+                <div class="menu-card__ingredients" aria-label="Zutaten">
+                  <span class="menu-card__ingredient">Potato Bun</span>
+                  <span class="menu-card__ingredient">2x Smashed Beef</span>
+                  <span class="menu-card__ingredient">4x Käse</span>
+                  <span class="menu-card__ingredient">Zwiebeln</span>
+                  <span class="menu-card__ingredient">Eingelegte Gurke</span>
+                  <span class="menu-card__ingredient">Ketchup</span>
+                  <span class="menu-card__ingredient">Senf</span>
+                </div>
+                <div class="menu-card__footer-hint" aria-hidden="true">
+                  <span class="menu-card__footer-hint-icon">↻</span>
+                  <span>Tippen für Menü-Ansicht mit Pommes & Fritz-Kola</span>
+                </div>
+              </div>
+              <div class="menu-card__glass-sheen" aria-hidden="true"></div>
             </div>
-            <div class="menu-card__menu-badge">
-              <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Inkl. Pommes und Getränk
-            </div>
-            <p class="menu-card__desc">Doppelte Power: Zwei perfekt kross gesmashte Beef-Patties umhüllt von einer
-              wahren Lawine aus cremig geschmolzenem Käse.</p>
-            <div class="menu-card__ingredients" aria-label="Zutaten">
-              <span class="menu-card__ingredient">Potato Bun</span>
-              <span class="menu-card__ingredient">2x Smashed Beef</span>
-              <span class="menu-card__ingredient">4x Käse</span>
-              <span class="menu-card__ingredient">Zwiebeln</span>
-              <span class="menu-card__ingredient">Eingelegte Gurke</span>
-              <span class="menu-card__ingredient">Ketchup</span>
-              <span class="menu-card__ingredient">Senf</span>
+
+            <!-- BACK: MENÜ -->
+            <div class="menu-card__face menu-card__face--back">
+              <div class="menu-card__image-wrapper">
+                <img src="Burger_Bilder/Menu_Bilder/web/doublecheese_menu.jpg"
+                  srcset="Burger_Bilder/Menu_Bilder/web/doublecheese_menu.jpg 1200w, Burger_Bilder/Menu_Bilder/doublecheese_menu.jpg 2048w"
+                  sizes="(max-width: 768px) 100vw, 500px"
+                  alt="Double Cheeseburger Menü mit Pommes und Fritz-Kola" class="menu-card__image menu-card__image--menu" loading="lazy">
+                <div class="menu-card__image-overlay" aria-hidden="true"></div>
+                <span class="menu-card__tag menu-card__tag--menu">Menü-Deal</span>
+                <div class="menu-card__flip-pill menu-card__flip-pill--menu" aria-hidden="true">
+                  <svg class="menu-card__flip-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                    <path d="M16 21h5v-5"/>
+                  </svg>
+                  <span>Single ansehen</span>
+                </div>
+              </div>
+              <div class="menu-card__body">
+                <div class="menu-card__top-row">
+                  <h3 class="menu-card__name">Double Cheese <span class="menu-card__name-badge">Menü</span></h3>
+                  <div class="menu-card__price-wrapper">
+                    <span class="menu-card__price menu-card__price--menu">15,00 €</span>
+                  </div>
+                </div>
+                <div class="menu-card__menu-badge">
+                  <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Inkl. Pommes & Fritz-Kola / Softdrink
+                </div>
+                <p class="menu-card__desc">Käseliebhaber-Glück im Menü: 4x geschmolzener Käse über zwei krossen Patties, serviert mit heißen Knusper-Pommes und eisgekühlter Fritz-Kola.</p>
+                <div class="menu-card__combo-pills" aria-label="Menü-Bestandteile">
+                  <span class="menu-card__combo-pill">🍟 Knusprige Pommes</span>
+                  <span class="menu-card__combo-pill">🥤 0,33l Fritz-Kola / Softdrink</span>
+                  <span class="menu-card__combo-pill">🥫 Ketchup & Senf</span>
+                </div>
+                <div class="menu-card__footer-hint" aria-hidden="true">
+                  <span class="menu-card__footer-hint-icon">↺</span>
+                  <span>Tippen für Single-Burger Ansicht</span>
+                </div>
+              </div>
+              <div class="menu-card__glass-sheen" aria-hidden="true"></div>
             </div>
           </div>
         </article>
 
         <!-- Card 4: Double Chili Cheeseburger -->
-        <article class="menu-card reveal reveal-delay-5" id="menu-double-chili-cheeseburger">
-          <div class="menu-card__image-wrapper">
-            <img src="Burger_Bilder/double_chili_cheese_burger.jpeg" alt="Double Chili Cheeseburger"
-              class="menu-card__image" loading="lazy">
-            <div class="menu-card__image-overlay" aria-hidden="true"></div>
-            <span class="menu-card__tag">Scharf</span>
-            <span class="menu-card__menu-tag">Menü-Deal</span>
-          </div>
-          <div class="menu-card__body">
-            <div class="menu-card__top-row">
-              <h3 class="menu-card__name">Double Chili Cheeseburger</h3>
-              <div class="menu-card__price-wrapper">
-                <span class="menu-card__price menu-card__price--single">10,00 €</span>
-                <span class="menu-card__price menu-card__price--menu">15,00 €</span>
+        <article class="menu-card reveal reveal-delay-5" id="menu-double-chili-cheeseburger" role="button" tabindex="0"
+          aria-label="Double Chili Cheeseburger — Tippen um zwischen Single und Menü zu wechseln" aria-expanded="false" data-mode="single">
+          <div class="menu-card__inner">
+            <!-- FRONT: SINGLE -->
+            <div class="menu-card__face menu-card__face--front">
+              <div class="menu-card__image-wrapper">
+                <img src="Burger_Bilder/double_chili_cheese_burger.jpeg" alt="Double Chili Cheeseburger Single" class="menu-card__image" loading="lazy">
+                <div class="menu-card__image-overlay" aria-hidden="true"></div>
+                <span class="menu-card__tag">Scharf</span>
+                <div class="menu-card__flip-pill" aria-hidden="true">
+                  <svg class="menu-card__flip-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                    <path d="M16 21h5v-5"/>
+                  </svg>
+                  <span>Menü ansehen</span>
+                </div>
               </div>
+              <div class="menu-card__body">
+                <div class="menu-card__top-row">
+                  <h3 class="menu-card__name">Double Chili Cheeseburger</h3>
+                  <div class="menu-card__price-wrapper">
+                    <span class="menu-card__price">10,00 €</span>
+                  </div>
+                </div>
+                <p class="menu-card__desc">Feuriger Hochgenuss: Zwei saftige Smash-Patties mit feurigen Jalapeños, abgerundet durch unsere unwiderstehlich cremige Chili-Cheese-Sauce.</p>
+                <div class="menu-card__ingredients" aria-label="Zutaten">
+                  <span class="menu-card__ingredient">Potato Bun</span>
+                  <span class="menu-card__ingredient">2x Smashed Beef</span>
+                  <span class="menu-card__ingredient">2x Käse</span>
+                  <span class="menu-card__ingredient">Jalapeños</span>
+                  <span class="menu-card__ingredient">Chili-Cheese-Sauce</span>
+                </div>
+                <div class="menu-card__footer-hint" aria-hidden="true">
+                  <span class="menu-card__footer-hint-icon">↻</span>
+                  <span>Tippen für Menü-Ansicht mit Pommes & Fritz-Kola</span>
+                </div>
+              </div>
+              <div class="menu-card__glass-sheen" aria-hidden="true"></div>
             </div>
-            <div class="menu-card__menu-badge">
-              <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Inkl. Pommes und Getränk
-            </div>
-            <p class="menu-card__desc">Feuriger Hochgenuss: Zwei saftige Smash-Patties mit feurigen Jalapeños,
-              abgerundet durch unsere unwiderstehlich cremige Chili-Cheese-Sauce.</p>
-            <div class="menu-card__ingredients" aria-label="Zutaten">
-              <span class="menu-card__ingredient">Potato Bun</span>
-              <span class="menu-card__ingredient">2x Smashed Beef</span>
-              <span class="menu-card__ingredient">2x Käse</span>
-              <span class="menu-card__ingredient">Jalapeños</span>
-              <span class="menu-card__ingredient">Chili-Cheese-Sauce</span>
+
+            <!-- BACK: MENÜ -->
+            <div class="menu-card__face menu-card__face--back">
+              <div class="menu-card__image-wrapper">
+                <img src="Burger_Bilder/Menu_Bilder/web/double_chilli_cheese_menu.jpg"
+                  srcset="Burger_Bilder/Menu_Bilder/web/double_chilli_cheese_menu.jpg 1200w, Burger_Bilder/Menu_Bilder/double_chilli_cheese_menu.jpg 2048w"
+                  sizes="(max-width: 768px) 100vw, 500px"
+                  alt="Double Chili Cheeseburger Menü mit Pommes und Fritz-Kola" class="menu-card__image menu-card__image--menu" loading="lazy">
+                <div class="menu-card__image-overlay" aria-hidden="true"></div>
+                <span class="menu-card__tag menu-card__tag--menu">Menü-Deal</span>
+                <div class="menu-card__flip-pill menu-card__flip-pill--menu" aria-hidden="true">
+                  <svg class="menu-card__flip-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                    <path d="M16 21h5v-5"/>
+                  </svg>
+                  <span>Single ansehen</span>
+                </div>
+              </div>
+              <div class="menu-card__body">
+                <div class="menu-card__top-row">
+                  <h3 class="menu-card__name">Chili Cheese <span class="menu-card__name-badge">Menü</span></h3>
+                  <div class="menu-card__price-wrapper">
+                    <span class="menu-card__price menu-card__price--menu">15,00 €</span>
+                  </div>
+                </div>
+                <div class="menu-card__menu-badge">
+                  <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Inkl. Pommes & Fritz-Kola / Softdrink
+                </div>
+                <p class="menu-card__desc">Feurig-cremiger Hochgenuss komplett: Zwei Patties mit Chili-Cheese-Sauce und Jalapeños, perfekt abgelöscht mit knusprigen Fries und kalter Fritz-Kola.</p>
+                <div class="menu-card__combo-pills" aria-label="Menü-Bestandteile">
+                  <span class="menu-card__combo-pill">🍟 Knusprige Pommes</span>
+                  <span class="menu-card__combo-pill">🥤 0,33l Fritz-Kola / Softdrink</span>
+                  <span class="menu-card__combo-pill">🌶️ Chili-Cheese-Dip</span>
+                </div>
+                <div class="menu-card__footer-hint" aria-hidden="true">
+                  <span class="menu-card__footer-hint-icon">↺</span>
+                  <span>Tippen für Single-Burger Ansicht</span>
+                </div>
+              </div>
+              <div class="menu-card__glass-sheen" aria-hidden="true"></div>
             </div>
           </div>
         </article>
 
         <!-- Card 5: Cheeseburger -->
-        <article class="menu-card reveal reveal-delay-6" id="menu-cheeseburger">
-          <div class="menu-card__image-wrapper">
-            <img src="Burger_Bilder/cheese_burger.jpeg" alt="Cheeseburger" class="menu-card__image" loading="lazy">
-            <div class="menu-card__image-overlay" aria-hidden="true"></div>
-            <span class="menu-card__tag">Beliebt</span>
-            <span class="menu-card__menu-tag">Menü-Deal</span>
-          </div>
-          <div class="menu-card__body">
-            <div class="menu-card__top-row">
-              <h3 class="menu-card__name">Cheeseburger</h3>
-              <div class="menu-card__price-wrapper">
-                <span class="menu-card__price menu-card__price--single">8,50 €</span>
-                <span class="menu-card__price menu-card__price--menu">14,00 €</span>
+        <article class="menu-card reveal reveal-delay-6" id="menu-cheeseburger" role="button" tabindex="0"
+          aria-label="Cheeseburger — Tippen um zwischen Single und Menü zu wechseln" aria-expanded="false" data-mode="single">
+          <div class="menu-card__inner">
+            <!-- FRONT: SINGLE -->
+            <div class="menu-card__face menu-card__face--front">
+              <div class="menu-card__image-wrapper">
+                <img src="Burger_Bilder/cheese_burger.jpeg" alt="Cheeseburger Single" class="menu-card__image" loading="lazy">
+                <div class="menu-card__image-overlay" aria-hidden="true"></div>
+                <span class="menu-card__tag">Beliebt</span>
+                <div class="menu-card__flip-pill" aria-hidden="true">
+                  <svg class="menu-card__flip-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                    <path d="M16 21h5v-5"/>
+                  </svg>
+                  <span>Menü ansehen</span>
+                </div>
               </div>
+              <div class="menu-card__body">
+                <div class="menu-card__top-row">
+                  <h3 class="menu-card__name">Cheeseburger</h3>
+                  <div class="menu-card__price-wrapper">
+                    <span class="menu-card__price">8,50 €</span>
+                  </div>
+                </div>
+                <p class="menu-card__desc">Der absolute Klassiker unter den Smashburgern – perfekt auf den Punkt gesmashed mit extra viel geschmolzenem Käse.</p>
+                <div class="menu-card__ingredients" aria-label="Zutaten">
+                  <span class="menu-card__ingredient">Potato Bun</span>
+                  <span class="menu-card__ingredient">1x Smashed Beef</span>
+                  <span class="menu-card__ingredient">2x Käse</span>
+                  <span class="menu-card__ingredient">Zwiebeln</span>
+                  <span class="menu-card__ingredient">Eingelegte Gurke</span>
+                  <span class="menu-card__ingredient">Ketchup</span>
+                  <span class="menu-card__ingredient">Senf</span>
+                </div>
+                <div class="menu-card__footer-hint" aria-hidden="true">
+                  <span class="menu-card__footer-hint-icon">↻</span>
+                  <span>Tippen für Menü-Ansicht mit Pommes & Fritz-Kola</span>
+                </div>
+              </div>
+              <div class="menu-card__glass-sheen" aria-hidden="true"></div>
             </div>
-            <div class="menu-card__menu-badge">
-              <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Inkl. Pommes und Getränk
-            </div>
-            <p class="menu-card__desc">Der absolute Klassiker unter den Smashburgern – perfekt auf den Punkt gesmashed
-              mit extra viel geschmolzenem Käse.</p>
-            <div class="menu-card__ingredients" aria-label="Zutaten">
-              <span class="menu-card__ingredient">Potato Bun</span>
-              <span class="menu-card__ingredient">1x Smashed Beef</span>
-              <span class="menu-card__ingredient">2x Käse</span>
-              <span class="menu-card__ingredient">Zwiebeln</span>
-              <span class="menu-card__ingredient">Eingelegte Gurke</span>
-              <span class="menu-card__ingredient">Ketchup</span>
-              <span class="menu-card__ingredient">Senf</span>
+
+            <!-- BACK: MENÜ -->
+            <div class="menu-card__face menu-card__face--back">
+              <div class="menu-card__image-wrapper">
+                <img src="Burger_Bilder/Menu_Bilder/web/cheeseburger_menu.jpg"
+                  srcset="Burger_Bilder/Menu_Bilder/web/cheeseburger_menu.jpg 1200w, Burger_Bilder/Menu_Bilder/cheeseburger_menu.jpg 2048w"
+                  sizes="(max-width: 768px) 100vw, 500px"
+                  alt="Cheeseburger Menü mit Pommes und Fritz-Kola" class="menu-card__image menu-card__image--menu" loading="lazy">
+                <div class="menu-card__image-overlay" aria-hidden="true"></div>
+                <span class="menu-card__tag menu-card__tag--menu">Menü-Deal</span>
+                <div class="menu-card__flip-pill menu-card__flip-pill--menu" aria-hidden="true">
+                  <svg class="menu-card__flip-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                    <path d="M16 21h5v-5"/>
+                  </svg>
+                  <span>Single ansehen</span>
+                </div>
+              </div>
+              <div class="menu-card__body">
+                <div class="menu-card__top-row">
+                  <h3 class="menu-card__name">Classic Cheese <span class="menu-card__name-badge">Menü</span></h3>
+                  <div class="menu-card__price-wrapper">
+                    <span class="menu-card__price menu-card__price--menu">14,00 €</span>
+                  </div>
+                </div>
+                <div class="menu-card__menu-badge">
+                  <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Inkl. Pommes & Fritz-Kola / Softdrink
+                </div>
+                <p class="menu-card__desc">Die Essenz des Smashburgers als vollwertiges Menü: Frisches Beef-Patty mit doppeltem Käse, goldgelben Pommes und erfrischender Fritz-Kola.</p>
+                <div class="menu-card__combo-pills" aria-label="Menü-Bestandteile">
+                  <span class="menu-card__combo-pill">🍟 Knusprige Pommes</span>
+                  <span class="menu-card__combo-pill">🥤 0,33l Fritz-Kola / Softdrink</span>
+                  <span class="menu-card__combo-pill">🥫 Ketchup & Mayo</span>
+                </div>
+                <div class="menu-card__footer-hint" aria-hidden="true">
+                  <span class="menu-card__footer-hint-icon">↺</span>
+                  <span>Tippen für Single-Burger Ansicht</span>
+                </div>
+              </div>
+              <div class="menu-card__glass-sheen" aria-hidden="true"></div>
             </div>
           </div>
         </article>
 
         <!-- Card 6: Chicken Burger -->
-        <article class="menu-card reveal reveal-delay-1" id="menu-chicken-burger">
-          <div class="menu-card__image-wrapper">
-            <img src="Burger_Bilder/chicken_burger.jpeg" alt="Chicken Burger" class="menu-card__image" loading="lazy">
-            <div class="menu-card__image-overlay" aria-hidden="true"></div>
-            <span class="menu-card__tag">Knusprig</span>
-            <span class="menu-card__menu-tag">Menü-Deal</span>
-          </div>
-          <div class="menu-card__body">
-            <div class="menu-card__top-row">
-              <h3 class="menu-card__name">Chicken Burger</h3>
-              <div class="menu-card__price-wrapper">
-                <span class="menu-card__price menu-card__price--single">8,50 €</span>
-                <span class="menu-card__price menu-card__price--menu">14,00 €</span>
+        <article class="menu-card reveal reveal-delay-1" id="menu-chicken-burger" role="button" tabindex="0"
+          aria-label="Chicken Burger — Tippen um zwischen Single und Menü zu wechseln" aria-expanded="false" data-mode="single">
+          <div class="menu-card__inner">
+            <!-- FRONT: SINGLE -->
+            <div class="menu-card__face menu-card__face--front">
+              <div class="menu-card__image-wrapper">
+                <img src="Burger_Bilder/chicken_burger.jpeg" alt="Chicken Burger Single" class="menu-card__image" loading="lazy">
+                <div class="menu-card__image-overlay" aria-hidden="true"></div>
+                <span class="menu-card__tag">Knusprig</span>
+                <div class="menu-card__flip-pill" aria-hidden="true">
+                  <svg class="menu-card__flip-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                    <path d="M16 21h5v-5"/>
+                  </svg>
+                  <span>Menü ansehen</span>
+                </div>
               </div>
+              <div class="menu-card__body">
+                <div class="menu-card__top-row">
+                  <h3 class="menu-card__name">Chicken Burger</h3>
+                  <div class="menu-card__price-wrapper">
+                    <span class="menu-card__price">8,50 €</span>
+                  </div>
+                </div>
+                <p class="menu-card__desc">Die knusprige Alternative: Goldgelb paniertes Hähnchenfilet mit knackigem Salat, frischen Tomatenscheiben und cremiger Knoblauch-Mayonnaise.</p>
+                <div class="menu-card__ingredients" aria-label="Zutaten">
+                  <span class="menu-card__ingredient">Potato Bun</span>
+                  <span class="menu-card__ingredient">Crispy Chicken</span>
+                  <span class="menu-card__ingredient">Salat</span>
+                  <span class="menu-card__ingredient">Tomate</span>
+                  <span class="menu-card__ingredient">Knoblauchmajo</span>
+                </div>
+                <div class="menu-card__footer-hint" aria-hidden="true">
+                  <span class="menu-card__footer-hint-icon">↻</span>
+                  <span>Tippen für Menü-Ansicht mit Pommes & Fritz-Kola</span>
+                </div>
+              </div>
+              <div class="menu-card__glass-sheen" aria-hidden="true"></div>
             </div>
-            <div class="menu-card__menu-badge">
-              <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              Inkl. Pommes und Getränk
-            </div>
-            <p class="menu-card__desc">Die knusprige Alternative: Goldgelb paniertes Hähnchenfilet mit knackigem Salat, frischen Tomatenscheiben und cremiger Knoblauch-Mayonnaise.</p>
-            <div class="menu-card__ingredients" aria-label="Zutaten">
-              <span class="menu-card__ingredient">Potato Bun</span>
-              <span class="menu-card__ingredient">Crispy Chicken</span>
-              <span class="menu-card__ingredient">Salat</span>
-              <span class="menu-card__ingredient">Tomate</span>
-              <span class="menu-card__ingredient">Knoblauchmajo</span>
+
+            <!-- BACK: MENÜ -->
+            <div class="menu-card__face menu-card__face--back">
+              <div class="menu-card__image-wrapper">
+                <img src="Burger_Bilder/Menu_Bilder/web/chickenburger_menu.jpg"
+                  srcset="Burger_Bilder/Menu_Bilder/web/chickenburger_menu.jpg 1200w, Burger_Bilder/Menu_Bilder/chickenburger_menu.jpg 2048w"
+                  sizes="(max-width: 768px) 100vw, 500px"
+                  alt="Chicken Burger Menü mit Pommes und Fritz-Kola" class="menu-card__image menu-card__image--menu" loading="lazy">
+                <div class="menu-card__image-overlay" aria-hidden="true"></div>
+                <span class="menu-card__tag menu-card__tag--menu">Menü-Deal</span>
+                <div class="menu-card__flip-pill menu-card__flip-pill--menu" aria-hidden="true">
+                  <svg class="menu-card__flip-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                    <path d="M3 3v5h5"/>
+                    <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+                    <path d="M16 21h5v-5"/>
+                  </svg>
+                  <span>Single ansehen</span>
+                </div>
+              </div>
+              <div class="menu-card__body">
+                <div class="menu-card__top-row">
+                  <h3 class="menu-card__name">Crispy Chicken <span class="menu-card__name-badge">Menü</span></h3>
+                  <div class="menu-card__price-wrapper">
+                    <span class="menu-card__price menu-card__price--menu">14,00 €</span>
+                  </div>
+                </div>
+                <div class="menu-card__menu-badge">
+                  <svg class="menu-card__menu-badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Inkl. Pommes & Fritz-Kola / Softdrink
+                </div>
+                <p class="menu-card__desc">Knusprig-saftiger Geflügelgenuss im Bundle: Unser Crispy Chicken Burger im Potato Bun mit krossen Pommes und deiner kalten Lieblings-Fritz-Kola.</p>
+                <div class="menu-card__combo-pills" aria-label="Menü-Bestandteile">
+                  <span class="menu-card__combo-pill">🍟 Knusprige Pommes</span>
+                  <span class="menu-card__combo-pill">🥤 0,33l Fritz-Kola / Softdrink</span>
+                  <span class="menu-card__combo-pill">🧄 Knoblauchmajo</span>
+                </div>
+                <div class="menu-card__footer-hint" aria-hidden="true">
+                  <span class="menu-card__footer-hint-icon">↺</span>
+                  <span>Tippen für Single-Burger Ansicht</span>
+                </div>
+              </div>
+              <div class="menu-card__glass-sheen" aria-hidden="true"></div>
             </div>
           </div>
         </article>
@@ -332,8 +674,8 @@
             Kommodore-Johnsen-Boulevard 21<br>
             28217 Bremen
           </p>
-          <a href="https://maps.google.com/?q=Kommodore-Johnsen-Boulevard+21,+28217+Bremen" target="_blank" rel="noopener noreferrer"
-            class="info-block__link" id="info-maps-link">
+          <a href="https://maps.google.com/?q=Kommodore-Johnsen-Boulevard+21,+28217+Bremen" target="_blank"
+            rel="noopener noreferrer" class="info-block__link" id="info-maps-link">
             Auf Google Maps anzeigen
             <span class="info-block__link-arrow" aria-hidden="true">→</span>
           </a>
@@ -351,7 +693,8 @@
         </div>
         <h3 class="info-block__title">News & Aktuelles</h3>
         <div class="info-block__news-grid" id="news-container">
-          <p class="news-loading" style="color: var(--text-muted); font-size: 0.95rem; font-style: italic;">News werden geladen...</p>
+          <p class="news-loading" style="color: var(--text-muted); font-size: 0.95rem; font-style: italic;">News werden
+            geladen...</p>
         </div>
       </div>
     </section>
@@ -360,8 +703,9 @@
   <!-- ==================== FOOTER ==================== -->
   <footer class="footer" id="footer">
     <div class="footer__social">
-      <a href="https://www.instagram.com/eliteburgerbremen?igsh=MW04aGdyeXQ0bzh0Yw==" target="_blank" rel="noopener noreferrer" class="footer__social-link"
-        id="social-instagram" aria-label="Elite Burger auf Instagram">
+      <a href="https://www.instagram.com/eliteburgerbremen?igsh=MW04aGdyeXQ0bzh0Yw==" target="_blank"
+        rel="noopener noreferrer" class="footer__social-link" id="social-instagram"
+        aria-label="Elite Burger auf Instagram">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -370,8 +714,8 @@
         </svg>
       </a>
 
-      <a href="https://www.tiktok.com/@myburgerbremen" target="_blank" rel="noopener noreferrer" class="footer__social-link"
-        id="social-tiktok" aria-label="Elite Burger auf TikTok">
+      <a href="https://www.tiktok.com/@myburgerbremen" target="_blank" rel="noopener noreferrer"
+        class="footer__social-link" id="social-tiktok" aria-label="Elite Burger auf TikTok">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
@@ -387,16 +731,24 @@
     <nav class="footer__legal" aria-label="Rechtliche Links">
       <a href="impressum.html" class="footer__legal-link" id="legal-impressum">
         Impressum
-        <svg class="wip-gear-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-left: 4px; display: inline-block;">
+        <svg class="wip-gear-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor"
+          stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+          style="vertical-align: middle; margin-left: 4px; display: inline-block;">
           <circle cx="12" cy="12" r="3"></circle>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
+          </path>
         </svg>
       </a>
       <a href="datenschutz.html" class="footer__legal-link" id="legal-datenschutz">
         Datenschutz
-        <svg class="wip-gear-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-left: 4px; display: inline-block;">
+        <svg class="wip-gear-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor"
+          stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+          style="vertical-align: middle; margin-left: 4px; display: inline-block;">
           <circle cx="12" cy="12" r="3"></circle>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
+          </path>
         </svg>
       </a>
     </nav>

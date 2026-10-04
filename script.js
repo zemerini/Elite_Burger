@@ -275,7 +275,7 @@
         heroVideo.pause();
       } else {
         const playing = heroVideo.play();
-        if (playing && typeof playing.catch === 'function') playing.catch(() => {});
+        if (playing && typeof playing.catch === 'function') playing.catch(() => { });
       }
     };
     if (prefersReducedMotion()) syncVideoToMotionPreference();
@@ -308,52 +308,222 @@
     }, 4000);
   }
 
-  // --- Menu Toggle (Single / Menü) ---
+  // --- Apple-style 3D Glass Flip Cards & Menu Toggle ---
   const menuTogglePill = document.getElementById('menuTogglePill');
   const btnSingle = document.getElementById('btn-single');
   const btnMenu = document.getElementById('btn-menu');
   const menuSection = document.getElementById('menu');
+  const cards = Array.from(document.querySelectorAll('.menu-card'));
 
-  if (menuTogglePill && btnSingle && btnMenu && menuSection) {
-    const slider = menuTogglePill.querySelector('.menu__toggle-slider');
+  if (cards.length > 0) {
+    const cardControllers = [];
 
-    // Schieber als Feder: jederzeit umlenkbar, minimales Nachfedern wie ein physischer Schalter
-    const sliderSpring = slider
-      ? createSpring(0, { response: 0.3, damping: 0.8, restDelta: 0.0005 }, (progress) => {
-        slider.style.transform = `translateX(${progress * 100}%)`;
-      })
-      : null;
-
-    function setMenuMode(mode) {
-      const isMenu = mode === 'menu';
-
-      if (isMenu) {
-        menuTogglePill.setAttribute('data-active', 'menu');
-        btnSingle.classList.remove('active');
-        btnSingle.setAttribute('aria-pressed', 'false');
-        btnMenu.classList.add('active');
-        btnMenu.setAttribute('aria-pressed', 'true');
-        menuSection.classList.add('menu--show-menu');
-      } else {
-        menuTogglePill.setAttribute('data-active', 'single');
-        btnSingle.classList.add('active');
-        btnSingle.setAttribute('aria-pressed', 'true');
-        btnMenu.classList.remove('active');
-        btnMenu.setAttribute('aria-pressed', 'false');
-        menuSection.classList.remove('menu--show-menu');
-      }
-
-      if (sliderSpring) {
-        if (prefersReducedMotion()) {
-          sliderSpring.jump(isMenu ? 1 : 0);
-        } else {
-          sliderSpring.to(isMenu ? 1 : 0);
-        }
+    // Helper to sync global toggle button state based on cards
+    function syncToggleFromCards() {
+      if (!menuTogglePill || !btnSingle || !btnMenu) return;
+      const menuCount = cardControllers.filter(c => c.getTarget() === 180).length;
+      if (menuCount === cardControllers.length) {
+        syncToggleUI('menu');
+      } else if (menuCount === 0) {
+        syncToggleUI('single');
       }
     }
 
-    btnSingle.addEventListener('click', () => setMenuMode('single'));
-    btnMenu.addEventListener('click', () => setMenuMode('menu'));
+    cards.forEach((card, index) => {
+      const inner = card.querySelector('.menu-card__inner');
+      const frontFace = card.querySelector('.menu-card__face--front');
+      const backFace = card.querySelector('.menu-card__face--back');
+      const frontSheen = frontFace ? frontFace.querySelector('.menu-card__glass-sheen') : null;
+      const backSheen = backFace ? backFace.querySelector('.menu-card__glass-sheen') : null;
+
+      let targetAngle = 0; // 0 = single, 180 = menu
+      let currentAngle = 0;
+
+      // Apple WWDC 2018 rotation spring: damping 0.82, response 0.42
+      // Erlaubt unterbrechungsfreie Umkehr aus jedem beliebigen Flug-Winkel
+      const spring = createSpring(0, { response: 0.42, damping: 0.82, restDelta: 0.05 }, (angle) => {
+        currentAngle = angle;
+
+        if (prefersReducedMotion()) {
+          const p = Math.max(0, Math.min(1, angle / 180));
+          if (frontFace) {
+            frontFace.style.opacity = (1 - p).toFixed(2);
+            frontFace.style.pointerEvents = p > 0.5 ? 'none' : 'auto';
+          }
+          if (backFace) {
+            backFace.style.opacity = p.toFixed(2);
+            backFace.style.pointerEvents = p <= 0.5 ? 'none' : 'auto';
+          }
+          if (inner) inner.style.transform = 'none';
+          return;
+        }
+
+        // Apple 3D Physics:
+        // Z-Elevation: bei 90° hebt sich die Karte um 26px in den Raum zum Betrachter
+        const rad = (angle * Math.PI) / 180;
+        const depth = Math.sin(rad) * 26;
+        if (inner) {
+          if (Math.abs(angle) < 0.05) {
+            inner.style.transform = '';
+          } else if (Math.abs(angle - 180) < 0.05) {
+            inner.style.transform = 'rotateY(180deg)';
+          } else {
+            inner.style.transform = `translate3d(0, 0, ${depth.toFixed(2)}px) rotateY(${angle.toFixed(2)}deg)`;
+          }
+        }
+
+        // Sichtbarkeit an der 90°-Kante umschalten verhindert Z-Fighting und Durchscheinen
+        const isFlippedOver = angle >= 90;
+        if (frontFace) {
+          frontFace.style.visibility = isFlippedOver ? 'hidden' : 'visible';
+          frontFace.style.pointerEvents = isFlippedOver ? 'none' : 'auto';
+        }
+        if (backFace) {
+          backFace.style.visibility = isFlippedOver ? 'visible' : 'hidden';
+          backFace.style.pointerEvents = isFlippedOver ? 'auto' : 'none';
+        }
+
+        // Dynamischer Lichtstreif (Specular Sheen) wandert über das Glas
+        const sheenOffset = (angle / 180) * 160 - 30;
+        if (frontSheen) frontSheen.style.transform = `translateX(${sheenOffset.toFixed(1)}%) rotate(25deg)`;
+        if (backSheen) backSheen.style.transform = `translateX(${(100 - sheenOffset).toFixed(1)}%) rotate(25deg)`;
+
+        // Status-Attribute synchronisieren
+        card.setAttribute('data-mode', isFlippedOver ? 'menu' : 'single');
+        card.setAttribute('aria-expanded', isFlippedOver ? 'true' : 'false');
+      });
+
+      function flipTo(target, { immediate = false } = {}) {
+        targetAngle = target;
+        if (immediate || prefersReducedMotion()) {
+          spring.jump(target);
+        } else {
+          spring.to(target);
+        }
+      }
+
+      function toggleFlip() {
+        const next = targetAngle === 0 ? 180 : 0;
+        flipTo(next);
+        syncToggleFromCards();
+      }
+
+      // Touch & Pointer Feedback (Sofortige Reaktion auf pointerdown per SKILL.md)
+      let pointerStartX = 0;
+      let pointerStartY = 0;
+      let isPointerDown = false;
+      let isDragScroll = false;
+
+      card.addEventListener('pointerdown', (e) => {
+        if (e.button !== undefined && e.button > 0) return;
+        isPointerDown = true;
+        isDragScroll = false;
+        pointerStartX = e.clientX;
+        pointerStartY = e.clientY;
+        card.classList.add('is-pressed');
+      });
+
+      card.addEventListener('pointermove', (e) => {
+        if (!isPointerDown) return;
+        if (Math.hypot(e.clientX - pointerStartX, e.clientY - pointerStartY) > 8) {
+          isDragScroll = true;
+          card.classList.remove('is-pressed');
+        }
+      });
+
+      card.addEventListener('pointerup', () => {
+        isPointerDown = false;
+        card.classList.remove('is-pressed');
+      });
+
+      card.addEventListener('pointercancel', () => {
+        isPointerDown = false;
+        card.classList.remove('is-pressed');
+      });
+
+      card.addEventListener('pointerleave', () => {
+        isPointerDown = false;
+        card.classList.remove('is-pressed');
+      });
+
+      card.addEventListener('click', (e) => {
+        if (isDragScroll) return;
+        if (e.target.closest('a')) return;
+        toggleFlip();
+      });
+
+      // Barrierefreiheit: Tastatur-Navigation (Enter & Space)
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleFlip();
+        }
+      });
+
+      cardControllers.push({
+        card,
+        flipTo,
+        toggleFlip,
+        getTarget: () => targetAngle,
+        getCurrent: () => currentAngle
+      });
+    });
+
+    // Global Toggle Pill (Single / Menü)
+    if (menuTogglePill && btnSingle && btnMenu && menuSection) {
+      const slider = menuTogglePill.querySelector('.menu__toggle-slider');
+      const sliderSpring = slider
+        ? createSpring(0, { response: 0.3, damping: 0.8, restDelta: 0.0005 }, (progress) => {
+          slider.style.transform = `translateX(${progress * 100}%)`;
+        })
+        : null;
+
+      let waveTimeouts = [];
+
+      function clearWaveTimeouts() {
+        waveTimeouts.forEach(t => clearTimeout(t));
+        waveTimeouts = [];
+      }
+
+      function syncToggleUI(mode) {
+        const isMenu = mode === 'menu';
+        menuTogglePill.setAttribute('data-active', mode);
+        btnSingle.classList.toggle('active', !isMenu);
+        btnSingle.setAttribute('aria-pressed', (!isMenu).toString());
+        btnMenu.classList.toggle('active', isMenu);
+        btnMenu.setAttribute('aria-pressed', isMenu.toString());
+        menuSection.classList.toggle('menu--show-menu', isMenu);
+
+        if (sliderSpring) {
+          if (prefersReducedMotion()) {
+            sliderSpring.jump(isMenu ? 1 : 0);
+          } else {
+            sliderSpring.to(isMenu ? 1 : 0);
+          }
+        }
+      }
+
+      function setGlobalMode(mode) {
+        clearWaveTimeouts();
+        syncToggleUI(mode);
+        const targetAngle = mode === 'menu' ? 180 : 0;
+
+        cardControllers.forEach((ctrl, i) => {
+          if (prefersReducedMotion()) {
+            ctrl.flipTo(targetAngle, { immediate: true });
+          } else {
+            // Apple Cascading Wave (Stagger von 45ms pro Karte)
+            const timeout = setTimeout(() => {
+              ctrl.flipTo(targetAngle);
+            }, i * 45);
+            waveTimeouts.push(timeout);
+          }
+        });
+      }
+
+      btnSingle.addEventListener('click', () => setGlobalMode('single'));
+      btnMenu.addEventListener('click', () => setGlobalMode('menu'));
+    }
   }
 
   // --- Dynamic News Loading ---
