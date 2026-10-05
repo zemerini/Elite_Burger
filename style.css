@@ -1594,21 +1594,12 @@ button {
   margin-bottom: 0.85rem;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-}
-
-.legend-card__return[hidden],
-.legend-card__return-footer[hidden] {
-  display: none !important;
-}
-
-.legend-card__return-footer {
-  margin-top: var(--space-lg);
-  display: flex;
-  align-items: center;
   justify-content: center;
-  padding-top: var(--space-md);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  width: 100%;
+}
+
+.legend-card__return[hidden] {
+  display: none !important;
 }
 
 .legend-card__return-btn {
@@ -1668,10 +1659,10 @@ button {
 
 @keyframes productReturnPulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(225, 136, 52, 0.7);
+    box-shadow: 0 0 0 0 rgba(225, 136, 52, 0);
   }
   35% {
-    box-shadow: 0 0 0 8px rgba(225, 136, 52, 0.35), 0 0 24px rgba(225, 136, 52, 0.4);
+    box-shadow: 0 0 0 1px rgba(225, 136, 52, 0.22), 0 2px 10px rgba(225, 136, 52, 0.08);
   }
   100% {
     box-shadow: none;
@@ -1679,13 +1670,13 @@ button {
 }
 
 .menu-card.product-returned-pulse {
-  animation: productReturnPulse 1.8s var(--ease-out);
+  animation: productReturnPulse 1.3s var(--ease-out);
 }
 
 .menu-list__item.product-returned-pulse {
-  animation: productReturnPulse 1.8s var(--ease-out);
+  animation: productReturnPulse 1.3s var(--ease-out);
   border-radius: var(--radius-xs);
-  background: rgba(225, 136, 52, 0.15);
+  background: rgba(225, 136, 52, 0.05);
 }
 
 /* --- Mobile Segmented Tabs --- */

@@ -529,7 +529,6 @@
   // --- Legend Accordion & Allergen Jump Handler ---
   const legendCard = document.getElementById('legendCard') || document.querySelector('.legend-card');
   const legendHeader = document.getElementById('legendCardHeader') || document.querySelector('.legend-card__header');
-  const legendToggleBtn = document.getElementById('legendToggleBtn');
   const legendContent = document.getElementById('legendContent');
   const legendSubtitle = document.getElementById('legendSubtitle') || (legendCard ? legendCard.querySelector('.legend-card__subtitle') : null);
 
@@ -543,13 +542,6 @@
     }
     if (legendCard) {
       legendCard.setAttribute('data-expanded', expanded.toString());
-    }
-    if (legendToggleBtn) {
-      legendToggleBtn.setAttribute('aria-expanded', expanded.toString());
-      const textSpan = legendToggleBtn.querySelector('.legend-card__toggle-text');
-      if (textSpan) {
-        textSpan.textContent = expanded ? 'Legende einklappen' : 'Legende ausklappen';
-      }
     }
     if (legendSubtitle) {
       legendSubtitle.textContent = expanded ? 'Tippen zum Einklappen' : 'Tippen zum Aufklappen';
@@ -635,9 +627,6 @@
   const legendReturnBar = document.getElementById('legendReturnBar');
   const legendReturnBtn = document.getElementById('legendReturnBtn');
   const legendReturnTarget = document.getElementById('legendReturnTarget');
-  const legendReturnFooter = document.getElementById('legendReturnFooter');
-  const legendReturnFooterBtn = document.getElementById('legendReturnFooterBtn');
-  const legendReturnTargetBottom = document.getElementById('legendReturnTargetBottom');
 
   function getLegendItemId(code) {
     return /^\d+$/.test(code) ? `additive-item-${code}` : `allergen-item-${code}`;
@@ -688,7 +677,6 @@
       activeAllergenSource = null;
     }
     if (legendReturnBar) legendReturnBar.hidden = true;
-    if (legendReturnFooter) legendReturnFooter.hidden = true;
     updateTabMarkers();
   }
 
@@ -733,11 +721,9 @@
       returnTargetElement = container;
     }
 
-    // Zurück-Buttons beschriften und anzeigen
+    // Zurück-Button beschriften und anzeigen
     if (legendReturnTarget) legendReturnTarget.textContent = productName;
-    if (legendReturnTargetBottom) legendReturnTargetBottom.textContent = productName;
     if (legendReturnBar) legendReturnBar.hidden = false;
-    if (legendReturnFooter) legendReturnFooter.hidden = false;
 
     if (legendContent && legendContent.classList.contains('is-collapsed')) {
       setLegendExpanded(true);
@@ -770,22 +756,15 @@
       behavior: prefersReducedMotion() ? 'auto' : 'smooth',
     });
 
-    // Sanfte Puls-Hervorhebung des Ausgangsprodukts zur visuellen Orientierung
+    // Sehr dezente Puls-Hervorhebung des Ausgangsprodukts zur visuellen Orientierung
     returnTargetElement.classList.add('product-returned-pulse');
     setTimeout(() => {
       if (returnTargetElement) returnTargetElement.classList.remove('product-returned-pulse');
-    }, 2200);
+    }, 1600);
   }
 
   if (legendReturnBtn) {
     legendReturnBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      returnToProduct();
-    });
-  }
-
-  if (legendReturnFooterBtn) {
-    legendReturnFooterBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       returnToProduct();
     });
