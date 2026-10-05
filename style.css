@@ -931,11 +931,6 @@ button {
   transform: rotateY(180deg) translateZ(1px);
   color: #FFC72C;
   font-weight: 900;
-  text-shadow:
-    0 0 10px rgba(255, 199, 44, 0.75),
-    0 0 22px rgba(255, 199, 44, 0.4),
-    0 1px 3px rgba(0, 0, 0, 0.9);
-  filter: drop-shadow(0 0 4px rgba(255, 199, 44, 0.6));
 }
 
 .wac-morph__rest {
@@ -949,12 +944,6 @@ button {
   }
   27% {
     transform: rotateY(180deg);
-  }
-  48% {
-    transform: rotateY(180deg) scale(1.08);
-  }
-  68% {
-    transform: rotateY(180deg) scale(1);
   }
   72% {
     transform: rotateY(180deg);
@@ -1600,6 +1589,105 @@ button {
   display: none;
 }
 
+/* --- Allergen Legend: Return to Product Button --- */
+.legend-card__return {
+  margin-bottom: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.legend-card__return[hidden],
+.legend-card__return-footer[hidden] {
+  display: none !important;
+}
+
+.legend-card__return-footer {
+  margin-top: var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.legend-card__return-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(225, 136, 52, 0.35);
+  background: rgba(225, 136, 52, 0.1);
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3), 0 0 12px rgba(225, 136, 52, 0.12);
+  text-decoration: none;
+  max-width: 100%;
+}
+
+.legend-card__return-btn svg {
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.legend-card__return-btn:hover {
+  background: rgba(225, 136, 52, 0.22);
+  border-color: rgba(225, 136, 52, 0.6);
+  color: #fff;
+  transform: translateX(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 18px rgba(225, 136, 52, 0.25);
+}
+
+.legend-card__return-btn:hover svg {
+  transform: translateX(-3px);
+}
+
+.legend-card__return-btn:active {
+  transform: scale(0.98);
+}
+
+.legend-card__return-label {
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.legend-card__return-target {
+  color: #fff;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@keyframes productReturnPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(225, 136, 52, 0.7);
+  }
+  35% {
+    box-shadow: 0 0 0 8px rgba(225, 136, 52, 0.35), 0 0 24px rgba(225, 136, 52, 0.4);
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
+.menu-card.product-returned-pulse {
+  animation: productReturnPulse 1.8s var(--ease-out);
+}
+
+.menu-list__item.product-returned-pulse {
+  animation: productReturnPulse 1.8s var(--ease-out);
+  border-radius: var(--radius-xs);
+  background: rgba(225, 136, 52, 0.15);
+}
+
 /* --- Mobile Segmented Tabs --- */
 .legend-card__tabs {
   display: flex;
@@ -1616,8 +1704,8 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
-  padding: 0.5rem 0.75rem;
+  gap: 0.35rem;
+  padding: 0.45rem 0.6rem;
   border-radius: var(--radius-pill);
   border: none;
   background: transparent;
@@ -1626,7 +1714,13 @@ button {
   font-size: 0.78rem;
   font-weight: 600;
   cursor: pointer;
+  white-space: nowrap;
   transition: all var(--transition-fast);
+  min-width: 0;
+}
+
+.legend-card__tab span {
+  white-space: nowrap;
 }
 
 .legend-card__tab:hover {
@@ -1644,10 +1738,12 @@ button {
 .legend-card__tab-count {
   font-size: 0.65rem;
   font-weight: 700;
-  padding: 0.1rem 0.4rem;
+  padding: 0.1rem 0.38rem;
   border-radius: var(--radius-pill);
   background: rgba(255, 255, 255, 0.12);
   color: inherit;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .legend-card__tab.is-active .legend-card__tab-count {
@@ -1732,6 +1828,8 @@ button {
   padding: 0.35rem 0.55rem;
   border-radius: var(--radius-xs);
   transition: background-color var(--transition-fast), transform var(--transition-fast);
+  min-width: 0;
+  overflow: hidden;
 }
 
 .legend-list__item:hover,
@@ -1796,6 +1894,11 @@ button {
   font-size: 0.8rem;
   color: var(--text-secondary);
   line-height: 1.35;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 .legend-card__notice {
@@ -1868,17 +1971,38 @@ button {
     display: none;
   }
 
-  /* 2-column compact grid */
+  /* Compact tabs without line break */
+  .legend-card__tab {
+    padding: 0.4rem 0.45rem;
+    font-size: 0.74rem;
+    gap: 0.28rem;
+    white-space: nowrap;
+  }
+
+  .legend-card__tab span {
+    white-space: nowrap;
+  }
+
+  .legend-card__tab-count {
+    font-size: 0.62rem;
+    padding: 0.08rem 0.32rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Responsive 2-column or 1-column grid */
   .legend-list {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.25rem 0.35rem;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+    gap: 0.3rem 0.45rem;
   }
 
   .legend-list__item {
-    padding: 0.25rem 0.35rem;
+    padding: 0.3rem 0.45rem;
     gap: 0.45rem;
     border-radius: var(--radius-xs);
+    min-width: 0;
+    overflow: hidden;
   }
 
   .legend-list__code {
@@ -1886,11 +2010,34 @@ button {
     height: 20px;
     font-size: 0.68rem;
     border-radius: 5px;
+    flex-shrink: 0;
   }
 
   .legend-list__text {
-    font-size: 0.72rem;
-    line-height: 1.25;
+    font-size: 0.73rem;
+    line-height: 1.3;
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  @media (max-width: 390px) {
+    .legend-card__tab {
+      padding: 0.34rem 0.32rem;
+      font-size: 0.68rem;
+      gap: 0.18rem;
+    }
+
+    .legend-card__tab-count {
+      font-size: 0.58rem;
+      padding: 0.06rem 0.24rem;
+    }
+
+    .legend-list {
+      grid-template-columns: 1fr;
+    }
   }
 
   .legend-card__notice {

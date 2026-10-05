@@ -625,11 +625,19 @@
     });
   }
 
-  // --- Allergen-Markierung ---
+  // --- Allergen-Markierung & Zurück-Navigation ---
   // Ein Tipp auf die Klammer eines Produkts (egal auf welchen Code) markiert ALLE
-  // darin enthaltenen Allergene und Zusatzstoffe in der Legende. Die Markierung
-  // bleibt stehen, bis ein anderes Produkt angetippt oder die Legende geschlossen wird.
+  // darin enthaltenen Allergene und Zusatzstoffe in der Legende. Ein "Zurück"-Button
+  // erlaubt es, mit einem Klick genau zum Ausgangsprodukt zurückzuspringen.
   let activeAllergenSource = null;
+  let returnTargetElement = null;
+
+  const legendReturnBar = document.getElementById('legendReturnBar');
+  const legendReturnBtn = document.getElementById('legendReturnBtn');
+  const legendReturnTarget = document.getElementById('legendReturnTarget');
+  const legendReturnFooter = document.getElementById('legendReturnFooter');
+  const legendReturnFooterBtn = document.getElementById('legendReturnFooterBtn');
+  const legendReturnTargetBottom = document.getElementById('legendReturnTargetBottom');
 
   function getLegendItemId(code) {
     return /^\d+$/.test(code) ? `additive-item-${code}` : `allergen-item-${code}`;
@@ -679,6 +687,8 @@
       activeAllergenSource.classList.remove('is-active');
       activeAllergenSource = null;
     }
+    if (legendReturnBar) legendReturnBar.hidden = true;
+    if (legendReturnFooter) legendReturnFooter.hidden = true;
     updateTabMarkers();
   }
 
@@ -702,6 +712,33 @@
     activeAllergenSource = container;
     container.classList.add('is-active');
 
+    // Produktname & Zielelement für den "Zurück"-Button ermitteln
+    const card = container.closest('.menu-card');
+    const listItem = container.closest('.menu-list__item');
+    let productName = 'Produkt';
+
+    if (card) {
+      returnTargetElement = card;
+      const nameEl = card.querySelector('.menu-card__name');
+      if (nameEl) {
+        const clone = nameEl.cloneNode(true);
+        clone.querySelectorAll('.product-allergens, .menu-card__name-badge, .wac-morph__coin, [aria-hidden="true"]').forEach((el) => el.remove());
+        productName = clone.textContent.replace(/\s+/g, ' ').trim() || 'Burger';
+      }
+    } else if (listItem) {
+      returnTargetElement = listItem;
+      const nameEl = listItem.querySelector('.menu-list__name');
+      productName = nameEl ? nameEl.textContent.trim() : 'Produkt';
+    } else {
+      returnTargetElement = container;
+    }
+
+    // Zurück-Buttons beschriften und anzeigen
+    if (legendReturnTarget) legendReturnTarget.textContent = productName;
+    if (legendReturnTargetBottom) legendReturnTargetBottom.textContent = productName;
+    if (legendReturnBar) legendReturnBar.hidden = false;
+    if (legendReturnFooter) legendReturnFooter.hidden = false;
+
     if (legendContent && legendContent.classList.contains('is-collapsed')) {
       setLegendExpanded(true);
     }
@@ -719,6 +756,39 @@
 
     // Nach dem Aufklappen ist das Layout erst im nächsten Frame final
     requestAnimationFrame(scrollLegendIntoView);
+  }
+
+  function returnToProduct() {
+    if (!returnTargetElement) return;
+
+    const headerBottom = header ? Math.max(0, header.getBoundingClientRect().bottom) : 0;
+    const rect = returnTargetElement.getBoundingClientRect();
+    const top = rect.top + window.scrollY - headerBottom - 24;
+
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+    });
+
+    // Sanfte Puls-Hervorhebung des Ausgangsprodukts zur visuellen Orientierung
+    returnTargetElement.classList.add('product-returned-pulse');
+    setTimeout(() => {
+      if (returnTargetElement) returnTargetElement.classList.remove('product-returned-pulse');
+    }, 2200);
+  }
+
+  if (legendReturnBtn) {
+    legendReturnBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      returnToProduct();
+    });
+  }
+
+  if (legendReturnFooterBtn) {
+    legendReturnFooterBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      returnToProduct();
+    });
   }
 
   document.addEventListener('click', (e) => {

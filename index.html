@@ -1089,6 +1089,17 @@
           </div>
 
           <div class="legend-card__content is-collapsed" id="legendContent">
+            <!-- Zurück zum Produkt (erscheint nach Klick auf ein Produkt) -->
+            <div class="legend-card__return" id="legendReturnBar" hidden>
+              <button type="button" class="legend-card__return-btn" id="legendReturnBtn" aria-label="Zurück zum ausgewählten Produkt">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span class="legend-card__return-label">Zurück zu</span>
+                <strong class="legend-card__return-target" id="legendReturnTarget">Produkt</strong>
+              </button>
+            </div>
+
             <!-- Mobile Category Tabs (Allergene / Zusatzstoffe) -->
             <div class="legend-card__tabs" role="tablist" aria-label="Kategorien Allergene und Zusatzstoffe">
               <button class="legend-card__tab is-active" id="tabBtnAllergens" type="button" role="tab"
@@ -1180,7 +1191,7 @@
                 <ul class="legend-list">
                   <li class="legend-list__item" id="additive-item-1" data-code="1">
                     <span class="legend-list__code legend-list__code--number">1</span>
-                    <span class="legend-list__text">mit Konservierungsstoff(en)</span>
+                    <span class="legend-list__text">mit Konservierungs&shy;stoff(en)</span>
                   </li>
                   <li class="legend-list__item" id="additive-item-2" data-code="2">
                     <span class="legend-list__code legend-list__code--number">2</span>
@@ -1192,7 +1203,7 @@
                   </li>
                   <li class="legend-list__item" id="additive-item-4" data-code="4">
                     <span class="legend-list__code legend-list__code--number">4</span>
-                    <span class="legend-list__text">mit Antioxidationsmittel</span>
+                    <span class="legend-list__text">mit Antioxidations&shy;mittel</span>
                   </li>
                   <li class="legend-list__item" id="additive-item-5" data-code="5">
                     <span class="legend-list__code legend-list__code--number">5</span>
@@ -1212,7 +1223,7 @@
                   </li>
                   <li class="legend-list__item" id="additive-item-9" data-code="9">
                     <span class="legend-list__code legend-list__code--number">9</span>
-                    <span class="legend-list__text">mit Geschmacksverstärker(n)</span>
+                    <span class="legend-list__text">mit Geschmacks&shy;verstärker(n)</span>
                   </li>
                   <li class="legend-list__item" id="additive-item-10" data-code="10">
                     <span class="legend-list__code legend-list__code--number">10</span>
@@ -1220,7 +1231,7 @@
                   </li>
                   <li class="legend-list__item" id="additive-item-11" data-code="11">
                     <span class="legend-list__code legend-list__code--number">11</span>
-                    <span class="legend-list__text">Säuerungsmittel</span>
+                    <span class="legend-list__text">Säuerungs&shy;mittel</span>
                   </li>
                   <li class="legend-list__item" id="additive-item-12" data-code="12">
                     <span class="legend-list__code legend-list__code--number">12</span>
@@ -1247,6 +1258,17 @@
                   handwerklichen Zubereitung in der Küche nicht zu 100 % ausgeschlossen werden. Bei spezifischen
                   Allergien oder Ernährungsfragen sprich bitte jederzeit unser Team an.</p>
               </div>
+            </div>
+
+            <!-- Zurück zum Produkt (Fußbereich der Legende) -->
+            <div class="legend-card__return-footer" id="legendReturnFooter" hidden>
+              <button type="button" class="legend-card__return-btn" id="legendReturnFooterBtn" aria-label="Zurück zum ausgewählten Produkt">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span class="legend-card__return-label">Zurück zu</span>
+                <strong class="legend-card__return-target" id="legendReturnTargetBottom">Produkt</strong>
+              </button>
             </div>
           </div>
         </div>
