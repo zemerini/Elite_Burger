@@ -304,14 +304,6 @@
     }, { passive: true });
   }
 
-  // --- Easter Egg: Auto W ↔ M flip ---
-  const easterEggW = document.getElementById('easter-egg-w');
-  if (easterEggW) {
-    setInterval(() => {
-      easterEggW.classList.toggle('flipped');
-    }, 4000);
-  }
-
   // --- Apple-style 3D Glass Flip Cards & Menu Toggle ---
   const menuTogglePill = document.getElementById('menuTogglePill');
   const btnSingle = document.getElementById('btn-single');
@@ -420,6 +412,8 @@
 
       card.addEventListener('pointerdown', (e) => {
         if (e.button !== undefined && e.button > 0) return;
+        // Tipp auf die Allergen-Zeile ist eine eigene Aktion, kein Karten-Flip
+        if (e.target.closest('.product-allergens')) return;
         isPointerDown = true;
         isDragScroll = false;
         pointerStartX = e.clientX;
@@ -459,6 +453,7 @@
 
       // Barrierefreiheit: Tastatur-Navigation (Enter & Space)
       card.addEventListener('keydown', (e) => {
+        if (e.target.closest('.product-allergens')) return;
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           toggleFlip();
@@ -559,6 +554,8 @@
     if (legendSubtitle) {
       legendSubtitle.textContent = expanded ? 'Tippen zum Einklappen' : 'Tippen zum Aufklappen';
     }
+    // Legende zu = Markierung erledigt
+    if (!expanded) clearAllergenHighlights();
   }
 
   function toggleLegend() {
@@ -628,43 +625,118 @@
     });
   }
 
-  // Click on any allergen code jumps smoothly to the legend and highlights it
+  // --- Allergen-Markierung ---
+  // Ein Tipp auf die Klammer eines Produkts (egal auf welchen Code) markiert ALLE
+  // darin enthaltenen Allergene und Zusatzstoffe in der Legende. Die Markierung
+  // bleibt stehen, bis ein anderes Produkt angetippt oder die Legende geschlossen wird.
+  let activeAllergenSource = null;
+
+  function getLegendItemId(code) {
+    return /^\d+$/.test(code) ? `additive-item-${code}` : `allergen-item-${code}`;
+  }
+
+  function getCodesFrom(container) {
+    const codes = Array.from(container.querySelectorAll('.allergen-code'), (el) => {
+      const raw = el.getAttribute('data-code') || el.textContent;
+      const match = raw.trim().replace(/[()]/g, '').match(/^[a-z0-9]+/i);
+      return match ? match[0].toLowerCase() : '';
+    });
+    return [...new Set(codes.filter(Boolean))];
+  }
+
+  // Zähler an den mobilen Tabs, damit Markierungen im anderen Tab nicht übersehen werden
+  function ensureTabMarker(tabBtn) {
+    let marker = tabBtn.querySelector('.legend-card__tab-marker');
+    if (!marker) {
+      marker = document.createElement('span');
+      marker.className = 'legend-card__tab-marker';
+      marker.hidden = true;
+      tabBtn.appendChild(marker);
+    }
+    return marker;
+  }
+
+  function updateTabMarkers() {
+    const pairs = [
+      [tabBtnAllergens, colAllergens, 'Allergene'],
+      [tabBtnAdditives, colAdditives, 'Zusatzstoffe'],
+    ];
+    for (const [tabBtn, col, label] of pairs) {
+      if (!tabBtn || !col) continue;
+      const count = col.querySelectorAll('.legend-list__item.is-highlighted').length;
+      const marker = ensureTabMarker(tabBtn);
+      marker.hidden = count === 0;
+      marker.textContent = count > 0 ? String(count) : '';
+      tabBtn.setAttribute('aria-label', count > 0 ? `${label}, ${count} markiert` : label);
+    }
+  }
+
+  function clearAllergenHighlights() {
+    for (const item of document.querySelectorAll('.legend-list__item.is-highlighted')) {
+      item.classList.remove('is-highlighted');
+    }
+    if (activeAllergenSource) {
+      activeAllergenSource.classList.remove('is-active');
+      activeAllergenSource = null;
+    }
+    updateTabMarkers();
+  }
+
+  function scrollLegendIntoView() {
+    const target = legendCard || legendContent;
+    if (!target) return;
+    // Fixierten Header berücksichtigen, damit der Legendenkopf nicht verdeckt wird
+    const headerBottom = header ? Math.max(0, header.getBoundingClientRect().bottom) : 0;
+    const top = target.getBoundingClientRect().top + window.scrollY - headerBottom - 12;
+    window.scrollTo({ top: Math.max(0, top), behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+  }
+
+  function highlightProductAllergens(container) {
+    const items = getCodesFrom(container)
+      .map((code) => document.getElementById(getLegendItemId(code)))
+      .filter(Boolean);
+
+    clearAllergenHighlights();
+    if (items.length === 0) return;
+
+    activeAllergenSource = container;
+    container.classList.add('is-active');
+
+    if (legendContent && legendContent.classList.contains('is-collapsed')) {
+      setLegendExpanded(true);
+    }
+
+    // Mobile: Allergene-Tab bevorzugen, Zusatzstoffe nur wenn es keine Allergene gibt
+    const hasAllergens = items.some((item) => item.id.startsWith('allergen-item-'));
+    setLegendTab(hasAllergens ? 'allergens' : 'additives');
+
+    // Reflow erzwingen, damit der Puls auch beim erneuten Tippen desselben Produkts abläuft
+    void items[0].offsetWidth;
+    for (const item of items) {
+      item.classList.add('is-highlighted');
+    }
+    updateTabMarkers();
+
+    // Nach dem Aufklappen ist das Layout erst im nächsten Frame final
+    requestAnimationFrame(scrollLegendIntoView);
+  }
+
   document.addEventListener('click', (e) => {
+    const container = e.target.closest('.product-allergens');
+    if (!container) return;
+    e.preventDefault();
+    highlightProductAllergens(container);
+  });
+
+  // Tastatur: Enter/Leertaste auf einem Code verhält sich wie ein Tipp
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
     const codeEl = e.target.closest('.allergen-code');
     if (!codeEl) return;
-
-    let code = codeEl.getAttribute('data-code');
-    if (!code) {
-      const raw = codeEl.textContent.trim().replace(/[()]/g, '');
-      const match = raw.match(/^[a-z0-9]+/i);
-      code = match ? match[0].toLowerCase() : '';
-    }
-
-    if (!code) return;
-
-    const isNum = /^\d+$/.test(code);
-    const targetId = isNum ? `additive-item-${code}` : `allergen-item-${code}`;
-    const targetItem = document.getElementById(targetId);
-
-    if (targetItem) {
-      if (legendContent && legendContent.classList.contains('is-collapsed')) {
-        setLegendExpanded(true);
-      }
-
-      setLegendTab(isNum ? 'additives' : 'allergens');
-
-      targetItem.scrollIntoView({
-        behavior: prefersReducedMotion() ? 'auto' : 'smooth',
-        block: 'center'
-      });
-
-      targetItem.classList.remove('is-highlighted');
-      void targetItem.offsetWidth;
-      targetItem.classList.add('is-highlighted');
-      setTimeout(() => {
-        targetItem.classList.remove('is-highlighted');
-      }, 2500);
-    }
+    const container = codeEl.closest('.product-allergens');
+    if (!container) return;
+    e.preventDefault();
+    highlightProductAllergens(container);
   });
 
   // --- Menu Data State ---

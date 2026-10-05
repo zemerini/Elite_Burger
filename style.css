@@ -21,11 +21,11 @@
   --text-secondary: #b4b4ba;
   --text-muted: #8e8e93;
 
-  --accent: #ff6600;
-  --accent-hover: #ff8533;
-  --accent-pressed: #e65c00;
-  --accent-glow: rgba(255, 102, 0, 0.12);
-  --accent-glow-strong: rgba(255, 102, 0, 0.22);
+  --accent: rgb(225, 136, 52);
+  --accent-hover: #ea9d4d;
+  --accent-pressed: #d1771f;
+  --accent-glow: rgba(225, 136, 52, 0.12);
+  --accent-glow-strong: rgba(225, 136, 52, 0.22);
   --danger-color: #ff453a;
 
   /* Typography — System-Font: bringt Optical Sizing & Tracking-Tabellen schon mit */
@@ -316,7 +316,7 @@ button {
   align-items: center;
   gap: var(--space-xs);
   padding: 0.45rem 1rem;
-  border: 1px solid rgba(255, 102, 0, 0.45);
+  border: 1px solid rgba(225, 136, 52, 0.45);
   border-radius: var(--radius-pill);
   font-family: var(--font-heading);
   font-size: 0.72rem;
@@ -386,7 +386,7 @@ button {
   cursor: pointer;
   transition: box-shadow var(--transition-smooth),
     background var(--transition-fast);
-  box-shadow: 0 6px 24px rgba(255, 102, 0, 0.28),
+  box-shadow: 0 6px 24px rgba(225, 136, 52, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
@@ -394,7 +394,7 @@ button {
   .hero__cta:hover {
     background: var(--accent-hover);
     box-shadow: 0 10px 34px var(--accent-glow-strong),
-      0 6px 24px rgba(255, 102, 0, 0.3),
+      0 6px 24px rgba(225, 136, 52, 0.3),
       inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
 }
@@ -562,7 +562,7 @@ button {
   border-radius: var(--radius-pill);
   transition: background var(--transition-smooth);
   z-index: 1;
-  box-shadow: 0 2px 10px rgba(255, 102, 0, 0.3),
+  box-shadow: 0 2px 10px rgba(225, 136, 52, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.25);
   will-change: transform;
 }
@@ -653,9 +653,9 @@ button {
 .menu-card__face--back {
   transform: rotateY(180deg) translateZ(1px);
   background: linear-gradient(165deg, rgba(34, 26, 20, 0.8) 0%, rgba(16, 15, 18, 0.92) 100%);
-  border-color: rgba(255, 102, 0, 0.32);
+  border-color: rgba(225, 136, 52, 0.32);
   box-shadow: 0 18px 42px -8px rgba(0, 0, 0, 0.65),
-    0 0 24px -4px rgba(255, 102, 0, 0.14),
+    0 0 24px -4px rgba(225, 136, 52, 0.14),
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
     inset 0 -1px 0 rgba(0, 0, 0, 0.4);
 }
@@ -688,9 +688,9 @@ button {
   }
 
   .menu-card:hover .menu-card__face--back {
-    border-color: rgba(255, 102, 0, 0.55);
+    border-color: rgba(225, 136, 52, 0.55);
     box-shadow: 0 22px 50px -10px rgba(0, 0, 0, 0.7),
-      0 0 32px 0 rgba(255, 102, 0, 0.22),
+      0 0 32px 0 rgba(225, 136, 52, 0.22),
       inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
 }
@@ -780,7 +780,7 @@ button {
   color: #0d0d0d;
   font-weight: 700;
   border: 1px solid var(--accent);
-  box-shadow: 0 4px 14px rgba(255, 102, 0, 0.4),
+  box-shadow: 0 4px 14px rgba(225, 136, 52, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
@@ -818,8 +818,8 @@ button {
 
 .menu-card:hover .menu-card__flip-pill {
   transform: scale(1.05);
-  background: rgba(255, 102, 0, 0.22);
-  border-color: rgba(255, 102, 0, 0.45);
+  background: rgba(225, 136, 52, 0.22);
+  border-color: rgba(225, 136, 52, 0.45);
   color: #ffffff;
 }
 
@@ -828,8 +828,8 @@ button {
 }
 
 .menu-card__flip-pill--menu {
-  background: rgba(255, 102, 0, 0.18);
-  border-color: rgba(255, 102, 0, 0.35);
+  background: rgba(225, 136, 52, 0.18);
+  border-color: rgba(225, 136, 52, 0.35);
   color: var(--accent);
 }
 
@@ -849,6 +849,15 @@ button {
   margin-bottom: var(--space-xs);
 }
 
+/* Name + Allergen-Zeile als vertikaler Stapel links neben dem Preis */
+.menu-card__title-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
 .menu-card__name {
   font-family: var(--font-heading);
   font-size: 1.25rem;
@@ -866,11 +875,112 @@ button {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  background: rgba(255, 102, 0, 0.15);
+  background: rgba(225, 136, 52, 0.15);
   color: var(--accent);
   padding: 0.18rem 0.5rem;
   border-radius: var(--radius-xs);
-  border: 1px solid rgba(255, 102, 0, 0.28);
+  border: 1px solid rgba(225, 136, 52, 0.28);
+}
+
+.menu-card__name-title {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.26em;
+}
+
+/* ============================================
+   Big Wac / Big Mac — 3D Coin Morph Animation
+   ============================================ */
+.wac-morph {
+  display: inline-flex;
+  align-items: baseline;
+  position: relative;
+  vertical-align: baseline;
+  perspective: 500px;
+}
+
+.wac-morph__coin {
+  display: inline-grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  place-items: center;
+  position: relative;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  will-change: transform;
+  animation: wacFlipCycle 5.5s cubic-bezier(0.45, 0.05, 0.25, 1) infinite;
+}
+
+.wac-morph__face {
+  grid-area: 1 / 1;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: inline-block;
+  line-height: 1;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  user-select: none;
+}
+
+.wac-morph__face--w {
+  transform: rotateY(0deg) translateZ(1px);
+  color: var(--text-primary);
+}
+
+.wac-morph__face--m {
+  transform: rotateY(180deg) translateZ(1px);
+  color: #FFC72C;
+  font-weight: 900;
+  text-shadow:
+    0 0 10px rgba(255, 199, 44, 0.75),
+    0 0 22px rgba(255, 199, 44, 0.4),
+    0 1px 3px rgba(0, 0, 0, 0.9);
+  filter: drop-shadow(0 0 4px rgba(255, 199, 44, 0.6));
+}
+
+.wac-morph__rest {
+  display: inline-block;
+  line-height: 1;
+}
+
+@keyframes wacFlipCycle {
+  0%, 12% {
+    transform: rotateY(0deg);
+  }
+  27% {
+    transform: rotateY(180deg);
+  }
+  48% {
+    transform: rotateY(180deg) scale(1.08);
+  }
+  68% {
+    transform: rotateY(180deg) scale(1);
+  }
+  72% {
+    transform: rotateY(180deg);
+  }
+  87%, 100% {
+    transform: rotateY(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wac-morph__coin {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 .menu-card__price-wrapper {
@@ -890,7 +1000,7 @@ button {
 
 .menu-card__price--menu {
   color: var(--accent);
-  text-shadow: 0 0 15px rgba(255, 102, 0, 0.3);
+  text-shadow: 0 0 15px rgba(225, 136, 52, 0.3);
 }
 
 /* Menü-Badge */
@@ -898,8 +1008,8 @@ button {
   display: inline-flex;
   align-items: center;
   gap: var(--space-xs);
-  background: rgba(255, 102, 0, 0.08);
-  border: 1px solid rgba(255, 102, 0, 0.2);
+  background: rgba(225, 136, 52, 0.08);
+  border: 1px solid rgba(225, 136, 52, 0.2);
   color: var(--accent);
   padding: 0.35rem 0.75rem;
   border-radius: var(--radius-sm);
@@ -947,8 +1057,8 @@ button {
   display: inline-flex;
   align-items: center;
   padding: 0.28rem 0.65rem;
-  background: rgba(255, 102, 0, 0.08);
-  border: 1px solid rgba(255, 102, 0, 0.22);
+  background: rgba(225, 136, 52, 0.08);
+  border: 1px solid rgba(225, 136, 52, 0.22);
   border-radius: var(--radius-xs);
   font-size: 0.74rem;
   font-weight: 500;
@@ -1028,28 +1138,60 @@ button {
   }
 }
 
-/* --- Allergen & Additives Notation --- */
+/* --- Allergen & Additives Notation ---
+   Eigene Zeile direkt unter dem Produktnamen. Die ganze Klammer ist eine
+   Tippfläche: ein Tipp markiert alle enthaltenen Codes in der Legende. */
 .product-allergens {
-  display: inline-flex;
-  align-items: baseline;
+  display: block;
+  white-space: nowrap !important;
+  width: fit-content;
+  margin-left: -0.4rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-xs);
   font-family: var(--font-body);
-  font-size: 0.62em;
+  font-size: 0.78rem;
   font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
   color: var(--text-muted);
-  letter-spacing: 0.02em;
-  vertical-align: baseline;
-  position: relative;
-  top: -0.42em;
-  margin-left: 0.35rem;
+  cursor: pointer;
   user-select: none;
-  line-height: 1;
+  -webkit-tap-highlight-color: transparent;
+  transition: color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+@media (max-width: 480px) {
+  .product-allergens {
+    font-size: 0.73rem;
+    letter-spacing: 0.02em;
+  }
+}
+
+.product-allergens--list {
+  margin-top: 0.15rem;
+  margin-left: calc(1.55rem - 0.4rem);
+  font-size: 0.74rem;
+}
+
+@media (hover: hover) {
+  .product-allergens:hover {
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Aktives Produkt: seine Codes sind gerade in der Legende markiert */
+.product-allergens.is-active {
+  color: var(--accent);
+  background: rgba(225, 136, 52, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(225, 136, 52, 0.3);
 }
 
 .allergen-code {
   position: relative;
   display: inline-block;
   cursor: pointer;
-  color: var(--text-muted);
+  color: inherit;
   transition: color var(--transition-fast), transform var(--transition-fast);
   padding: 0 1px;
 }
@@ -1116,6 +1258,18 @@ button {
   transform: translate3d(-50%, 0, 0);
 }
 
+/* Die Klammer steht jetzt linksbündig: Tooltips der ersten Codes nach rechts
+   aufklappen, damit sie nicht am Kartenrand abgeschnitten werden. */
+.allergen-code[data-tooltip]:nth-child(-n + 3)::after {
+  left: -0.4rem;
+  transform: translate3d(0, 6px, 0);
+}
+
+.allergen-code[data-tooltip]:nth-child(-n + 3):hover::after,
+.allergen-code[data-tooltip]:nth-child(-n + 3):focus-visible::after {
+  transform: translate3d(0, 0, 0);
+}
+
 /* --- Fingerfood & Dips (Compact List View) --- */
 .menu__lists-grid {
   display: grid;
@@ -1171,8 +1325,8 @@ button {
   font-weight: 600;
   letter-spacing: 0.03em;
   color: var(--accent);
-  background: rgba(255, 102, 0, 0.08);
-  border: 1px solid rgba(255, 102, 0, 0.2);
+  background: rgba(225, 136, 52, 0.08);
+  border: 1px solid rgba(225, 136, 52, 0.2);
   padding: 0.28rem 0.75rem;
   border-radius: var(--radius-pill);
 }
@@ -1345,8 +1499,8 @@ button {
 }
 
 .legend-card:has(.legend-card__content.is-collapsed):hover {
-  border-color: rgba(255, 102, 0, 0.35);
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45), 0 0 24px rgba(255, 102, 0, 0.1);
+  border-color: rgba(225, 136, 52, 0.35);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45), 0 0 24px rgba(225, 136, 52, 0.1);
 }
 
 .legend-card:has(.legend-card__content.is-collapsed) .legend-card__header {
@@ -1363,8 +1517,8 @@ button {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: rgba(255, 102, 0, 0.08);
-  border: 1px solid rgba(255, 102, 0, 0.2);
+  background: rgba(225, 136, 52, 0.08);
+  border: 1px solid rgba(225, 136, 52, 0.2);
   color: var(--accent);
   display: flex;
   align-items: center;
@@ -1375,8 +1529,8 @@ button {
 
 .legend-card__header:hover .legend-card__icon {
   transform: scale(1.06);
-  background: rgba(255, 102, 0, 0.15);
-  border-color: rgba(255, 102, 0, 0.4);
+  background: rgba(225, 136, 52, 0.15);
+  border-color: rgba(225, 136, 52, 0.4);
 }
 
 .legend-card__title {
@@ -1416,8 +1570,8 @@ button {
 
 .legend-card__header:hover .legend-card__indicator,
 .legend-card__header:hover .legend-card__toggle-btn {
-  background: rgba(255, 102, 0, 0.12);
-  border-color: rgba(255, 102, 0, 0.3);
+  background: rgba(225, 136, 52, 0.12);
+  border-color: rgba(225, 136, 52, 0.3);
   color: var(--accent);
 }
 
@@ -1484,7 +1638,7 @@ button {
   background: var(--accent);
   color: #0b0b0d;
   font-weight: 700;
-  box-shadow: 0 2px 10px rgba(255, 102, 0, 0.35);
+  box-shadow: 0 2px 10px rgba(225, 136, 52, 0.35);
 }
 
 .legend-card__tab-count {
@@ -1499,6 +1653,33 @@ button {
 .legend-card__tab.is-active .legend-card__tab-count {
   background: rgba(0, 0, 0, 0.2);
   color: #000;
+}
+
+/* Zähler: wie viele markierte Einträge in diesem Tab stecken */
+.legend-card__tab-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.15rem;
+  height: 1.15rem;
+  padding: 0 0.3rem;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: #0b0b0d;
+  font-size: 0.64rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 0 0 2px rgba(225, 136, 52, 0.25);
+}
+
+.legend-card__tab-marker[hidden] {
+  display: none;
+}
+
+.legend-card__tab.is-active .legend-card__tab-marker {
+  background: #0b0b0d;
+  color: var(--accent);
+  box-shadow: none;
 }
 
 .legend-card__columns {
@@ -1524,9 +1705,9 @@ button {
 .legend-card__col-badge {
   font-size: 0.68rem;
   font-weight: 700;
-  background: rgba(255, 102, 0, 0.12);
+  background: rgba(225, 136, 52, 0.12);
   color: var(--accent);
-  border: 1px solid rgba(255, 102, 0, 0.25);
+  border: 1px solid rgba(225, 136, 52, 0.25);
   border-radius: var(--radius-xs);
   padding: 0.15rem 0.45rem;
 }
@@ -1555,7 +1736,7 @@ button {
 
 .legend-list__item:hover,
 .legend-list__item.is-highlighted {
-  background: rgba(255, 102, 0, 0.12);
+  background: rgba(225, 136, 52, 0.12);
 }
 
 .legend-list__item.is-highlighted {
@@ -1563,20 +1744,30 @@ button {
   animation: pulseHighlight 1.8s var(--ease-out);
 }
 
+.legend-list__item.is-highlighted .legend-list__code {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0b0b0d;
+}
+
+.legend-list__item.is-highlighted .legend-list__text {
+  color: var(--text-primary);
+}
+
 @keyframes pulseHighlight {
   0% {
     transform: scale(1);
-    background: rgba(255, 102, 0, 0.35);
+    background: rgba(225, 136, 52, 0.35);
   }
 
   50% {
     transform: scale(1.02);
-    background: rgba(255, 102, 0, 0.22);
+    background: rgba(225, 136, 52, 0.22);
   }
 
   100% {
     transform: scale(1);
-    background: rgba(255, 102, 0, 0.08);
+    background: rgba(225, 136, 52, 0.08);
   }
 }
 
@@ -1596,8 +1787,8 @@ button {
 }
 
 .legend-list__code--number {
-  background: rgba(255, 102, 0, 0.08);
-  border-color: rgba(255, 102, 0, 0.2);
+  background: rgba(225, 136, 52, 0.08);
+  border-color: rgba(225, 136, 52, 0.2);
   color: var(--accent);
 }
 
@@ -1612,8 +1803,8 @@ button {
   display: flex;
   gap: var(--space-md);
   align-items: flex-start;
-  background: rgba(255, 102, 0, 0.05);
-  border: 1px solid rgba(255, 102, 0, 0.18);
+  background: rgba(225, 136, 52, 0.05);
+  border: 1px solid rgba(225, 136, 52, 0.18);
   border-radius: var(--radius-md);
   padding: var(--space-md) var(--space-lg);
 }
@@ -1665,6 +1856,7 @@ button {
       opacity: 0;
       transform: translateY(3px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -1943,7 +2135,7 @@ button {
 
   .news-card:hover {
     transform: translateY(-2px);
-    border-color: rgba(255, 102, 0, 0.25);
+    border-color: rgba(225, 136, 52, 0.25);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     background: rgba(255, 255, 255, 0.03);
   }
@@ -1967,9 +2159,9 @@ button {
 }
 
 .news-card__badge--accent {
-  background: rgba(255, 102, 0, 0.1);
+  background: rgba(225, 136, 52, 0.1);
   color: var(--accent);
-  border: 1px solid rgba(255, 102, 0, 0.2);
+  border: 1px solid rgba(225, 136, 52, 0.2);
 }
 
 .news-card__badge--vacation {
@@ -2043,7 +2235,7 @@ button {
   .footer__social-link:hover {
     background: var(--accent-glow);
     color: var(--accent);
-    border-color: rgba(255, 102, 0, 0.3);
+    border-color: rgba(225, 136, 52, 0.3);
   }
 }
 
@@ -2156,25 +2348,6 @@ button {
   }
 }
 
-/* --- Easter Egg: W → M Auto-Flip --- */
-.wac-perspective {
-  display: inline-block;
-}
-
-.easter-egg-w {
-  display: inline-block;
-  transition: transform 0.7s var(--ease-out),
-    color 0.4s ease,
-    text-shadow 0.4s ease;
-}
-
-.easter-egg-w.flipped {
-  transform: scaleY(-1);
-  color: #ffd700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.4),
-    0 0 20px rgba(255, 215, 0, 0.15);
-}
-
 /* --- WIP Gear Spin Animation (Impressum & Datenschutz) --- */
 @keyframes spin-gear-icon {
   from {
@@ -2265,7 +2438,7 @@ button {
     transform: none;
   }
 
-  .easter-egg-w {
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+  .legend-list__item.is-highlighted {
+    animation: none;
   }
 }

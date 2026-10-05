@@ -351,7 +351,7 @@ if ($is_logged_in) {
         }
 
         .news-card-admin:hover {
-            border-color: rgba(255, 102, 0, 0.25);
+            border-color: rgba(225, 136, 52, 0.25);
             background: rgba(255, 255, 255, 0.03);
         }
 
@@ -398,9 +398,9 @@ if ($is_logged_in) {
             text-transform: uppercase;
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
-            background: rgba(255, 102, 0, 0.1);
+            background: rgba(225, 136, 52, 0.1);
             color: var(--accent);
-            border: 1px solid rgba(255, 102, 0, 0.2);
+            border: 1px solid rgba(225, 136, 52, 0.2);
         }
 
         .news-card-admin__date {
