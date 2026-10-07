@@ -1,0 +1,733 @@
+/* ==========================================================================
+   ELITE BURGER — CINEMATIC SPACE ZOOM MAP
+   Design System integration: Dark-Mode, Glassmorphism, 3D Globe Telemetry
+   ========================================================================== */
+
+.space-location {
+  position: relative;
+  width: 100%;
+  max-width: 1320px;
+  margin: var(--space-3xl, 4rem) auto;
+  padding: 0 var(--space-md, 1rem);
+  box-sizing: border-box;
+}
+
+.space-location__header {
+  text-align: center;
+  margin-bottom: var(--space-xl, 2rem);
+}
+
+.space-location__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label, 0.12em);
+  color: var(--accent, rgb(225, 136, 52));
+  margin-bottom: var(--space-xs, 0.5rem);
+}
+
+.space-location__label-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent, rgb(225, 136, 52));
+  box-shadow: 0 0 10px var(--accent, rgb(225, 136, 52));
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 0.4; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.space-location__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-title, -0.028em);
+  color: var(--text-primary, #f5f5f7);
+  margin: 0 0 var(--space-xs, 0.5rem) 0;
+}
+
+.space-location__subtitle {
+  color: var(--text-secondary, #b4b4ba);
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  margin: 0;
+}
+
+/* --- Map Stage Container --- */
+.space-location__stage {
+  position: relative;
+  width: 100%;
+  height: clamp(480px, 68vh, 680px);
+  border-radius: var(--radius-xl, 28px);
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, #151820 0%, #08090d 100%);
+  border: 1px solid var(--border-highlight, rgba(255, 255, 255, 0.14));
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.7),
+              0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+}
+
+.space-location__fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  z-index: 1;
+}
+
+.space-location__fallback.is-active {
+  opacity: 1;
+}
+
+/* Mapbox Canvas Container */
+.space-location__map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #08090d;
+}
+
+/* Canvas Cloud / Fog Layer */
+.space-location__clouds {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
+
+/* Starfield / Space ambient vignette */
+.space-location__vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.75),
+              inset 0 0 35px rgba(0, 0, 0, 0.9);
+}
+
+/* --- HUD Telemetry Overlay --- */
+.space-location__hud {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.space-location__telemetry {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(14, 16, 20, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill, 999px);
+  color: var(--text-primary, #f5f5f7);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.space-location__telemetry-radar {
+  width: 10px;
+  height: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.space-location__telemetry-radar::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--accent, rgb(225, 136, 52));
+  opacity: 0.8;
+}
+
+.space-location__telemetry-radar::after {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  border-radius: 50%;
+  border: 1px solid var(--accent, rgb(225, 136, 52));
+  animation: radarPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes radarPing {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.space-location__telemetry-text {
+  color: var(--text-secondary, #b4b4ba);
+}
+
+.space-location__telemetry-value {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* --- Floating Address Glassmorphic Card --- */
+.space-location__card {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 5;
+  width: min(390px, calc(100% - 48px));
+  background: rgba(18, 19, 24, 0.82);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--border-highlight, rgba(255, 255, 255, 0.14));
+  border-radius: var(--radius-lg, 24px);
+  padding: 22px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65),
+              0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  color: var(--text-primary, #f5f5f7);
+  transition: transform 0.3s var(--ease-out, cubic-bezier(0.32, 0.72, 0, 1)),
+              box-shadow 0.3s ease;
+}
+
+.space-location__card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.75),
+              0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.space-location__card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.space-location__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-glow, rgba(225, 136, 52, 0.12));
+  color: var(--accent, rgb(225, 136, 52));
+  border: 1px solid rgba(225, 136, 52, 0.3);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill, 999px);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.space-location__status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #34c759;
+  font-weight: 500;
+}
+
+.space-location__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34c759;
+  box-shadow: 0 0 6px #34c759;
+}
+
+.space-location__card-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+  letter-spacing: var(--tracking-heading, -0.018em);
+  color: var(--text-primary, #f5f5f7);
+}
+
+.space-location__card-address {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-secondary, #b4b4ba);
+  margin: 0 0 16px 0;
+}
+
+.space-location__card-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.space-location__feature-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.06));
+  color: var(--text-secondary, #b4b4ba);
+  padding: 4px 9px;
+  border-radius: var(--radius-xs, 8px);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.space-location__card-actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.space-location__cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--accent, rgb(225, 136, 52));
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 11px 18px;
+  border-radius: var(--radius-sm, 10px);
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 16px var(--accent-glow-strong, rgba(225, 136, 52, 0.22));
+}
+
+.space-location__cta-btn:hover {
+  background: var(--accent-hover, #ea9d4d);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(225, 136, 52, 0.35);
+}
+
+.space-location__cta-btn:active {
+  background: var(--accent-pressed, #d1771f);
+  transform: translateY(0);
+}
+
+.space-location__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.06));
+  color: var(--text-primary, #f5f5f7);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm, 10px);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
+}
+
+.space-location__icon-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.space-location__icon-btn:active {
+  transform: translateY(0);
+}
+
+.space-location__icon-btn.is-copied {
+  color: #34c759;
+  border-color: rgba(52, 199, 89, 0.4);
+}
+
+/* Replay Flight Button (Top Right of Stage) */
+.space-location__replay-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(14, 16, 20, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-primary, #f5f5f7);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill, 999px);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.space-location__replay-btn:hover {
+  background: rgba(26, 30, 38, 0.9);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.space-location__replay-btn svg {
+  transition: transform 0.4s var(--ease-out, cubic-bezier(0.32, 0.72, 0, 1));
+}
+
+.space-location__replay-btn:hover svg {
+  transform: rotate(180deg);
+}
+
+/* --- Mapbox Custom Pin Marker --- */
+.space-marker {
+  position: relative;
+  width: 58px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: translate(-50%, -100%);
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: auto;
+}
+
+.space-marker.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -100%) scale(1);
+}
+
+.space-marker__pulse {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent, rgb(225, 136, 52));
+  opacity: 0.6;
+  animation: markerRipple 2.2s infinite ease-out;
+}
+
+@keyframes markerRipple {
+  0% { transform: translateX(-50%) scale(0.5); opacity: 0.9; }
+  100% { transform: translateX(-50%) scale(3.5); opacity: 0; }
+}
+
+.space-marker__body {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #2a2218, #0e0d0c);
+  border: 2px solid var(--accent, rgb(225, 136, 52));
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.8),
+              0 0 16px var(--accent-glow-strong, rgba(225, 136, 52, 0.35));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+.space-marker__body::after {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 10px solid var(--accent, rgb(225, 136, 52));
+}
+
+.space-marker__icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* --- Token Setup / Fallback Banner --- */
+.space-location__token-banner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  max-width: 540px;
+  width: 90%;
+  background: rgba(18, 20, 26, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(225, 136, 52, 0.4);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85),
+              0 0 30px rgba(225, 136, 52, 0.15);
+  border-radius: var(--radius-lg, 24px);
+  padding: 28px;
+  text-align: center;
+  color: var(--text-primary, #f5f5f7);
+  display: none;
+}
+
+.space-location__token-banner.is-active {
+  display: block;
+}
+
+.space-location__token-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 14px auto;
+  color: var(--accent, rgb(225, 136, 52));
+}
+
+.space-location__token-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.space-location__token-desc {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--text-secondary, #b4b4ba);
+  margin: 0 0 20px 0;
+}
+
+.space-location__token-desc code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #fff;
+  font-family: monospace;
+}
+
+.space-location__token-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.space-location__token-input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-highlight, rgba(255, 255, 255, 0.14));
+  border-radius: var(--radius-sm, 10px);
+  padding: 10px 14px;
+  color: #fff;
+  font-size: 0.88rem;
+  outline: none;
+  font-family: monospace;
+}
+
+.space-location__token-input:focus {
+  border-color: var(--accent, rgb(225, 136, 52));
+}
+
+.space-location__token-submit {
+  background: var(--accent, rgb(225, 136, 52));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm, 10px);
+  padding: 10px 18px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.space-location__token-submit:hover {
+  background: var(--accent-hover, #ea9d4d);
+}
+
+.space-location__token-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted, #8e8e93);
+  margin: 0;
+}
+
+.space-location__token-hint a {
+  color: var(--accent, rgb(225, 136, 52));
+  text-decoration: underline;
+}
+
+/* --- Mapbox UI Overrides to match Dark Aesthetic --- */
+.mapboxgl-ctrl-group {
+  background: rgba(18, 19, 24, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: var(--radius-sm, 10px) !important;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+}
+
+.mapboxgl-ctrl-group button {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.mapboxgl-ctrl-group button:last-child {
+  border-bottom: none !important;
+}
+
+.mapboxgl-ctrl-group button .mapboxgl-ctrl-icon {
+  filter: invert(1) brightness(1.2);
+}
+
+.mapboxgl-ctrl-bottom-right {
+  display: none !important; /* Hide default attribution in stage to preserve clean cinematic feel, attribution kept legal in card or footer */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .space-location {
+    margin: var(--space-2xl, 3rem) auto;
+  }
+
+  .space-location__stage {
+    height: 520px;
+    border-radius: var(--radius-lg, 24px);
+  }
+
+  .space-location__hud {
+    top: 14px;
+    left: 14px;
+  }
+
+  .space-location__replay-btn {
+    top: 14px;
+    right: 14px;
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+
+  .space-location__card {
+    bottom: 14px;
+    right: 14px;
+    left: 14px;
+    width: auto;
+    padding: 16px;
+    border-radius: var(--radius-md, 14px);
+  }
+
+  .space-location__card-title {
+    font-size: 1.18rem;
+  }
+
+  .space-location__card-address {
+    font-size: 0.88rem;
+    margin-bottom: 12px;
+  }
+
+  .space-location__card-features {
+    display: none;
+  }
+}
+
+/* --- Reduced Motion Support --- */
+@media (prefers-reduced-motion: reduce) {
+  .space-location__clouds {
+    display: none !important;
+  }
+  .space-marker__pulse {
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   EMBEDDED MAP IN INFO GRID (Replaces original Anschrift & Anfahrt card)
+   ========================================================================== */
+.info-block.info-block--map {
+  position: relative;
+  min-height: 480px;
+  padding: 0 !important;
+  overflow: hidden;
+  border-radius: var(--radius-lg, 24px);
+  border: 1px solid var(--border-accent, rgba(255, 255, 255, 0.09));
+  background: radial-gradient(circle at 50% 50%, #151820 0%, #08090d 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.info-block.info-block--map .space-location__map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #08090d;
+}
+
+.info-block.info-block--map .space-location__replay-btn {
+  top: 14px;
+  right: 14px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  background: rgba(14, 16, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.info-block.info-block--map .space-location__card {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  width: auto;
+  max-width: none;
+  padding: 16px;
+  border-radius: var(--radius-md, 14px);
+  background: rgba(18, 19, 24, 0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--border-highlight, rgba(255, 255, 255, 0.14));
+}
+
+.info-block.info-block--map .space-location__card-title {
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+}
+
+.info-block.info-block--map .space-location__card-address {
+  font-size: 0.88rem;
+  margin-bottom: 10px;
+}
+
+.info-block.info-block--map .space-location__card-features {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.info-block.info-block--map .space-location__cta-btn {
+  padding: 9px 14px;
+  font-size: 0.85rem;
+}
+
+.info-block.info-block--map .space-location__icon-btn {
+  width: 40px;
+  height: 40px;
+}
+
+@media (min-width: 768px) {
+  .info__grid {
+    align-items: stretch !important;
+  }
+  #info-hours {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .info-block.info-block--map {
+    flex: 1.25;
+    min-height: 500px;
+  }
+}

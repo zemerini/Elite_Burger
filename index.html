@@ -12,6 +12,9 @@
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
   <link rel="stylesheet" href="style.css?v=3">
+  <!-- Mapbox GL JS & Cinematic Space Map CSS -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.css" rel="stylesheet">
+  <link rel="stylesheet" href="space-map.css?v=5">
 </head>
 
 <body>
@@ -1285,25 +1288,63 @@
           </div>
         </div>
 
-        <!-- Location -->
-        <div class="info-block reveal reveal-delay-2" id="info-location">
-          <div class="info-block__icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
+        <!-- Anschrift & Anfahrt (Interaktive Satelliten-Karte) -->
+        <div class="info-block info-block--map reveal reveal-delay-2" id="spaceLocationStage">
+          <!-- 3D Globe / Satelliten-Karten-Container -->
+          <div id="spaceMap" class="space-location__map" aria-label="Interaktive Satelliten-Karte von Elite Burger"></div>
+
+          <!-- Satelliten Fallback-Ebene -->
+          <div id="spaceFallback" class="space-location__fallback" aria-hidden="true"></div>
+
+          <!-- Prozedurale Wolken-Ebene -->
+          <canvas id="cloudOverlay" class="space-location__clouds" aria-hidden="true"></canvas>
+
+          <!-- Vignette -->
+          <div class="space-location__vignette" aria-hidden="true"></div>
+
+          <!-- Floating Glassmorphic Address Card -->
+          <div class="space-location__card">
+            <div class="space-location__card-top">
+              <span class="space-location__badge">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                Bremen Überseestadt
+              </span>
+            </div>
+
+            <h3 class="space-location__card-title">Anschrift & Anfahrt</h3>
+            <p class="space-location__card-address">
+              Kommodore-Johnsen-Boulevard 21<br>
+              28217 Bremen
+            </p>
+
+            <div class="space-location__card-features">
+              <span class="space-location__feature-chip">Parkplätze vor Ort</span>
+              <span class="space-location__feature-chip">Dine-In & Takeaway</span>
+            </div>
+
+            <div class="space-location__card-actions">
+              <a href="https://maps.google.com/?q=Kommodore-Johnsen-Boulevard+21,+28217+Bremen"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 class="space-location__cta-btn"
+                 id="space-maps-btn">
+                In Google Maps öffnen
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+              <button class="space-location__icon-btn" id="copyAddressBtn" type="button" aria-label="Adresse kopieren" title="Adresse kopieren">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
           </div>
-          <h3 class="info-block__title">Anschrift & Anfahrt</h3>
-          <p class="info-block__address">
-            Kommodore-Johnsen-Boulevard 21<br>
-            28217 Bremen
-          </p>
-          <a href="https://maps.google.com/?q=Kommodore-Johnsen-Boulevard+21,+28217+Bremen" target="_blank"
-            rel="noopener noreferrer" class="info-block__link" id="info-maps-link">
-            Auf Google Maps anzeigen
-            <span class="info-block__link-arrow" aria-hidden="true">→</span>
-          </a>
         </div>
       </div>
 
@@ -1380,6 +1421,9 @@
   </footer>
 
   <script src="script.js?v=3"></script>
+  <!-- Mapbox GL JS & Cinematic Space Zoom Engine -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.9.4/mapbox-gl.js" defer></script>
+  <script src="space-map.js?v=5" defer></script>
 </body>
 
 </html>
