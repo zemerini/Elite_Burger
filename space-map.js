@@ -159,8 +159,11 @@
     }
   }
 
-  // Open-Source Esri World Imagery (Kostenlos, unbegrenzt, gestochen scharf)
-  const esriSatelliteStyle = {
+  // Ultra-HD Hybrid Satelliten- & Luftbild-Engine:
+  // 1. Orbit bis Region (Zoom 0 bis 13): Esri World Imagery für globale Erdkugel & Kontinente
+  // 2. Zielanflug & Landung (Zoom 13 bis 20): Offizielle True Orthophotos der Freien Hansestadt Bremen
+  //    (Landesamt GeoInformation Bremen, DOP10 mit 10 cm Bodenauflösung) — gestochen scharf, kein Pixelbrei!
+  const ultraHdSatelliteStyle = {
     version: 8,
     sources: {
       'esri-world-imagery': {
@@ -169,29 +172,39 @@
           'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
         ],
         tileSize: 256,
-        maxzoom: 19,
-        attribution: 'Esri, Maxar, Earthstar Geographics'
+        maxzoom: 18,
+        attribution: 'Esri, Maxar'
       },
-      'esri-world-labels': {
+      'bremen-dop10': {
         type: 'raster',
         tiles: [
-          'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}'
+          'https://geodienste.bremen.de/wms_dop_lb?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=dop10_2025_HB&STYLES=&SRS=EPSG:3857&BBOX={bbox-epsg-3857}&WIDTH=256&HEIGHT=256&FORMAT=image/png&TRANSPARENT=TRUE'
         ],
         tileSize: 256,
-        maxzoom: 19
+        minzoom: 13,
+        maxzoom: 21,
+        attribution: '© GeoInformation Bremen'
       }
     },
     layers: [
       {
-        id: 'satellite-tiles',
+        id: 'global-satellite',
         type: 'raster',
-        source: 'esri-world-imagery'
+        source: 'esri-world-imagery',
+        paint: {
+          'raster-fade-duration': 300
+        }
       },
       {
-        id: 'place-labels',
+        id: 'bremen-hd-aerial',
         type: 'raster',
-        source: 'esri-world-labels',
-        minzoom: 10
+        source: 'bremen-dop10',
+        minzoom: 13,
+        paint: {
+          'raster-fade-duration': 300,
+          'raster-contrast': 0.05,
+          'raster-saturation': 0.1
+        }
       }
     ]
   };
@@ -201,8 +214,8 @@
     fallbackActive = true;
 
     if (fallbackEl) {
-      // Satellitenkachel für Bremen Überseestadt
-      fallbackEl.style.backgroundImage = 'url("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/17/42491/68032.jpg")';
+      // Gestochen scharfes 10cm-Luftbild für Bremen Überseestadt
+      fallbackEl.style.backgroundImage = 'url("https://geodienste.bremen.de/wms_dop_lb?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=dop10_2025_HB&STYLES=&SRS=EPSG:3857&BBOX=974419,7001631,974724,7001937&WIDTH=1024&HEIGHT=768&FORMAT=image/jpeg")';
       fallbackEl.classList.add('is-active');
     }
 
@@ -251,7 +264,7 @@
     try {
       map = new MapEngine.Map({
         container: 'spaceMap',
-        style: esriSatelliteStyle,
+        style: ultraHdSatelliteStyle,
         center: TARGET_COORDS,
         zoom: START_ZOOM,
         pitch: START_PITCH,
