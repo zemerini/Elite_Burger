@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Elite Burger — Premium Smashburger | Bremen</title>
   <meta name="description"
-    content="Elite Burger — Die Kunst des Smash. Edle Premium Smashburger aus Köln. Handgemacht, perfekt gesmashed, unwiderstehlich.">
+    content="Elite Burger — Die Kunst des Smash. Edle Premium Smashburger aus Bremen. Handgemacht, perfekt gesmashed, unwiderstehlich.">
   <meta name="theme-color" content="#0d0d0d">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
@@ -43,6 +43,8 @@
       </div>
 
       <div class="hero__content reveal">
+        <!-- Halal-Hinweis im Hero: Reinweiß, edel gesperrt und minimalistisch über dem Slogan platziert -->
+        <span class="hero__halal-tag" id="hero-halal-tag" aria-label="100% Halal">100% HALAL</span>
         <h1 class="hero__title">Die Kunst<br>des Smash.</h1>
         <p class="hero__subtitle">Elite schmeckt man.</p>
         <a href="#menu" class="hero__cta" id="hero-cta">
@@ -1399,6 +1401,26 @@
           <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
         </svg>
       </a>
+    </div>
+
+    <!-- Halal-Badge im Footer: Dezentes orientalisches Siegel mit arabischer Schrift (Rub el Hizb Stern) -->
+    <div class="footer__halal-wrapper">
+      <div class="footer__halal-badge" id="footer-halal-badge" role="img" aria-label="Halal">
+        <svg class="footer__halal-badge-bg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Orientalischer 8-Eck-Stern (Rub el Hizb) im dezenten Website-Orange -->
+          <polygon points="32,6 39.6,13.6 50.4,13.6 50.4,24.4 58,32 50.4,39.6 50.4,50.4 39.6,50.4 32,58 24.4,50.4 13.6,50.4 13.6,39.6 6,32 13.6,24.4 13.6,13.6 24.4,13.6" 
+                   fill="rgba(225, 136, 52, 0.06)" 
+                   stroke="rgba(225, 136, 52, 0.38)" 
+                   stroke-width="1.1" 
+                   stroke-linejoin="round" />
+          <!-- Feiner innerer Zierkreis mit dezentem Abstand -->
+          <circle cx="32" cy="32" r="18.5" 
+                  stroke="rgba(225, 136, 52, 0.22)" 
+                  stroke-width="0.8" 
+                  stroke-dasharray="2 2" />
+        </svg>
+        <span class="footer__halal-arabic" lang="ar" dir="rtl">حلال</span>
+      </div>
     </div>
 
     <div class="footer__brand">
