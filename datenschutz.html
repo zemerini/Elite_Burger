@@ -1,130 +1,342 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datenschutzerklärung — In Arbeit | Elite Burger</title>
-    <link rel="stylesheet" href="style.css?v=3">
-    <style>
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .wip-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-accent);
-            border-radius: var(--radius-lg);
-            padding: 50px 30px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .wip-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), transparent);
-        }
-
-        .wip-gear {
-            width: 80px;
-            height: 80px;
-            color: var(--accent);
-            margin: 0 auto 30px auto;
-            animation: spin-gear-page 6s linear infinite;
-        }
-
-        @keyframes spin-gear-page {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .wip-card h1 {
-            font-family: var(--font-heading);
-            font-size: 2.4rem;
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: var(--tracking-title);
-            margin-bottom: 12px;
-        }
-
-        .wip-card h2 {
-            font-family: var(--font-heading);
-            color: var(--accent);
-            font-size: 0.78rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: var(--tracking-label);
-            margin-bottom: 24px;
-        }
-
-        .wip-card p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.55;
-            margin-bottom: 35px;
-            text-wrap: pretty;
-        }
-
-        .btn-wip {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 52px;
-            padding: 0 1.75rem;
-            background: var(--accent);
-            color: var(--bg-primary);
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: var(--tracking-ui);
-            border-radius: var(--radius-pill);
-            border: none;
-            cursor: pointer;
-            transition: transform 120ms var(--ease-out), box-shadow var(--transition-smooth), background var(--transition-fast);
-            box-shadow: 0 6px 24px rgba(225, 136, 52, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-        }
-
-        @media (hover: hover) {
-            .btn-wip:hover {
-                background: var(--accent-hover);
-                box-shadow: 0 10px 34px var(--accent-glow-strong), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            }
-        }
-
-        .btn-wip:active {
-            transform: scale(0.97);
-            background: var(--accent-pressed);
-            transition-duration: 80ms;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .wip-gear { animation: none; }
-            .btn-wip:active { transform: none; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datenschutzerklärung | Elite Burger</title>
+  <meta name="description" content="Datenschutzerklärung von Elite Burger Bremen: welche Daten beim Besuch unserer Website verarbeitet werden und welche Rechte Sie haben.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#0d0d0d">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
+
 <body>
-    <div class="wip-card">
-        <svg class="wip-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="3"></circle>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-        </svg>
-        <h1>Datenschutz</h1>
-        <h2>In Arbeit</h2>
-        <p>Unsere Datenschutzerklärung wird derzeit aktualisiert, um dem neuesten Stand der DSGVO zu entsprechen. Diese Seite steht Ihnen in Kürze zur Verfügung.</p>
-        <a href="index.html" class="btn-wip">Zurück zur Startseite</a>
+  <!-- ==================== HEADER ==================== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo" aria-label="Elite Burger Startseite">
+        <img src="images/Logo_transparent.png" alt="Elite Burger Logo" class="header__logo-image" width="42"
+          height="42">
+        <span class="header__logo-text">Elite Burger</span>
+      </a>
     </div>
+  </header>
+
+  <main class="legal">
+    <!-- ==================== INTRO ==================== -->
+    <header class="legal__hero">
+      <a href="index.html" class="legal__back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Zurück zur Startseite
+      </a>
+      <p class="legal__label">Rechtliches</p>
+      <h1 class="legal__title">Datenschutzerklärung</h1>
+      <div class="menu__divider" aria-hidden="true"></div>
+    </header>
+
+    <!-- ==================== 1. ÜBERBLICK ==================== -->
+    <section class="legal__section" id="ueberblick" aria-labelledby="ueberblick-title">
+      <h2 class="legal__section-title" id="ueberblick-title">1. Datenschutz auf einen
+        Blick</h2>
+
+      <h3>Allgemeine Hinweise</h3>
+      <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert,
+        wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert
+        werden können. Ausführliche Informationen entnehmen Sie den folgenden Abschnitten dieser Datenschutzerklärung.
+      </p>
+
+      <h3>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</h3>
+      <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten finden Sie im
+        Abschnitt <a href="#verantwortliche-stelle">„Hinweis zur verantwortlichen Stelle“</a>.</p>
+
+      <h3>Wie erfassen wir Ihre Daten?</h3>
+      <p>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen, z. B. wenn Sie uns per E-Mail oder
+        telefonisch kontaktieren. Andere Daten werden beim Besuch der Website automatisch durch IT-Systeme erfasst. Das
+        sind vor allem technische Daten wie Internetbrowser, Betriebssystem, IP-Adresse oder Uhrzeit des
+        Seitenaufrufs. Die Erfassung dieser Daten erfolgt automatisch, sobald Sie diese Website betreten.</p>
+
+      <h3>Wofür nutzen wir Ihre Daten?</h3>
+      <p>Die Daten werden erhoben, um eine fehlerfreie Bereitstellung der Website, unserer digitalen Speisekarte, unserer
+        Standortkarte sowie unserer Öffnungszeiten und Neuigkeiten zu gewährleisten. Eine Nutzung Ihrer Daten zu
+        Werbe-, Analyse- oder Trackingzwecken findet nicht statt.</p>
+
+      <h3>Welche Rechte haben Sie bezüglich Ihrer Daten?</h3>
+      <p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten
+        personenbezogenen Daten zu erhalten. Sie haben außerdem das Recht, die Berichtigung, Löschung oder Einschränkung
+        der Verarbeitung dieser Daten zu verlangen sowie der Verarbeitung zu widersprechen. Des Weiteren steht Ihnen ein
+        Beschwerderecht bei der zuständigen Aufsichtsbehörde zu. Details finden Sie im Abschnitt <a
+          href="#rechte">„Ihre Rechte als betroffene Person“</a>.</p>
+    </section>
+
+    <!-- ==================== 2. HOSTING ==================== -->
+    <section class="legal__section" id="hosting" aria-labelledby="hosting-title">
+      <h2 class="legal__section-title" id="hosting-title">2. Hosting</h2>
+
+      <h3>Hosting bei IONOS</h3>
+      <p>Wir hosten die Inhalte unserer Website – einschließlich der Datenbank für unseren Bereich „News &amp;
+        Aktuelles“ – bei folgendem Anbieter:</p>
+      <address class="legal__address">
+        <strong>IONOS SE</strong><br>
+        Elgendorfer Str. 57<br>
+        56410 Montabaur<br>
+        Deutschland
+      </address>
+      <p>Wenn Sie unsere Website besuchen, erfasst IONOS verschiedene Logfiles inklusive Ihrer IP-Adresse (siehe <a
+          href="#server-logs">„Server-Log-Dateien“</a>). Details entnehmen Sie der Datenschutzerklärung von IONOS: <a
+          href="https://www.ionos.de/terms-gtc/datenschutzerklaerung/" target="_blank"
+          rel="noopener noreferrer">https://www.ionos.de/terms-gtc/datenschutzerklaerung/</a>.</p>
+      <p>Die Verwendung von IONOS erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes
+        Interesse an einer möglichst zuverlässigen und sicheren Darstellung unserer Website.</p>
+
+      <!-- TODO: Diesen Absatz nur behalten, wenn "IONOS WebAnalytics" im IONOS-Kundenkonto aktiv ist – sonst löschen. -->
+      <h4>IONOS WebAnalytics</h4>
+      <p>Diese Website nutzt die Statistikfunktion IONOS WebAnalytics. Dabei werden keine Cookies auf Ihrem Endgerät
+        gespeichert. Ausgewertet werden ausschließlich anonymisierte Verbindungsdaten aus den Server-Logfiles (z. B.
+        Referrer, aufgerufene Seiten, Gerätetyp, Browsertyp sowie die gekürzte IP-Adresse), um die technische
+        Auslastung zu prüfen. Ein Rückschluss auf einzelne Personen ist nicht möglich. Rechtsgrundlage ist Art. 6 Abs. 1
+        lit. f DSGVO.</p>
+
+      <h4>Auftragsverarbeitung</h4>
+      <p>Wir haben einen Vertrag über Auftragsverarbeitung (AVV) gemäß Art. 28 DSGVO mit IONOS geschlossen. Dieser
+        gewährleistet, dass IONOS die personenbezogenen Daten unserer Websitebesucher nur nach unseren Weisungen und
+        unter Einhaltung der DSGVO verarbeitet.</p>
+    </section>
+
+    <!-- ==================== 3. PFLICHTINFORMATIONEN ==================== -->
+    <section class="legal__section" id="pflichtinformationen" aria-labelledby="pflicht-title">
+      <h2 class="legal__section-title" id="pflicht-title">3. Allgemeine Hinweise &amp;
+        Pflichtinformationen</h2>
+
+      <h3>Datenschutz</h3>
+      <p>Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst und behandeln Ihre personenbezogenen Daten
+        vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
+      <p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z. B. bei der Kommunikation per E-Mail)
+        Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht
+        möglich.</p>
+
+      <h3 id="verantwortliche-stelle">Hinweis zur verantwortlichen Stelle</h3>
+      <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist:</p>
+      <address class="legal__address">
+        <strong>Elite Burger</strong><br>
+        Inhaber: Egzon Januzi<br>
+        Kommodore-Johnsen-Boulevard 21<br>
+        28217 Bremen<br>
+        Deutschland<br><br>
+        Telefon: <a href="tel:+4942160958133">0421/60958133</a><br>
+        E-Mail: <a href="mailto:eliteburgerhb@gmail.com">eliteburgerhb@gmail.com</a>
+      </address>
+      <p>Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über
+        die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z. B. Namen, E-Mail-Adressen o. Ä.)
+        entscheidet.</p>
+
+      <h3>Speicherdauer</h3>
+      <p>Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre
+        personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt. Wenn Sie ein berechtigtes
+        Löschersuchen geltend machen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe
+        für die Speicherung haben (z. B. steuer- oder handelsrechtliche Aufbewahrungsfristen); im letztgenannten Fall
+        erfolgt die Löschung nach Fortfall dieser Gründe.</p>
+
+      <h3>Rechtsgrundlagen der Datenverarbeitung</h3>
+      <p>Sind Ihre Daten zur Vertragserfüllung oder zur Durchführung vorvertraglicher Maßnahmen erforderlich (z. B. bei
+        Anfragen zu Bestellungen oder Catering), verarbeiten wir sie auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO.
+        Sofern die Verarbeitung zur Erfüllung einer rechtlichen Verpflichtung erforderlich ist, erfolgt sie auf
+        Grundlage von Art. 6 Abs. 1 lit. c DSGVO. Im Übrigen verarbeiten wir Ihre Daten auf Grundlage unseres
+        berechtigten Interesses nach Art. 6 Abs. 1 lit. f DSGVO. Die jeweils einschlägige Rechtsgrundlage ist in den
+        einzelnen Abschnitten dieser Datenschutzerklärung angegeben.</p>
+
+      <h3>Datenübermittlung in die USA</h3>
+      <p>Für die Darstellung unserer Standortkarte werden Dienste von Anbietern mit Sitz in den USA eingebunden (siehe
+        <a href="#karte">Abschnitt 5</a>). Diese Anbieter sind nach dem EU-US Data Privacy Framework (DPF) zertifiziert.
+        Für zertifizierte Unternehmen hat die EU-Kommission mit Beschluss vom 10. Juli 2023 ein angemessenes
+        Datenschutzniveau festgestellt (Art. 45 DSGVO).</p>
+
+      <h3>SSL- bzw. TLS-Verschlüsselung</h3>
+      <p>Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw.
+        TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers mit
+        „https://“ beginnt und ein Schloss-Symbol angezeigt wird. Bei aktiver Verschlüsselung können die Daten, die Sie
+        an uns übermitteln, nicht von Dritten mitgelesen werden.</p>
+
+      <h3 id="rechte">Ihre Rechte als betroffene Person</h3>
+      <p>Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf:</p>
+      <ul class="legal__list">
+        <li><strong>Auskunft</strong> über Ihre bei uns gespeicherten personenbezogenen Daten (Art. 15 DSGVO),</li>
+        <li><strong>Berichtigung</strong> unrichtiger Daten (Art. 16 DSGVO),</li>
+        <li><strong>Löschung</strong> Ihrer bei uns gespeicherten Daten (Art. 17 DSGVO),</li>
+        <li><strong>Einschränkung</strong> der Datenverarbeitung (Art. 18 DSGVO),</li>
+        <li><strong>Datenübertragbarkeit</strong> (Art. 20 DSGVO) sowie</li>
+        <li><strong>Widerspruch</strong> gegen die Verarbeitung Ihrer Daten (Art. 21 DSGVO).</li>
+      </ul>
+      <p>Wenden Sie sich dazu einfach an die oben genannte verantwortliche Stelle.</p>
+
+      <div class="legal__notice">
+        <h4>Widerspruchsrecht gegen die Datenerhebung in besonderen Fällen (Art. 21 DSGVO)</h4>
+        <p>Wenn die Datenverarbeitung auf Grundlage von Art. 6 Abs. 1 lit. e oder f DSGVO erfolgt, haben Sie jederzeit
+          das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, gegen die Verarbeitung Ihrer
+          personenbezogenen Daten Widerspruch einzulegen. Legen Sie Widerspruch ein, werden wir Ihre betroffenen
+          personenbezogenen Daten nicht mehr verarbeiten, es sei denn, wir können zwingende schutzwürdige Gründe für die
+          Verarbeitung nachweisen, die Ihre Interessen, Rechte und Freiheiten überwiegen, oder die Verarbeitung dient der
+          Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.</p>
+      </div>
+
+      <h3>Beschwerderecht bei der zuständigen Aufsichtsbehörde</h3>
+      <p>Im Falle von Verstößen gegen die DSGVO steht Ihnen ein Beschwerderecht bei einer Aufsichtsbehörde zu. Die für
+        uns zuständige Aufsichtsbehörde ist:</p>
+      <address class="legal__address">
+        <strong>Die Landesbeauftragte für Datenschutz und Informationsfreiheit der Freien Hansestadt Bremen</strong><br>
+        Arndtstraße 1<br>
+        27570 Bremerhaven<br>
+        <a href="https://www.datenschutz.bremen.de" target="_blank"
+          rel="noopener noreferrer">www.datenschutz.bremen.de</a>
+      </address>
+    </section>
+
+    <!-- ==================== 4. DATENERFASSUNG ==================== -->
+    <section class="legal__section" id="datenerfassung" aria-labelledby="datenerfassung-title">
+      <h2 class="legal__section-title" id="datenerfassung-title">4. Datenerfassung auf
+        dieser Website</h2>
+
+      <h3 id="server-logs">Server-Log-Dateien</h3>
+      <p>Unser Hoster IONOS erhebt und speichert automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr
+        Browser automatisch übermittelt. Dies sind:</p>
+      <ul class="legal__list">
+        <li>Browsertyp und Browserversion</li>
+        <li>verwendetes Betriebssystem</li>
+        <li>Referrer-URL (die zuvor besuchte Seite)</li>
+        <li>IP-Adresse des zugreifenden Geräts</li>
+        <li>Datum und Uhrzeit der Serveranfrage</li>
+      </ul>
+      <p>Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Die Erfassung erfolgt auf
+        Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an der technisch fehlerfreien
+        Darstellung, Stabilität und Sicherheit unserer Website.</p>
+
+      <h3>Keine Cookies, kein Tracking</h3>
+      <p>Unsere Website setzt keine Cookies und speichert keine Informationen in Ihrem Browser (z. B. im Local Storage).
+        Wir verwenden keine Analyse-, Tracking- oder Marketing-Dienste und binden keine Social-Media-Plugins ein.</p>
+
+      <h3>Schriftarten</h3>
+      <p>Unsere Website verwendet ausschließlich die auf Ihrem Gerät vorinstallierten Systemschriften. Es werden keine
+        Schriftarten von externen Servern (z. B. Google Fonts) nachgeladen.</p>
+
+      <h3>Speisekarte und „News &amp; Aktuelles“</h3>
+      <p>Speisekarte, Bilder, Videos sowie die Einträge im Bereich „News &amp; Aktuelles“ werden direkt von unserem
+        eigenen Webspace bzw. unserer eigenen Datenbank bei IONOS geladen. Dabei werden keine personenbezogenen Daten
+        gespeichert; es fallen lediglich die oben beschriebenen Server-Log-Daten an.</p>
+
+      <h3>Kontaktaufnahme per E-Mail oder Telefon</h3>
+      <p>Wenn Sie uns per E-Mail oder Telefon kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden
+        personenbezogenen Daten (z. B. Name, Telefonnummer, E-Mail-Adresse, Inhalt der Anfrage) zum Zwecke der
+        Bearbeitung Ihres Anliegens bei uns verarbeitet. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+      <p>Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung
+        eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist (z. B. Bestell-
+        oder Catering-Anfragen). In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an
+        der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO). Ihre Daten werden
+        gelöscht, sobald Ihr Anliegen abschließend bearbeitet ist und keine gesetzlichen Aufbewahrungsfristen
+        entgegenstehen.</p>
+    </section>
+
+    <!-- ==================== 5. KARTE ==================== -->
+    <section class="legal__section" id="karte" aria-labelledby="karte-title">
+      <h2 class="legal__section-title" id="karte-title">5. Interaktive Standortkarte
+      </h2>
+
+      <p>Damit Sie uns in der Bremer Überseestadt leicht finden, zeigen wir auf unserer Startseite eine interaktive
+        Satellitenkarte mit einem Anflug auf unseren Standort. Die Karte wird beim Aufruf der Startseite geladen. Dafür
+        stellt Ihr Browser Verbindungen zu den folgenden Servern her, wobei technisch bedingt Ihre IP-Adresse an den
+        jeweiligen Anbieter übermittelt wird. Rechtsgrundlage ist jeweils unser berechtigtes Interesse an einer
+        ansprechenden Darstellung unseres Angebots und einer leichten Auffindbarkeit unseres Restaurants (Art. 6 Abs. 1
+        lit. f DSGVO).</p>
+
+      <h3>MapLibre GL JS über das CDN „unpkg“</h3>
+      <p>Für die Darstellung der Karte nutzen wir die Open-Source-Bibliothek MapLibre GL JS. Die zugehörigen Skript- und
+        Stildateien werden über das Content Delivery Network „unpkg“ geladen, das über die Infrastruktur der
+        Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA, ausgeliefert wird. Dadurch erhält der Anbieter
+        Kenntnis darüber, dass über Ihre IP-Adresse unsere Website aufgerufen wurde. Cloudflare ist nach dem EU-US Data
+        Privacy Framework zertifiziert. Weitere Informationen: <a href="https://www.cloudflare.com/de-de/privacypolicy/"
+          target="_blank" rel="noopener noreferrer">https://www.cloudflare.com/de-de/privacypolicy/</a>.</p>
+
+      <h3>Satellitenbilder von Esri</h3>
+      <p>Die Satellitenbilder für die Welt- und Regionalansicht (Esri World Imagery) werden von Servern der Esri Inc.
+        (Environmental Systems Research Institute), 380 New York St., Redlands, CA 92373, USA, unter der Domain
+        arcgisonline.com geladen. Esri ist nach dem EU-US Data Privacy Framework zertifiziert. Weitere Informationen: <a
+          href="https://www.esri.com/de-de/privacy/overview" target="_blank"
+          rel="noopener noreferrer">https://www.esri.com/de-de/privacy/overview</a>.</p>
+
+      <h3>Luftbilder von GeoInformation Bremen</h3>
+      <p>Für die hochauflösende Nahansicht unseres Standorts nutzen wir die amtlichen Luftbilder (Digitale Orthophotos)
+        des Landesamts GeoInformation Bremen, Lloydstraße 4, 28217 Bremen. Diese werden direkt vom Server
+        geodienste.bremen.de geladen.</p>
+
+      <h3>Adresse kopieren</h3>
+      <p>Die Funktion „Adresse kopieren“ legt unsere Anschrift ausschließlich lokal in der Zwischenablage Ihres Geräts
+        ab. Dabei werden keine Daten an uns oder Dritte übertragen.</p>
+    </section>
+
+    <!-- ==================== 6. EXTERNE LINKS ==================== -->
+    <section class="legal__section" id="links" aria-labelledby="links-title">
+      <h2 class="legal__section-title" id="links-title">6. Externe Links</h2>
+
+      <h3>Google Maps, Instagram und TikTok</h3>
+      <p>Auf unserer Website befinden sich Verlinkungen zu externen Diensten: der Button „In Google Maps öffnen“ und die
+        Standort-Markierung auf der Karte führen zu Google Maps, im Footer verlinken wir unsere Profile auf Instagram
+        und TikTok. Dabei handelt es sich um reine Links und <strong>nicht</strong> um eingebettete Plugins.</p>
+      <p>Solange Sie diese Links nicht anklicken, findet keinerlei Datenübertragung an Google, Meta (Instagram) oder
+        TikTok statt. Erst wenn Sie einen Link anklicken, verlassen Sie unsere Website, und es gelten die
+        Datenschutzbestimmungen des jeweiligen Anbieters.</p>
+    </section>
+
+    <p class="legal__section-footer">Stand dieser Datenschutzerklärung: Oktober 2026</p>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer" id="footer">
+    <div class="footer__social">
+      <a href="https://www.instagram.com/eliteburgerbremen?igsh=MW04aGdyeXQ0bzh0Yw==" target="_blank"
+        rel="noopener noreferrer" class="footer__social-link" aria-label="Elite Burger auf Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" />
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+        </svg>
+      </a>
+
+      <a href="https://www.tiktok.com/@myburgerbremen" target="_blank" rel="noopener noreferrer"
+        class="footer__social-link" aria-label="Elite Burger auf TikTok">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="footer__brand">
+      <img src="images/Logo_transparent.png" alt="Elite Burger Logo" class="footer__brand-logo" width="34" height="34">
+      <span class="footer__brand-name">Elite Burger</span>
+    </div>
+    <p class="footer__copyright">© 2026 Elite Burger. Alle Rechte vorbehalten.</p>
+    <nav class="footer__legal" aria-label="Rechtliche Links">
+      <a href="impressum.html" class="footer__legal-link">Impressum</a>
+      <a href="datenschutz.html" class="footer__legal-link" aria-current="page">Datenschutz</a>
+    </nav>
+  </footer>
+
+  <!-- Header-Kapsel verkleinert sich beim Scrollen, wie auf der Startseite -->
+  <script>
+    (function () {
+      var header = document.getElementById('header');
+      function update() { header.classList.toggle('scrolled', window.scrollY > 50); }
+      update();
+      window.addEventListener('scroll', update, { passive: true });
+    })();
+  </script>
 </body>
+
 </html>

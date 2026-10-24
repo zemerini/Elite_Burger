@@ -1,130 +1,173 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impressum — In Arbeit | Elite Burger</title>
-    <link rel="stylesheet" href="style.css?v=3">
-    <style>
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .wip-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-accent);
-            border-radius: var(--radius-lg);
-            padding: 50px 30px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .wip-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), transparent);
-        }
-
-        .wip-gear {
-            width: 80px;
-            height: 80px;
-            color: var(--accent);
-            margin: 0 auto 30px auto;
-            animation: spin-gear-page 6s linear infinite;
-        }
-
-        @keyframes spin-gear-page {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .wip-card h1 {
-            font-family: var(--font-heading);
-            font-size: 2.4rem;
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: var(--tracking-title);
-            margin-bottom: 12px;
-        }
-
-        .wip-card h2 {
-            font-family: var(--font-heading);
-            color: var(--accent);
-            font-size: 0.78rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: var(--tracking-label);
-            margin-bottom: 24px;
-        }
-
-        .wip-card p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.55;
-            margin-bottom: 35px;
-            text-wrap: pretty;
-        }
-
-        .btn-wip {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 52px;
-            padding: 0 1.75rem;
-            background: var(--accent);
-            color: var(--bg-primary);
-            font-family: var(--font-heading);
-            font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: var(--tracking-ui);
-            border-radius: var(--radius-pill);
-            border: none;
-            cursor: pointer;
-            transition: transform 120ms var(--ease-out), box-shadow var(--transition-smooth), background var(--transition-fast);
-            box-shadow: 0 6px 24px rgba(225, 136, 52, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-        }
-
-        @media (hover: hover) {
-            .btn-wip:hover {
-                background: var(--accent-hover);
-                box-shadow: 0 10px 34px var(--accent-glow-strong), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            }
-        }
-
-        .btn-wip:active {
-            transform: scale(0.97);
-            background: var(--accent-pressed);
-            transition-duration: 80ms;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .wip-gear { animation: none; }
-            .btn-wip:active { transform: none; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impressum | Elite Burger</title>
+  <meta name="description" content="Impressum von Elite Burger Bremen: Anbieterkennzeichnung, Kontakt und rechtliche Hinweise.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#0d0d0d">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
+
 <body>
-    <div class="wip-card">
-        <svg class="wip-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="3"></circle>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-        </svg>
-        <h1>Impressum</h1>
-        <h2>In Arbeit</h2>
-        <p>Diese Seite wird aktuell noch überarbeitet. In Kürze finden Sie hier alle rechtlichen Informationen gemäß den gesetzlichen Vorgaben.</p>
-        <a href="index.html" class="btn-wip">Zurück zur Startseite</a>
+  <!-- ==================== HEADER ==================== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="header__logo" aria-label="Elite Burger Startseite">
+        <img src="images/Logo_transparent.png" alt="Elite Burger Logo" class="header__logo-image" width="42"
+          height="42">
+        <span class="header__logo-text">Elite Burger</span>
+      </a>
     </div>
+  </header>
+
+  <main class="legal">
+    <!-- ==================== INTRO ==================== -->
+    <header class="legal__hero">
+      <a href="index.html" class="legal__back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Zurück zur Startseite
+      </a>
+      <p class="legal__label">Rechtliches</p>
+      <h1 class="legal__title">Impressum</h1>
+      <div class="menu__divider" aria-hidden="true"></div>
+    </header>
+
+    <!-- ==================== 1. ANBIETER ==================== -->
+    <section class="legal__section" id="anbieter" aria-labelledby="anbieter-title">
+      <h2 class="legal__section-title" id="anbieter-title">1. Angaben gemäß § 5 DDG</h2>
+
+      <address class="legal__address">
+        <strong>Elite Burger</strong><br>
+        Inhaber: Egzon Januzi<br>
+        Kommodore-Johnsen-Boulevard 21<br>
+        28217 Bremen<br>
+        Deutschland
+      </address>
+
+      <h3>Kontakt</h3>
+      <p>
+        Telefon: <a href="tel:+4942160958133">0421/60958133</a><br>
+        E-Mail: <a href="mailto:eliteburgerhb@gmail.com">eliteburgerhb@gmail.com</a>
+      </p>
+
+      <h3>Umsatzsteuer-ID</h3>
+      <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:<br>
+        6023424671
+      </p>
+    </section>
+
+    <!-- ==================== 2. REDAKTIONELL VERANTWORTLICH ==================== -->
+    <section class="legal__section" id="redaktion" aria-labelledby="redaktion-title">
+      <h2 class="legal__section-title" id="redaktion-title">2. Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
+      </h2>
+
+      <address class="legal__address">
+        Egzon Januzi<br>
+        Kommodore-Johnsen-Boulevard 21<br>
+        28217 Bremen
+      </address>
+    </section>
+
+    <!-- ==================== 3. STREITBEILEGUNG ==================== -->
+    <section class="legal__section" id="streitbeilegung" aria-labelledby="streitbeilegung-title">
+      <h2 class="legal__section-title" id="streitbeilegung-title">3. Verbraucherstreitbeilegung</h2>
+
+      <p>Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer
+        Verbraucherschlichtungsstelle teilzunehmen.</p>
+    </section>
+
+    <!-- ==================== 4. HAFTUNG ==================== -->
+    <section class="legal__section" id="haftung" aria-labelledby="haftung-title">
+      <h2 class="legal__section-title" id="haftung-title">4. Haftungshinweise</h2>
+
+      <h3>Haftung für Inhalte</h3>
+      <p>Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und
+        Aktualität der Inhalte – insbesondere von Preisen, Öffnungszeiten sowie Angaben zu Allergenen und
+        Zusatzstoffen – können wir jedoch keine Gewähr übernehmen. Maßgeblich sind die Angaben vor Ort in unserem
+        Restaurant. Bei Fragen zu Allergenen sprechen Sie uns bitte direkt an.</p>
+      <p>Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
+        verantwortlich. Wir sind jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu
+        überwachen. Sobald wir von einer konkreten Rechtsverletzung Kenntnis erlangen, entfernen wir die betreffenden
+        Inhalte umgehend.</p>
+
+      <h3>Haftung für Links</h3>
+      <p>Unsere Website enthält Links zu externen Websites Dritter (z. B. Google Maps, Instagram und TikTok), auf deren
+        Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder
+        Betreiber verantwortlich. Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar. Werden uns
+        Rechtsverletzungen bekannt, entfernen wir derartige Links umgehend.</p>
+
+      <h3>Urheberrecht</h3>
+      <p>Die Inhalte dieser Website, insbesondere Texte, Fotos, Videos und das Logo, unterliegen dem deutschen
+        Urheberrecht. Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des
+        Urheberrechts bedürfen unserer vorherigen schriftlichen Zustimmung.</p>
+    </section>
+
+    <!-- ==================== 5. KARTENNACHWEISE ==================== -->
+    <section class="legal__section" id="nachweise" aria-labelledby="nachweise-title">
+      <h2 class="legal__section-title" id="nachweise-title">5. Kartennachweise</h2>
+
+      <p>Für die interaktive Standortkarte auf unserer Startseite verwenden wir folgendes Bildmaterial:</p>
+      <ul class="legal__list">
+        <li><strong>Satellitenbilder:</strong> Esri, Maxar, Earthstar Geographics und die GIS User Community (Esri
+          World Imagery)</li>
+        <li><strong>Luftbilder:</strong> © Landesamt GeoInformation Bremen (Digitale Orthophotos DOP10)</li>
+        <li><strong>Kartendarstellung:</strong> MapLibre GL JS (Open Source, BSD-3-Clause-Lizenz)</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer" id="footer">
+    <div class="footer__social">
+      <a href="https://www.instagram.com/eliteburgerbremen?igsh=MW04aGdyeXQ0bzh0Yw==" target="_blank"
+        rel="noopener noreferrer" class="footer__social-link" aria-label="Elite Burger auf Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" />
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+        </svg>
+      </a>
+
+      <a href="https://www.tiktok.com/@myburgerbremen" target="_blank" rel="noopener noreferrer"
+        class="footer__social-link" aria-label="Elite Burger auf TikTok">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="footer__brand">
+      <img src="images/Logo_transparent.png" alt="Elite Burger Logo" class="footer__brand-logo" width="34" height="34">
+      <span class="footer__brand-name">Elite Burger</span>
+    </div>
+    <p class="footer__copyright">© 2026 Elite Burger. Alle Rechte vorbehalten.</p>
+    <nav class="footer__legal" aria-label="Rechtliche Links">
+      <a href="impressum.html" class="footer__legal-link" aria-current="page">Impressum</a>
+      <a href="datenschutz.html" class="footer__legal-link">Datenschutz</a>
+    </nav>
+  </footer>
+
+  <!-- Header-Kapsel verkleinert sich beim Scrollen, wie auf der Startseite -->
+  <script>
+    (function () {
+      var header = document.getElementById('header');
+      function update() { header.classList.toggle('scrolled', window.scrollY > 50); }
+      update();
+      window.addEventListener('scroll', update, { passive: true });
+    })();
+  </script>
 </body>
+
 </html>

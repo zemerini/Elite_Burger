@@ -22,10 +22,10 @@
       "id": "cheeseburger",
       "name": "Cheeseburger",
       "menuName": "Cheeseburger Menü",
-      "singlePrice": 8.00,
-      "menuPrice": 14.00,
-      "allergens": ["a", "f", "j", "k", "l"],
-      "additives": ["9"],
+      "singlePrice": 8.50,
+      "menuPrice": 15.00,
+      "allergens": ["a", "f", "j", "k"],
+      "additives": ["1", "9"],
       "description": "Frisches Beef-Patty mit doppeltem Käse, Gewürzgurken, Ketchup und Senf im saftigen Potato Bun."
     },
     {
@@ -33,10 +33,10 @@
       "id": "double-cheeseburger",
       "name": "Double-Cheeseburger",
       "menuName": "Double-Cheeseburger Menü",
-      "singlePrice": 9.50,
-      "menuPrice": 15.00,
-      "allergens": ["a", "f", "j", "k", "l"],
-      "additives": ["9"],
+      "singlePrice": 10.00,
+      "menuPrice": 16.00,
+      "allergens": ["a", "f", "j", "k"],
+      "additives": ["1", "9"],
       "description": "Zwei kross gesmashte Patties mit vier Scheiben geschmolzenem Käse, Gurken, Ketchup und Senf."
     },
     {
@@ -45,9 +45,9 @@
       "name": "Chili Cheeseburger",
       "menuName": "Chili Cheeseburger Menü",
       "singlePrice": 8.50,
-      "menuPrice": 14.50,
-      "allergens": ["a", "f", "c", "l"],
-      "additives": ["9"],
+      "menuPrice": 15.00,
+      "allergens": ["a", "f", "c"],
+      "additives": ["1", "9"],
       "description": "Frisches Patty mit cremiger Chili-Cheese-Sauce, geschmolzenem Käse und feurigen Jalapeños."
     },
     {
@@ -55,10 +55,10 @@
       "id": "double-chili-cheeseburger",
       "name": "Double Chili-Cheeseburger",
       "menuName": "Double Chili-Cheeseburger Menü",
-      "singlePrice": 9.50,
-      "menuPrice": 15.00,
-      "allergens": ["a", "f", "c", "l"],
-      "additives": ["9"],
+      "singlePrice": 10.00,
+      "menuPrice": 16.00,
+      "allergens": ["a", "f", "c"],
+      "additives": ["1", "9"],
       "description": "Feurig-cremiger Hochgenuss: Zwei saftige Patties mit vier Scheiben Käse, Jalapeños und pikanter Sauce."
     },
     {
@@ -66,10 +66,10 @@
       "id": "big-wac",
       "name": "Big Wac",
       "menuName": "Big Wac Menü",
-      "singlePrice": 9.50,
-      "menuPrice": 15.00,
-      "allergens": ["a", "f", "j", "k", "l"],
-      "additives": ["9"],
+      "singlePrice": 10.00,
+      "menuPrice": 16.00,
+      "allergens": ["a", "f", "j", "k"],
+      "additives": ["1", "9"],
       "description": "Die Doppel-Decker Ikone: 2x Beef, 4x Käse, Salat, Zwiebeln, Gewürzgurken und unsere Geheimsoße."
     },
     {
@@ -78,8 +78,8 @@
       "originalName": "My Burger",
       "name": "Elite Burger",
       "menuName": "Elite Burger Menü",
-      "singlePrice": 10.00,
-      "menuPrice": 15.00,
+      "singlePrice": 11.00,
+      "menuPrice": 17.00,
       "allergens": ["a", "f", "k", "c", "n", "j"],
       "additives": ["1", "9"],
       "description": "Unser Signature Meisterwerk: Rauchiger Bacon, karamellisierte Zwiebeln, Jalapeños, BBQ- & hausgemachte Soße."
@@ -90,7 +90,7 @@
       "name": "Chickenburger",
       "menuName": "Chickenburger Menü",
       "singlePrice": 8.50,
-      "menuPrice": 14.00,
+      "menuPrice": 15.00,
       "allergens": ["a", "f", "g", "j", "c", "k", "n"],
       "additives": ["9"],
       "description": "Goldgelb paniertes Hähnchenfilet mit knackigem Salat, frischen Tomaten und cremiger Knoblauch-Mayonnaise."
@@ -100,11 +100,11 @@
       "id": "chilli-chickenburger",
       "name": "Chilli Chickenburger",
       "menuName": "Chilli Chickenburger Menü",
-      "singlePrice": 9.00,
-      "menuPrice": 14.50,
-      "allergens": ["a", "f", "g", "j", "b", "c", "l"],
-      "additives": ["9"],
-      "description": "Knuspriges Crispy Chicken Filet verfeinert mit feuriger Chili-Sauce und geschmolzenem Käse."
+      "singlePrice": 8.50,
+      "menuPrice": 15.00,
+      "allergens": ["a", "f", "c"],
+      "additives": ["1", "9"],
+      "description": "Kross paniertes Hähnchenfilet mit cremiger Chili-Cheese-Sauce, frischen Jalapeños und Chiliflocken."
     }
   ],
   "fingerfood": [
@@ -121,7 +121,7 @@
       "number": 11,
       "id": "chili-cheesepommes",
       "name": "Chili Cheesepommes",
-      "price": 6.50,
+      "price": 7.00,
       "allergens": ["f", "c", "l"],
       "additives": ["9"],
       "description": "Chili Cheesesoße und Jalapenos"
@@ -150,7 +150,7 @@
       "number": 30,
       "id": "kaesedip",
       "name": "Käsedip",
-      "price": 3.00,
+      "price": 4.00,
       "allergens": ["f"],
       "additives": [],
       "description": "Cremig geschmolzener, herzhafter Käsedip mit feiner Schärfenote."

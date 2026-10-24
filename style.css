@@ -616,6 +616,12 @@ button {
   border-radius: var(--radius-lg);
 }
 
+/* Chilli Chicken Burger: bewusst ohne Fokus-Ring */
+#menu-chilli-chicken-burger:focus,
+#menu-chilli-chicken-burger:focus-visible {
+  outline: none;
+}
+
 .menu-card__inner {
   position: relative;
   width: 100%;
@@ -796,6 +802,37 @@ button {
   border: 1px solid var(--accent);
   box-shadow: 0 4px 14px rgba(225, 136, 52, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Mehrere Tags: untereinander gestapelt an der Position des Einzel-Tags */
+.menu-card__tags {
+  position: absolute;
+  top: var(--space-md);
+  left: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  z-index: 2;
+}
+
+.menu-card__tags .menu-card__tag {
+  position: relative;
+  top: auto;
+  left: auto;
+}
+
+/* Grünes Glas: gleiche Materialität wie die übrigen Tags, nur grün getönt */
+.menu-card__tag--veggie {
+  background: rgba(48, 209, 88, 0.18);
+  color: #6ee68f;
+  border: 1px solid rgba(48, 209, 88, 0.45);
+  box-shadow: 0 4px 14px rgba(48, 209, 88, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.menu-card__tag-icon {
+  flex-shrink: 0;
 }
 
 /* Glass Flip Pill (Top-Right Action) */
@@ -2188,6 +2225,12 @@ button {
   font-variant-numeric: tabular-nums;
 }
 
+/* Ruhetag: zurückgenommen statt als Uhrzeit hervorgehoben */
+.info-block__time--closed {
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
 .info-block__address {
   font-size: 0.95rem;
   line-height: 1.65;
@@ -2508,21 +2551,222 @@ button {
   }
 }
 
-/* --- WIP Gear Spin Animation (Impressum & Datenschutz) --- */
-@keyframes spin-gear-icon {
-  from {
-    transform: rotate(0deg);
+/* --- Legal Pages (Datenschutz, Impressum) ---
+   Lesefluss zuerst: schmale Spalte, ruhige Karten pro Abschnitt. */
+.legal {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 8rem var(--space-md) var(--space-3xl);
+}
+
+.legal__hero {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.legal__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 36px;
+  padding: 0 0.9rem;
+  margin-bottom: var(--space-xl);
+  background: rgba(16, 16, 19, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.legal__back svg {
+  transition: transform var(--transition-fast);
+}
+
+@media (hover: hover) {
+  .legal__back:hover {
+    color: var(--accent);
+    border-color: rgba(225, 136, 52, 0.4);
+    background: rgba(225, 136, 52, 0.1);
   }
 
-  to {
-    transform: rotate(360deg);
+  .legal__back:hover svg {
+    transform: translateX(-3px);
   }
 }
 
-.wip-gear-icon {
-  animation: spin-gear-icon 4s linear infinite;
+.legal__label {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
   color: var(--accent);
-  transform-origin: center;
+  margin-bottom: var(--space-sm);
+}
+
+.legal__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 7vw, 3rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: var(--tracking-title);
+  margin-bottom: var(--space-md);
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* Abschnitte */
+.legal__section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  scroll-margin-top: 6rem;
+}
+
+@media (min-width: 640px) {
+  .legal__section {
+    padding: var(--space-xl);
+  }
+}
+
+.legal__section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 3.5vw, 1.45rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: var(--tracking-heading);
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.legal__section h3 {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-heading);
+  color: var(--text-primary);
+  margin: var(--space-lg) 0 var(--space-xs);
+}
+
+.legal__section [id] {
+  scroll-margin-top: 6rem;
+}
+
+.legal__section-title + h3 {
+  margin-top: 0;
+}
+
+.legal__section h4 {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: var(--space-md) 0 0.3rem;
+}
+
+.legal__section p,
+.legal__section li {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+.legal__section p + p {
+  margin-top: var(--space-sm);
+}
+
+.legal__section strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.legal__section a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(225, 136, 52, 0.4);
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+  transition: text-decoration-color var(--transition-fast);
+}
+
+@media (hover: hover) {
+  .legal__section a:hover {
+    text-decoration-color: var(--accent);
+  }
+}
+
+.legal__list {
+  list-style: none;
+  margin: var(--space-sm) 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.legal__list li {
+  position: relative;
+  padding-left: 1.15rem;
+}
+
+.legal__list li::before {
+  content: '';
+  position: absolute;
+  left: 0.15rem;
+  top: 0.68em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* Anschriften als ruhiger Block */
+.legal__address {
+  margin: var(--space-sm) 0;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-style: normal;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Hervorgehobener Hinweis (z. B. Widerspruchsrecht) */
+.legal__notice {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  background: rgba(225, 136, 52, 0.05);
+  border: 1px solid rgba(225, 136, 52, 0.2);
+  border-radius: var(--radius-md);
+}
+
+.legal__notice h4 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+/* Platzhalter: fällt auf, solange noch keine echten Daten eingetragen sind */
+.legal__placeholder {
+  padding: 0 0.3em;
+  border: 1px dashed rgba(225, 136, 52, 0.55);
+  border-radius: 5px;
+  background: rgba(225, 136, 52, 0.1);
+  color: var(--accent);
+}
+
+.legal__section-footer {
+  margin-top: var(--space-xl);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
 }
 
 /* --- Accessibility: Transparenz & Kontrast ---
@@ -2540,6 +2784,10 @@ button {
     background: var(--bg-card);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+  }
+
+  .menu-card__tag.menu-card__tag--veggie {
+    background: #12301b;
   }
 }
 
@@ -2575,7 +2823,6 @@ button {
 
   .hero__scroll-line,
   .hero__badge-dot,
-  .wip-gear-icon,
   .menu-card__tag--gold::after {
     animation: none;
   }
