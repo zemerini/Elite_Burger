@@ -787,11 +787,40 @@
   });
 
   // --- Speisekarten-Daten ---
-  // Daten aus menu-data.json für andere Skripte bereitstellen
-  fetch('menu-data.json')
+  // Zahl als Preis anzeigen, z. B. 8.5 -> "8,50 €"
+  function formatPreis(wert) {
+    return wert.toFixed(2).replace('.', ',') + ' €';
+  }
+
+  // Preise aus menu-data.json in die Seite schreiben.
+  // Jedes Produkt im HTML hat ein data-menu-id, das zur id in der JSON-Datei passt.
+  function preiseEintragen(data) {
+    const produkte = [...(data.burgers || []), ...(data.fingerfood || []), ...(data.dips || [])];
+
+    document.querySelectorAll('[data-menu-id]').forEach((el) => {
+      const produkt = produkte.find((p) => p.id === el.dataset.menuId);
+      if (!produkt) return;
+
+      const setzen = (selector, wert) => {
+        if (typeof wert !== 'number') return;
+        el.querySelectorAll(selector).forEach((span) => {
+          span.textContent = formatPreis(wert);
+        });
+      };
+
+      setzen('.menu-card__price:not(.menu-card__price--menu)', produkt.singlePrice);
+      setzen('.menu-card__price--menu', produkt.menuPrice);
+      setzen('.menu-list__price', produkt.price);
+    });
+  }
+
+  // no-cache: Browser fragt immer nach der neuesten Version der Datei
+  fetch('menu-data.json', { cache: 'no-cache' })
     .then((res) => (res.ok ? res.json() : null))
     .then((data) => {
-      if (data) window.MENU_DATA = data;
+      if (!data) return;
+      window.MENU_DATA = data;
+      preiseEintragen(data);
     })
     .catch(() => { });
 
