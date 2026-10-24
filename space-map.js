@@ -1,25 +1,23 @@
 /**
- * ==========================================================================
- * ELITE BURGER — CINEMATIC SPACE ZOOM CONTROLLER (OPEN SOURCE / MAPLIBRE GL)
- * 100% Free & Open-Source: Keine API-Keys, keine Limits, keine Quota-Kosten!
- * Nutzt Esri World Imagery (High-Res Satellit) via MapLibre GL JS
- * ==========================================================================
+ * Elite Burger — Standortkarte
+ * Animierter Flug vom Weltall bis zu unserem Restaurant.
+ * Nutzt MapLibre GL (kostenlos, ohne API-Schlüssel).
  */
 
 (function () {
   'use strict';
 
-  // Exact Rooftop Coordinates for Kommodore-Johnsen-Boulevard 21, 28217 Bremen
+  // Koordinaten: Kommodore-Johnsen-Boulevard 21, 28217 Bremen
   const TARGET_COORDS = [8.75513, 53.101985];
-  const START_ZOOM = 2.2; // Globale Ansicht aus dem Weltall
-  const TARGET_ZOOM = 17.6; // Gestochen scharfe Ansicht der Hausnummer 21
+  const START_ZOOM = 2.2; // Ansicht aus dem Weltall
+  const TARGET_ZOOM = 17.6; // Nahansicht auf das Gebäude
   const START_PITCH = 0;
-  const TARGET_PITCH = 0; // Pure 2D top-down view
+  const TARGET_PITCH = 0; // Gerade von oben
   const START_BEARING = 0;
   const TARGET_BEARING = 0;
-  const FLY_DURATION = 3800; // ms
+  const FLY_DURATION = 3800; // Dauer des Flugs in Millisekunden
 
-  // DOM Elements
+  // Elemente auf der Seite
   const stageEl = document.getElementById('spaceLocationStage');
   const mapContainer = document.getElementById('spaceMap');
   const fallbackEl = document.getElementById('spaceFallback');
@@ -30,7 +28,7 @@
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // --- Cloud & Atmospheric Fog Engine (Procedural Canvas) ---
+  // --- Wolken-Effekt beim Anflug ---
   const ctx = cloudCanvas.getContext('2d');
   let animationProgress = 0;
   let cloudAnimRunning = false;
@@ -143,7 +141,7 @@
     requestAnimationFrame(step);
   }
 
-  // --- Map Engine State ---
+  // --- Zustand der Karte ---
   let map = null;
   let marker = null;
   let markerElement = null;
@@ -159,10 +157,9 @@
     }
   }
 
-  // Ultra-HD Hybrid Satelliten- & Luftbild-Engine:
-  // 1. Orbit bis Region (Zoom 0 bis 13): Esri World Imagery für globale Erdkugel & Kontinente
-  // 2. Zielanflug & Landung (Zoom 13 bis 20): Offizielle True Orthophotos der Freien Hansestadt Bremen
-  //    (Landesamt GeoInformation Bremen, DOP10 mit 10 cm Bodenauflösung) — gestochen scharf, kein Pixelbrei!
+  // Kartenbilder in zwei Stufen:
+  // 1. Weit weg (Zoom 0 bis 13): Satellitenbilder von Esri
+  // 2. Nah dran (Zoom 13 bis 21): Luftbilder von GeoInformation Bremen (10 cm genau)
   const ultraHdSatelliteStyle = {
     version: 8,
     sources: {
@@ -214,7 +211,7 @@
     fallbackActive = true;
 
     if (fallbackEl) {
-      // Gestochen scharfes 10cm-Luftbild für Bremen Überseestadt
+      // Ersatzbild, falls die Karte nicht laden kann: Luftbild der Überseestadt
       fallbackEl.style.backgroundImage = 'url("https://geodienste.bremen.de/wms_dop_lb?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=dop10_2025_HB&STYLES=&SRS=EPSG:3857&BBOX=974419,7001631,974724,7001937&WIDTH=1024&HEIGHT=768&FORMAT=image/jpeg")';
       fallbackEl.classList.add('is-active');
     }
@@ -393,7 +390,7 @@
     observer.observe(stageEl);
   }
 
-  // Copy Address Button
+  // Button "Adresse kopieren"
   if (copyBtn) {
     copyBtn.addEventListener('click', async () => {
       const address = 'Kommodore-Johnsen-Boulevard 21, 28217 Bremen';
@@ -412,7 +409,7 @@
     });
   }
 
-  // Initialisieren
+  // Starten
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initMapEngine);
   } else {

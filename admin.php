@@ -1,37 +1,88 @@
 <?php
-// admin.php - Passwortgeschütztes Admin-Panel zur Verwaltung der Neuigkeiten
+// Admin-Bereich: News schreiben und löschen. Zugang nur mit Passwort.
+
+// Sicheres Login-Cookie: nicht per JavaScript lesbar, nicht von fremden Seiten mitgesendet
+$is_https = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path'     => '/',
+    'secure'   => $is_https,
+    'httponly' => true,
+    'samesite' => 'Strict',
+]);
 session_start();
+
+// Seite darf nicht in fremde Seiten eingebettet werden
+header('X-Frame-Options: DENY');
+header('X-Content-Type-Options: nosniff');
+header('Referrer-Policy: same-origin');
+
 require_once 'db.php';
 
-// Das verschlüsselte Passwort für den Zugang (entspricht: EliteBurgerAufDie1)
-$password_hash = '$2y$12$5YEPKaMH6mOXD2DbcYBmheUftedxWai2vMmB5XqDc.3YvMt.FQ1KG';
+// Schutz gegen gefälschte Formulare (CSRF): jedes Formular schickt diesen Code mit
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+$csrf_token = $_SESSION['csrf_token'];
 
-// 1. Logout verarbeiten
-if (isset($_GET['action']) && $_GET['action'] === 'logout') {
+function csrf_ok(): bool
+{
+    return hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'] ?? '');
+}
+
+// Login-Sperre: nach 5 Fehlversuchen 15 Minuten warten (pro IP-Adresse)
+const MAX_VERSUCHE = 5;
+const SPERRZEIT = 15 * 60;
+
+function versuche_datei(): string
+{
+    return sys_get_temp_dir() . '/eliteburger_login_' . hash('sha256', $_SERVER['REMOTE_ADDR'] ?? '') . '.json';
+}
+
+function versuche_lesen(): array
+{
+    $daten = json_decode((string) @file_get_contents(versuche_datei()), true);
+    if (!is_array($daten) || time() - $daten['seit'] > SPERRZEIT) {
+        return ['anzahl' => 0, 'seit' => time()];
+    }
+    return $daten;
+}
+
+$action = $_POST['action'] ?? '';
+$action_status = '';
+$login_error = '';
+
+// 1. Abmelden
+if ($action === 'logout' && csrf_ok()) {
+    $_SESSION = [];
     session_destroy();
     header('Location: admin.php');
     exit;
 }
 
-// 2. Login verarbeiten
-$login_error = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_password'])) {
-    $password_input = $_POST['login_password'];
-    if (password_verify($password_input, $password_hash)) {
+// 2. Anmelden
+if ($action === 'login') {
+    $versuche = versuche_lesen();
+
+    if ($versuche['anzahl'] >= MAX_VERSUCHE) {
+        $login_error = 'Zu viele Fehlversuche. Bitte in 15 Minuten erneut versuchen.';
+    } elseif (csrf_ok() && password_verify($_POST['login_password'] ?? '', $config['admin_password_hash'])) {
+        @unlink(versuche_datei());
+        session_regenerate_id(true); // Neue Session-ID nach dem Login
         $_SESSION['admin_logged_in'] = true;
         header('Location: admin.php');
         exit;
     } else {
+        $versuche['anzahl']++;
+        @file_put_contents(versuche_datei(), json_encode($versuche));
         $login_error = 'Ungültiges Passwort!';
     }
 }
 
-// Prüfen, ob der Benutzer eingeloggt ist
-$is_logged_in = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true;
+$is_logged_in = ($_SESSION['admin_logged_in'] ?? false) === true;
 
-// 3. Neue Neuigkeit hinzufügen
-$action_status = '';
-if ($is_logged_in && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_news'])) {
+// 3. Neue News speichern
+if ($is_logged_in && $action === 'add_news' && csrf_ok()) {
     $title = trim($_POST['title'] ?? '');
     $badge = trim($_POST['badge'] ?? '');
     $news_date = trim($_POST['news_date'] ?? '');
@@ -44,6 +95,7 @@ if ($is_logged_in && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_
             header('Location: admin.php?status=success_add');
             exit;
         } catch (Exception $e) {
+            error_log('News speichern fehlgeschlagen: ' . $e->getMessage());
             $action_status = 'error_add';
         }
     } else {
@@ -51,32 +103,32 @@ if ($is_logged_in && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_
     }
 }
 
-// 4. Neuigkeit löschen
-if ($is_logged_in && isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
-    $id = (int)$_GET['id'];
+// 4. News löschen
+if ($is_logged_in && $action === 'delete' && csrf_ok()) {
     try {
         $stmt = $pdo->prepare('DELETE FROM news WHERE id = ?');
-        $stmt->execute([$id]);
+        $stmt->execute([(int) ($_POST['id'] ?? 0)]);
         header('Location: admin.php?status=success_delete');
         exit;
     } catch (Exception $e) {
+        error_log('News löschen fehlgeschlagen: ' . $e->getMessage());
         $action_status = 'error_delete';
     }
 }
 
-// Statusmeldungen auslesen
+// Rückmeldung nach dem Speichern oder Löschen
 if (isset($_GET['status'])) {
     $action_status = $_GET['status'];
 }
 
-// News für die Liste abrufen
+// Alle News für die Liste laden
 $news_list = [];
 if ($is_logged_in) {
     try {
         $stmt = $pdo->query('SELECT id, title, badge, news_date, content FROM news ORDER BY created_at DESC');
         $news_list = $stmt->fetchAll();
     } catch (Exception $e) {
-        // Fehler stumm übergehen
+        error_log('News laden fehlgeschlagen: ' . $e->getMessage());
     }
 }
 ?>
@@ -86,12 +138,13 @@ if ($is_logged_in) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elite Burger — Admin-Bereich</title>
+    <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=5">
     <style>
-        /* Spezifische Overrides und Ergänzungen für den Admin-Bereich */
+        /* Zusätzliche Gestaltung nur für den Admin-Bereich */
         body {
             padding: 40px 20px;
             display: block;
@@ -105,7 +158,7 @@ if ($is_logged_in) {
             z-index: 1;
         }
 
-        /* Ambient Cursor Glow / Background Glow */
+        /* Leuchtender Hintergrund */
         .ambient-glow-admin {
             position: fixed;
             top: -150px;
@@ -118,7 +171,7 @@ if ($is_logged_in) {
             z-index: 0;
         }
 
-        /* Header */
+        /* Kopfzeile */
         .admin-header {
             display: flex;
             justify-content: space-between;
@@ -194,7 +247,7 @@ if ($is_logged_in) {
             box-shadow: 0 0 15px rgba(255, 69, 58, 0.3);
         }
 
-        /* Login */
+        /* Anmeldung */
         .login-wrapper {
             display: flex;
             justify-content: center;
@@ -237,7 +290,7 @@ if ($is_logged_in) {
             margin-bottom: 24px;
         }
 
-        /* Forms */
+        /* Formulare */
         .form-group {
             margin-bottom: 20px;
             text-align: left;
@@ -277,7 +330,7 @@ if ($is_logged_in) {
             min-height: 120px;
         }
 
-        /* Grid */
+        /* Aufteilung in zwei Spalten */
         .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -309,7 +362,7 @@ if ($is_logged_in) {
             padding-left: 12px;
         }
 
-        /* Alerts */
+        /* Meldungen */
         .alert {
             padding: 16px;
             border-radius: var(--radius-md);
@@ -330,7 +383,7 @@ if ($is_logged_in) {
             color: #30d158;
         }
 
-        /* News Cards Admin */
+        /* News-Liste */
         .news-list-admin {
             display: flex;
             flex-direction: column;
@@ -449,7 +502,7 @@ if ($is_logged_in) {
             color: var(--accent);
         }
 
-        /* Custom Modal Styling */
+        /* Fenster "Beitrag löschen?" */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -517,7 +570,7 @@ if ($is_logged_in) {
     <div class="ambient-glow-admin"></div>
 
     <?php if (!$is_logged_in): ?>
-        <!-- LOGIN MASKE -->
+        <!-- ANMELDUNG -->
         <div class="login-wrapper">
             <div class="login-card">
                 <img src="images/Logo_transparent.png" alt="Elite Burger Logo" class="login-card__logo">
@@ -529,6 +582,8 @@ if ($is_logged_in) {
                 <?php endif; ?>
 
                 <form method="POST" action="admin.php">
+                    <input type="hidden" name="action" value="login">
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                     <div class="form-group">
                         <label for="login_password" class="form-label">Passwort</label>
                         <input type="password" id="login_password" name="login_password" class="form-control" placeholder="••••••••" required autofocus>
@@ -538,11 +593,15 @@ if ($is_logged_in) {
             </div>
         </div>
     <?php else: ?>
-        <!-- ADMIN DASHBOARD -->
+        <!-- ÜBERSICHT -->
         <div class="admin-container">
             <header class="admin-header">
                 <h1 class="admin-header__title">Elite Burger <span>Admin</span></h1>
-                <a href="admin.php?action=logout" class="btn-admin btn-admin--secondary">Abmelden</a>
+                <form method="POST" action="admin.php">
+                    <input type="hidden" name="action" value="logout">
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
+                    <button type="submit" class="btn-admin btn-admin--secondary">Abmelden</button>
+                </form>
             </header>
 
             <?php if ($action_status === 'success_add'): ?>
@@ -562,7 +621,8 @@ if ($is_logged_in) {
                 <section class="admin-card">
                     <h2>Neuigkeit schreiben</h2>
                     <form method="POST" action="admin.php">
-                        <input type="hidden" name="add_news" value="1">
+                        <input type="hidden" name="action" value="add_news">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
                         
                         <div class="form-group">
                             <label for="title" class="form-label">Titel der News</label>
@@ -607,9 +667,12 @@ if ($is_logged_in) {
                                         </div>
                                     </div>
                                     <p class="news-card-admin__text"><?= nl2br(htmlspecialchars($item['content'])) ?></p>
-                                    <div class="news-card-admin__actions">
-                                        <a href="admin.php?action=delete&id=<?= $item['id'] ?>" class="btn-admin btn-admin--danger btn-delete-trigger">Löschen</a>
-                                    </div>
+                                    <form method="POST" action="admin.php" class="news-card-admin__actions">
+                                        <input type="hidden" name="action" value="delete">
+                                        <input type="hidden" name="id" value="<?= (int) $item['id'] ?>">
+                                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token) ?>">
+                                        <button type="submit" class="btn-admin btn-admin--danger btn-delete-trigger">Löschen</button>
+                                    </form>
                                 </article>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -623,14 +686,14 @@ if ($is_logged_in) {
         </div>
     <?php endif; ?>
 
-    <!-- CUSTOM DELETE CONFIRMATION MODAL -->
+    <!-- FENSTER "BEITRAG LÖSCHEN?" -->
     <div id="deleteConfirmModal" class="modal-overlay">
         <div class="modal-card">
             <h3>Beitrag löschen?</h3>
             <p>Möchtest du diese Neuigkeit wirklich unwiderruflich aus der Datenbank löschen?</p>
             <div class="modal-card__actions">
                 <button type="button" id="modalCancelBtn" class="btn-admin btn-admin--secondary">Abbrechen</button>
-                <a href="#" id="modalConfirmBtn" class="btn-admin" style="background: #ff453a; color: #ffffff; box-shadow: 0 0 20px rgba(255, 69, 58, 0.25);">Löschen</a>
+                <button type="button" id="modalConfirmBtn" class="btn-admin" style="background: #ff453a; color: #ffffff; box-shadow: 0 0 20px rgba(255, 69, 58, 0.25);">Löschen</button>
             </div>
         </div>
     </div>
@@ -641,30 +704,35 @@ if ($is_logged_in) {
         const modal = document.getElementById('deleteConfirmModal');
         const cancelBtn = document.getElementById('modalCancelBtn');
         const confirmBtn = document.getElementById('modalConfirmBtn');
+        let deleteForm = null;
 
         if (deleteTriggers.length > 0 && modal && cancelBtn && confirmBtn) {
+            // Löschen erst nach Bestätigung im Fenster abschicken
             deleteTriggers.forEach(trigger => {
                 trigger.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const deleteUrl = trigger.getAttribute('href');
-                    confirmBtn.setAttribute('href', deleteUrl);
+                    deleteForm = trigger.closest('form');
                     modal.classList.add('active');
                 });
             });
 
-            // Cancel button closes the modal
+            confirmBtn.addEventListener('click', () => {
+                if (deleteForm) deleteForm.submit();
+            });
+
+            // "Abbrechen" schließt das Fenster
             cancelBtn.addEventListener('click', () => {
                 modal.classList.remove('active');
             });
 
-            // Clicking on the overlay background closes the modal
+            // Klick auf den dunklen Hintergrund schließt das Fenster
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     modal.classList.remove('active');
                 }
             });
 
-            // ESC key closes the modal
+            // Esc-Taste schließt das Fenster
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && modal.classList.contains('active')) {
                     modal.classList.remove('active');

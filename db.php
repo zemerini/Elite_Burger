@@ -1,28 +1,17 @@
 <?php
-// db.php - Dynamische Datenbankverbindung (Lokales Testen vs. Ionos Server)
+// Verbindung zur Datenbank. Die Zugangsdaten stehen in config.php.
 
-// Erkennen, ob die Seite lokal über localhost aufgerufen wird
-$is_localhost = in_array($_SERVER['REMOTE_ADDR'] ?? '', ['127.0.0.1', '::1']) 
-             || in_array($_SERVER['SERVER_NAME'] ?? '', ['localhost', '127.0.0.1']);
-
-if ($is_localhost) {
-    // Lokale Testdaten für XAMPP
-    $host = '127.0.0.1';
-    $db   = 'dbs15777005'; // Name deiner lokalen Datenbank (in HeidiSQL erstellen)
-    $user = 'root';
-    $pass = '';           // Bei XAMPP standardmäßig leer
-    $port = '3306';
-} else {
-    // Live-Zugangsdaten von Ionos
-    $host = 'db5020669638.hosting-data.io';
-    $db   = 'dbs15777005';
-    $user = 'dbu3079816';
-    $pass = 'AS4NOa:Elits0W-1859!Qyutaslc@';
-    $port = '3306';
+if (!is_file(__DIR__ . '/config.php')) {
+    http_response_code(500);
+    exit('config.php fehlt. Bitte config.example.php kopieren und ausfüllen.');
 }
+$config = require __DIR__ . '/config.php';
 
-$charset = 'utf8mb4';
-$dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
+// Läuft die Seite lokal (XAMPP) oder auf IONOS?
+$is_local = in_array($_SERVER['SERVER_ADDR'] ?? '', ['127.0.0.1', '::1'], true);
+$db = $is_local ? $config['db_local'] : $config['db_live'];
+
+$dsn = "mysql:host={$db['host']};port={$db['port']};dbname={$db['name']};charset=utf8mb4";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -30,8 +19,10 @@ $options = [
 ];
 
 try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (\PDOException $e) {
-    die("Datenbankverbindung fehlgeschlagen: " . $e->getMessage());
+    $pdo = new PDO($dsn, $db['user'], $db['pass'], $options);
+} catch (PDOException $e) {
+    // Details nur ins Server-Log, nicht an Besucher
+    error_log('Datenbankfehler: ' . $e->getMessage());
+    http_response_code(500);
+    exit('Die Datenbank ist gerade nicht erreichbar.');
 }
-?>

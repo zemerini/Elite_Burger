@@ -1,0 +1,12 @@
+# Interne PHP-Dateien dürfen nicht direkt im Browser aufgerufen werden
+<FilesMatch "^(config|config\.example|db)\.php$">
+  Require all denied
+</FilesMatch>
+
+# Versteckte Dateien (z. B. .gitignore, .DS_Store) sperren
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
+# Versteckte Ordner (z. B. .git) sperren
+RedirectMatch 404 /\.(git|agents)(/|$)

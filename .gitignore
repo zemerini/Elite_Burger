@@ -1,0 +1,8 @@
+# Geheime Zugangsdaten
+config.php
+
+# macOS-Systemdateien
+.DS_Store
+
+# Fertiger Ordner für den Upload auf IONOS (enthält config.php)
+IONOS_Upload/

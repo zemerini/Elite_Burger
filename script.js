@@ -1,6 +1,6 @@
 /**
- * BUNSMITH — Premium Smashburger
- * Interactive Script: Scroll reveals, header state, ambient glow, springs
+ * Elite Burger — Startseite
+ * Animationen, Karten-Umdrehen, Allergen-Legende und News
  */
 
 (function () {
@@ -9,11 +9,11 @@
   const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   const prefersReducedMotion = () => reducedMotionQuery.matches;
 
-  // --- Spring-Engine ---
-  // Apple-Parametrisierung: damping = Dämpfungsgrad (1 = kein Überschwingen),
-  // response = Zeit einer ungedämpften Schwingung in Sekunden (kleiner = knackiger).
-  // Ein neues Ziel startet immer vom aktuellen Wert UND der aktuellen Geschwindigkeit:
-  // dadurch ist jede Bewegung jederzeit unterbrech- und umkehrbar, ohne Sprung.
+  // --- Feder-Animation ---
+  // damping: wie stark gebremst wird (1 = ohne Nachschwingen).
+  // response: wie schnell die Bewegung ist (kleiner = schneller).
+  // Jede neue Bewegung startet dort, wo die alte gerade ist.
+  // So kann man sie jederzeit unterbrechen oder umkehren.
   function createSpring(initial, config, onUpdate) {
     let value = initial;
     let velocity = 0;
@@ -75,9 +75,9 @@
     };
   }
 
-  // --- Press- & Hover-Feedback per Feder ---
-  // Reagiert auf pointerdown (nicht erst auf click), bricht ab, wenn der Finger
-  // wegwandert, und löst sich beim Loslassen mit leichtem Nachfedern.
+  // --- Rückmeldung beim Drücken und Darüberfahren ---
+  // Reagiert sofort beim Antippen, bricht ab, wenn der Finger wegrutscht,
+  // und federt beim Loslassen leicht nach.
   function makePressable(el, { hoverScale = 1, hoverLift = 0, pressScale = 0.96 } = {}) {
     if (!el) return;
     let hovering = false;
@@ -111,7 +111,7 @@
         scale.to(reduce ? 0.985 : pressScale, { response: 0.16, damping: 1 });
         lift.to(0, { response: 0.16, damping: 1 });
       } else {
-        // Loslassen trägt Schwung: leicht unterdämpft; Hover-Wechsel bleibt kritisch gedämpft
+        // Beim Loslassen leicht nachfedern, beim Darüberfahren nicht
         const spring = released ? { response: 0.4, damping: 0.78 } : { response: 0.35, damping: 1 };
         scale.to(hoverOn ? hoverScale : 1, spring);
         lift.to(hoverOn ? hoverLift : 0, spring);
@@ -161,8 +161,8 @@
     makePressable(legendHeaderEl, { pressScale: 0.99 });
   }
 
-  // --- Scroll Reveal with IntersectionObserver ---
-  // Stagger pro Batch: was gleichzeitig sichtbar wird, kaskadiert kurz hintereinander.
+  // --- Inhalte beim Scrollen einblenden ---
+  // Was gleichzeitig sichtbar wird, erscheint kurz nacheinander.
   const revealElements = document.querySelectorAll('.reveal');
 
   if (revealElements.length > 0) {
@@ -186,7 +186,7 @@
     }
   }
 
-  // --- Sticky Header Scroll State ---
+  // --- Header beim Scrollen verkleinern ---
   const header = document.getElementById('header');
 
   if (header) {
@@ -214,8 +214,8 @@
     updateHeaderState();
   }
 
-  // --- Ambient Cursor Glow (desktop only) ---
-  // Folgt dem Cursor mit weicher Annäherung (Compositor-only: transform).
+  // --- Leuchtender Schein, der der Maus folgt (nur am Computer) ---
+  // Folgt der Maus mit leichter Verzögerung.
   const ambientGlow = document.getElementById('ambientGlow');
 
   if (ambientGlow && window.matchMedia('(pointer: fine)').matches) {
@@ -259,7 +259,7 @@
     });
   }
 
-  // --- Smooth scroll for CTA ---
+  // --- Weiches Scrollen beim Klick auf den Button ---
   const heroCta = document.getElementById('hero-cta');
   if (heroCta) {
     heroCta.addEventListener('click', (e) => {
@@ -271,7 +271,7 @@
     });
   }
 
-  // --- Hero-Video: bei reduzierter Bewegung stehen lassen (Poster bleibt sichtbar) ---
+  // --- Hintergrundvideo anhalten, wenn weniger Bewegung gewünscht ist ---
   const heroVideo = document.querySelector('.hero__bg-video');
   if (heroVideo) {
     const syncVideoToMotionPreference = () => {
@@ -286,7 +286,7 @@
     reducedMotionQuery.addEventListener('change', syncVideoToMotionPreference);
   }
 
-  // --- Parallax hero image on scroll ---
+  // --- Hintergrund im oberen Bereich bewegt sich beim Scrollen langsamer ---
   const heroBgImage = document.querySelector('.hero__bg-image');
   if (heroBgImage && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
     let parallaxTicking = false;
@@ -304,7 +304,7 @@
     }, { passive: true });
   }
 
-  // --- Apple-style 3D Glass Flip Cards & Menu Toggle ---
+  // --- Burger-Karten umdrehen (Single / Menü) ---
   const menuTogglePill = document.getElementById('menuTogglePill');
   const btnSingle = document.getElementById('btn-single');
   const btnMenu = document.getElementById('btn-menu');
@@ -314,7 +314,7 @@
   if (cards.length > 0) {
     const cardControllers = [];
 
-    // Helper to sync global toggle button state based on cards
+    // Hebt den passenden Schalter oben hervor, je nachdem welche Seite die Karten zeigen
     function syncToggleFromCards() {
       if (!menuTogglePill || !btnSingle || !btnMenu) return;
       const menuCount = cardControllers.filter(c => c.getTarget() === 180).length;
@@ -332,11 +332,10 @@
       const frontSheen = frontFace ? frontFace.querySelector('.menu-card__glass-sheen') : null;
       const backSheen = backFace ? backFace.querySelector('.menu-card__glass-sheen') : null;
 
-      let targetAngle = 0; // 0 = single, 180 = menu
+      let targetAngle = 0; // 0 = Single, 180 = Menü
       let currentAngle = 0;
 
-      // Apple WWDC 2018 rotation spring: damping 0.82, response 0.42
-      // Erlaubt unterbrechungsfreie Umkehr aus jedem beliebigen Flug-Winkel
+      // Feder für die Drehung: kann jederzeit umgekehrt werden
       const spring = createSpring(0, { response: 0.42, damping: 0.82, restDelta: 0.05 }, (angle) => {
         currentAngle = angle;
 
@@ -354,8 +353,8 @@
           return;
         }
 
-        // Apple 3D Physics:
-        // Z-Elevation: bei 90° hebt sich die Karte um 26px in den Raum zum Betrachter
+        // 3D-Effekt:
+        // In der Mitte der Drehung hebt sich die Karte leicht nach vorne
         const rad = (angle * Math.PI) / 180;
         const depth = Math.sin(rad) * 26;
         if (inner) {
@@ -368,7 +367,7 @@
           }
         }
 
-        // Sichtbarkeit an der 90°-Kante umschalten verhindert Z-Fighting und Durchscheinen
+        // Bei 90° die Seite wechseln, damit nichts durchscheint
         const isFlippedOver = angle >= 90;
         if (frontFace) {
           frontFace.style.visibility = isFlippedOver ? 'hidden' : 'visible';
@@ -379,12 +378,12 @@
           backFace.style.pointerEvents = isFlippedOver ? 'auto' : 'none';
         }
 
-        // Dynamischer Lichtstreif (Specular Sheen) wandert über das Glas
+        // Lichtstreif wandert beim Drehen über die Karte
         const sheenOffset = (angle / 180) * 160 - 30;
         if (frontSheen) frontSheen.style.transform = `translateX(${sheenOffset.toFixed(1)}%) rotate(25deg)`;
         if (backSheen) backSheen.style.transform = `translateX(${(100 - sheenOffset).toFixed(1)}%) rotate(25deg)`;
 
-        // Status-Attribute synchronisieren
+        // Zustand für Bildschirmleser aktualisieren
         card.setAttribute('data-mode', isFlippedOver ? 'menu' : 'single');
         card.setAttribute('aria-expanded', isFlippedOver ? 'true' : 'false');
       });
@@ -404,7 +403,7 @@
         syncToggleFromCards();
       }
 
-      // Touch & Pointer Feedback (Sofortige Reaktion auf pointerdown per SKILL.md)
+      // Sofortige Rückmeldung beim Antippen
       let pointerStartX = 0;
       let pointerStartY = 0;
       let isPointerDown = false;
@@ -412,7 +411,7 @@
 
       card.addEventListener('pointerdown', (e) => {
         if (e.button !== undefined && e.button > 0) return;
-        // Tipp auf die Allergen-Zeile ist eine eigene Aktion, kein Karten-Flip
+        // Tippen auf die Allergene dreht die Karte nicht um
         if (e.target.closest('.product-allergens')) return;
         isPointerDown = true;
         isDragScroll = false;
@@ -451,7 +450,7 @@
         toggleFlip();
       });
 
-      // Barrierefreiheit: Tastatur-Navigation (Enter & Space)
+      // Bedienung mit der Tastatur (Enter und Leertaste)
       card.addEventListener('keydown', (e) => {
         if (e.target.closest('.product-allergens')) return;
         if (e.key === 'Enter' || e.key === ' ') {
@@ -469,7 +468,7 @@
       });
     });
 
-    // Global Toggle Pill (Single / Menü)
+    // Schalter oben: alle Karten auf Single oder Menü
     if (menuTogglePill && btnSingle && btnMenu && menuSection) {
       const slider = menuTogglePill.querySelector('.menu__toggle-slider');
       const sliderSpring = slider
@@ -512,7 +511,7 @@
           if (prefersReducedMotion()) {
             ctrl.flipTo(targetAngle, { immediate: true });
           } else {
-            // Apple Cascading Wave (Stagger von 45ms pro Karte)
+            // Karten drehen sich kurz nacheinander (45 ms Abstand)
             const timeout = setTimeout(() => {
               ctrl.flipTo(targetAngle);
             }, i * 45);
@@ -526,7 +525,7 @@
     }
   }
 
-  // --- Legend Accordion & Allergen Jump Handler ---
+  // --- Allergen-Legende auf- und zuklappen ---
   const legendCard = document.getElementById('legendCard') || document.querySelector('.legend-card');
   const legendHeader = document.getElementById('legendCardHeader') || document.querySelector('.legend-card__header');
   const legendContent = document.getElementById('legendContent');
@@ -546,7 +545,7 @@
     if (legendSubtitle) {
       legendSubtitle.textContent = expanded ? 'Tippen zum Einklappen' : 'Tippen zum Aufklappen';
     }
-    // Legende zu = Markierung erledigt
+    // Legende zu: Markierungen entfernen
     if (!expanded) clearAllergenHighlights();
   }
 
@@ -570,22 +569,22 @@
     });
   }
 
-  // Also clicking anywhere on the card when collapsed expands it smoothly
+  // Klick irgendwo auf die zugeklappte Legende öffnet sie
   if (legendCard) {
     legendCard.addEventListener('click', (e) => {
-      // If header was clicked, it's already handled with e.stopPropagation()
-      // If clicked inside content while open, don't collapse (user selecting text or reading)
+      // Klick auf den Kopf wird schon oben behandelt
+      // Klick in die offene Legende klappt sie nicht zu (z. B. beim Lesen)
       if (legendContent && !legendContent.classList.contains('is-collapsed') && e.target.closest('#legendContent')) {
         return;
       }
-      // If collapsed, clicking anywhere on the card opens it!
+      // Zugeklappt: Klick öffnet die Legende
       if (legendContent && legendContent.classList.contains('is-collapsed')) {
         setLegendExpanded(true);
       }
     });
   }
 
-  // --- Mobile Legend Category Tabs ---
+  // --- Reiter in der Legende (Handy) ---
   const tabBtnAllergens = document.getElementById('tabBtnAllergens');
   const tabBtnAdditives = document.getElementById('tabBtnAdditives');
   const colAllergens = document.getElementById('legendColAllergens');
@@ -617,10 +616,9 @@
     });
   }
 
-  // --- Allergen-Markierung & Zurück-Navigation ---
-  // Ein Tipp auf die Klammer eines Produkts (egal auf welchen Code) markiert ALLE
-  // darin enthaltenen Allergene und Zusatzstoffe in der Legende. Ein "Zurück"-Button
-  // erlaubt es, mit einem Klick genau zum Ausgangsprodukt zurückzuspringen.
+  // --- Allergene markieren und zurückspringen ---
+  // Tippen auf die Allergene eines Produkts markiert alle seine Codes in der Legende.
+  // Der Button "Zurück" springt danach wieder zum Produkt.
   let activeAllergenSource = null;
   let returnTargetElement = null;
 
@@ -641,7 +639,7 @@
     return [...new Set(codes.filter(Boolean))];
   }
 
-  // Zähler an den mobilen Tabs, damit Markierungen im anderen Tab nicht übersehen werden
+  // Zähler an den Reitern zeigt, wie viele Markierungen dort sind
   function ensureTabMarker(tabBtn) {
     let marker = tabBtn.querySelector('.legend-card__tab-marker');
     if (!marker) {
@@ -683,7 +681,7 @@
   function scrollLegendIntoView() {
     const target = legendCard || legendContent;
     if (!target) return;
-    // Fixierten Header berücksichtigen, damit der Legendenkopf nicht verdeckt wird
+    // Abstand für den Header oben lassen, damit nichts verdeckt wird
     const headerBottom = header ? Math.max(0, header.getBoundingClientRect().bottom) : 0;
     const top = target.getBoundingClientRect().top + window.scrollY - headerBottom - 12;
     window.scrollTo({ top: Math.max(0, top), behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
@@ -700,7 +698,7 @@
     activeAllergenSource = container;
     container.classList.add('is-active');
 
-    // Produktname & Zielelement für den "Zurück"-Button ermitteln
+    // Produktname und Sprungziel für den Zurück-Button suchen
     const card = container.closest('.menu-card');
     const listItem = container.closest('.menu-list__item');
     let productName = 'Produkt';
@@ -729,18 +727,18 @@
       setLegendExpanded(true);
     }
 
-    // Mobile: Allergene-Tab bevorzugen, Zusatzstoffe nur wenn es keine Allergene gibt
+    // Handy: Reiter "Allergene" zeigen, außer das Produkt hat nur Zusatzstoffe
     const hasAllergens = items.some((item) => item.id.startsWith('allergen-item-'));
     setLegendTab(hasAllergens ? 'allergens' : 'additives');
 
-    // Reflow erzwingen, damit der Puls auch beim erneuten Tippen desselben Produkts abläuft
+    // Damit das Aufleuchten auch beim zweiten Tippen wieder startet
     void items[0].offsetWidth;
     for (const item of items) {
       item.classList.add('is-highlighted');
     }
     updateTabMarkers();
 
-    // Nach dem Aufklappen ist das Layout erst im nächsten Frame final
+    // Erst im nächsten Moment scrollen, wenn die Legende fertig aufgeklappt ist
     requestAnimationFrame(scrollLegendIntoView);
   }
 
@@ -756,7 +754,7 @@
       behavior: prefersReducedMotion() ? 'auto' : 'smooth',
     });
 
-    // Sehr dezente Puls-Hervorhebung des Ausgangsprodukts zur visuellen Orientierung
+    // Produkt kurz aufleuchten lassen, damit man es wiederfindet
     returnTargetElement.classList.add('product-returned-pulse');
     setTimeout(() => {
       if (returnTargetElement) returnTargetElement.classList.remove('product-returned-pulse');
@@ -777,7 +775,7 @@
     highlightProductAllergens(container);
   });
 
-  // Tastatur: Enter/Leertaste auf einem Code verhält sich wie ein Tipp
+  // Tastatur: Enter oder Leertaste wirkt wie Antippen
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Enter' && e.key !== ' ') return;
     const codeEl = e.target.closest('.allergen-code');
@@ -788,8 +786,8 @@
     highlightProductAllergens(container);
   });
 
-  // --- Menu Data State ---
-  // Expose menu data globally for state inspection and client applications
+  // --- Speisekarten-Daten ---
+  // Daten aus menu-data.json für andere Skripte bereitstellen
   fetch('menu-data.json')
     .then((res) => (res.ok ? res.json() : null))
     .then((data) => {
@@ -797,7 +795,7 @@
     })
     .catch(() => { });
 
-  // --- Dynamic News Loading ---
+  // --- News laden ---
   async function loadNews() {
     const container = document.getElementById('news-container');
     if (!container) return;
@@ -838,7 +836,7 @@
       .replace(/'/g, "&#039;");
   }
 
-  // News laden, sobald das DOM bereit ist
+  // News laden, sobald die Seite bereit ist
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', loadNews);
   } else {

@@ -1,22 +1,21 @@
 /* ============================================
-   BUNSMITH — Premium Smashburger
-   Design System & Stylesheet
+   Elite Burger — Gestaltung der Website
    ============================================ */
 
-/* --- Design Tokens --- */
+/* --- Grundwerte (Farben, Schriften, Abstände) --- */
 :root {
-  /* Colors */
+  /* Farben */
   --bg-primary: #0d0d0d;
   --bg-secondary: #141414;
   --bg-card: #1a1a1a;
   --bg-card-hover: #1f1f1f;
-  /* Hairlines statt harter Grautöne: wirken auf jeder Fläche gleich fein */
+  /* Feine, halbdurchsichtige Linien */
   --border-subtle: rgba(255, 255, 255, 0.06);
   --border-accent: rgba(255, 255, 255, 0.09);
-  /* Heller Rand oben = Licht, das auf der Kante des Materials liegt */
+  /* Heller Rand oben wirkt wie Licht auf einer Kante */
   --border-highlight: rgba(255, 255, 255, 0.14);
 
-  /* Etwas weicheres Weiß gegen Überstrahlung auf Dunkel; Muted jetzt AA-konform */
+  /* Textfarben, gut lesbar auf dunklem Hintergrund */
   --text-primary: #f5f5f7;
   --text-secondary: #b4b4ba;
   --text-muted: #8e8e93;
@@ -28,18 +27,18 @@
   --accent-glow-strong: rgba(225, 136, 52, 0.22);
   --danger-color: #ff453a;
 
-  /* Typography — System-Font: bringt Optical Sizing & Tracking-Tabellen schon mit */
+  /* Schriften: die Systemschrift des Geräts */
   --font-heading: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI Variable Display', 'Segoe UI', system-ui, Roboto, 'Helvetica Neue', sans-serif;
   --font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI Variable Text', 'Segoe UI', system-ui, Roboto, 'Helvetica Neue', sans-serif;
 
-  /* Tracking nach Größe: je größer die Schrift, desto enger */
+  /* Buchstabenabstand: je größer die Schrift, desto enger */
   --tracking-display: -0.035em;
   --tracking-title: -0.028em;
   --tracking-heading: -0.018em;
   --tracking-ui: -0.006em;
   --tracking-label: 0.12em;
 
-  /* Spacing */
+  /* Abstände */
   --space-xs: 0.5rem;
   --space-sm: 0.75rem;
   --space-md: 1rem;
@@ -48,7 +47,7 @@
   --space-2xl: 3rem;
   --space-3xl: 4rem;
 
-  /* Radius — feste Stufen: Chips < Komponenten < Karten < Pille */
+  /* Ecken-Rundungen: von klein nach groß */
   --radius-xs: 8px;
   --radius-sm: 10px;
   --radius-md: 14px;
@@ -56,7 +55,7 @@
   --radius-xl: 28px;
   --radius-pill: 999px;
 
-  /* Transitions — nur Zustandswechsel. Echte Federn (Gesten, Toggle, Buttons) laufen in script.js */
+  /* Übergänge. Federnde Bewegungen steuert script.js */
   --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
   --transition-fast: 200ms cubic-bezier(0.25, 1, 0.5, 1);
   --transition-smooth: 500ms var(--ease-out);
@@ -65,7 +64,7 @@
   color-scheme: dark;
 }
 
-/* --- Reset & Base --- */
+/* --- Grundeinstellungen --- */
 *,
 *::before,
 *::after {
@@ -114,7 +113,7 @@ a {
   text-decoration: none;
 }
 
-/* Kein 300ms-Tap-Delay, kein graues Tap-Highlight: Feedback kommt von uns */
+/* Kein grauer Tipp-Effekt und keine Verzögerung beim Antippen */
 a,
 button {
   -webkit-tap-highlight-color: transparent;
@@ -126,15 +125,14 @@ button {
   outline-offset: 3px;
 }
 
-/* --- Utility --- */
+/* --- Hilfsklassen --- */
 .section-padding {
   padding-inline: var(--space-lg);
   padding-block: var(--space-3xl);
 }
 
-/* --- Scroll Reveal Animation ---
-   Als Animation mit "backwards"-Fill statt Transition:
-   Verzögerung (Stagger) bleibt im Reveal und verzögert später keine Hover-Effekte. */
+/* --- Einblenden beim Scrollen ---
+   Inhalte gleiten weich ins Bild, sobald sie sichtbar werden. */
 .reveal:not(.visible) {
   opacity: 0;
   will-change: transform, opacity, filter;
@@ -168,14 +166,14 @@ button {
   }
 }
 
-/* Fallback ohne JS, damit Inhalte nie unsichtbar bleiben */
+/* Ohne JavaScript alles sofort zeigen */
 @media (scripting: none) {
   .reveal:not(.visible) {
     opacity: 1;
   }
 }
 
-/* Statische Stufen als Fallback; script.js staffelt pro Sichtbarkeits-Batch */
+/* Verzögerungs-Stufen, falls script.js nicht läuft */
 .reveal-delay-1 {
   --reveal-delay: 100ms;
 }
@@ -201,7 +199,7 @@ button {
 }
 
 /* --- Header ---
-   Schwebende Glas-Kapsel: Inhalt scrollt darunter, kein harter Divider */
+   Schwebende Kapsel oben, der Inhalt scrollt darunter durch */
 .header {
   position: fixed;
   top: 0;
@@ -269,7 +267,7 @@ button {
   font-size: 1.05rem;
 }
 
-/* --- Hero Section --- */
+/* --- Oberer Bereich mit Video --- */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -311,7 +309,7 @@ button {
   max-width: 640px;
 }
 
-/* Halal-Slogan im Hero-Bereich: Edler, minimalistischer Eyebrow-Text in Reinweiß */
+/* "100% HALAL" über dem Slogan */
 .hero__halal-tag {
   display: inline-block;
   font-family: var(--font-heading);
@@ -382,7 +380,7 @@ button {
   margin-bottom: var(--space-2xl);
 }
 
-/* Press/Hover-Federn für den CTA kommen aus script.js (transform) */
+/* Federnde Bewegung des Buttons kommt aus script.js */
 .hero__cta {
   display: inline-flex;
   align-items: center;
@@ -476,7 +474,7 @@ button {
   }
 }
 
-/* --- Menu Section --- */
+/* --- Speisekarte --- */
 .menu {
   padding: var(--space-3xl) var(--space-lg);
   background: var(--bg-primary);
@@ -515,7 +513,7 @@ button {
   border-radius: 2px;
 }
 
-/* --- Menu Toggle Switch --- */
+/* --- Schalter Single / Menü --- */
 .menu__toggle-container {
   display: flex;
   justify-content: center;
@@ -564,8 +562,8 @@ button {
   outline-offset: -2px;
 }
 
-/* Position wird per Feder in script.js gesteuert (interruptibel, mit Velocity);
-   die Regel darunter ist nur der Ruhezustand ohne JS */
+/* Die Bewegung des Schiebers steuert script.js.
+   Diese Regel gilt nur ohne JavaScript */
 .menu__toggle-slider {
   position: absolute;
   top: 4px;
@@ -585,7 +583,7 @@ button {
   transform: translateX(100%);
 }
 
-/* --- Menu Cards --- */
+/* --- Burger-Karten --- */
 .menu__grid {
   display: flex;
   flex-direction: column;
@@ -616,7 +614,7 @@ button {
   border-radius: var(--radius-lg);
 }
 
-/* Chilli Chicken Burger: bewusst ohne Fokus-Ring */
+/* Chilli Chicken Burger: ohne orangen Fokus-Ring */
 #menu-chilli-chicken-burger:focus,
 #menu-chilli-chicken-burger:focus-visible {
   outline: none;
@@ -635,7 +633,7 @@ button {
   border-radius: var(--radius-lg);
 }
 
-/* Instant press response per Apple WWDC & SKILL.md */
+/* Karte gibt beim Antippen sofort leicht nach */
 .menu-card.is-pressed .menu-card__inner {
   transform: scale(0.982);
 }
@@ -652,7 +650,7 @@ button {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 
-  /* Apple VisionOS Liquid Glass Material */
+  /* Glas-Optik */
   background: linear-gradient(165deg, rgba(28, 28, 32, 0.76) 0%, rgba(15, 15, 18, 0.9) 100%);
   backdrop-filter: blur(28px) saturate(180%);
   -webkit-backdrop-filter: blur(28px) saturate(180%);
@@ -664,12 +662,12 @@ button {
     box-shadow var(--transition-smooth);
 }
 
-/* Front Face: Single */
+/* Vorderseite: Single */
 .menu-card__face--front {
   transform: rotateY(0deg) translateZ(1px);
 }
 
-/* Back Face: Menü */
+/* Rückseite: Menü */
 .menu-card__face--back {
   transform: rotateY(180deg) translateZ(1px);
   background: linear-gradient(165deg, rgba(34, 26, 20, 0.8) 0%, rgba(16, 15, 18, 0.92) 100%);
@@ -680,7 +678,7 @@ button {
     inset 0 -1px 0 rgba(0, 0, 0, 0.4);
 }
 
-/* Glass Sheen (Dynamischer Lichtstreif bei Rotation) */
+/* Lichtstreif beim Umdrehen */
 .menu-card__glass-sheen {
   position: absolute;
   inset: -50%;
@@ -699,7 +697,7 @@ button {
   will-change: transform;
 }
 
-/* Desktop Hover */
+/* Darüberfahren mit der Maus */
 @media (hover: hover) {
   .menu-card:hover .menu-card__face--front {
     border-color: rgba(255, 255, 255, 0.25);
@@ -715,7 +713,7 @@ button {
   }
 }
 
-/* Image Wrapper */
+/* Bild */
 .menu-card__image-wrapper {
   position: relative;
   width: 100%;
@@ -747,7 +745,7 @@ button {
   z-index: 1;
 }
 
-/* Tags on Image */
+/* Schilder auf dem Bild (z. B. "Scharf") */
 .menu-card__tag {
   position: absolute;
   top: var(--space-md);
@@ -804,7 +802,7 @@ button {
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-/* Mehrere Tags: untereinander gestapelt an der Position des Einzel-Tags */
+/* Mehrere Schilder untereinander */
 .menu-card__tags {
   position: absolute;
   top: var(--space-md);
@@ -822,7 +820,7 @@ button {
   left: auto;
 }
 
-/* Grünes Glas: gleiche Materialität wie die übrigen Tags, nur grün getönt */
+/* Grünes Schild "Auch vegetarisch" */
 .menu-card__tag--veggie {
   background: rgba(48, 209, 88, 0.18);
   color: #6ee68f;
@@ -835,7 +833,7 @@ button {
   flex-shrink: 0;
 }
 
-/* Glass Flip Pill (Top-Right Action) */
+/* Knopf oben rechts ("Menü ansehen") */
 .menu-card__flip-pill {
   position: absolute;
   top: var(--space-md);
@@ -884,7 +882,7 @@ button {
   color: var(--accent);
 }
 
-/* Card Body */
+/* Textbereich der Karte */
 .menu-card__body {
   padding: var(--space-lg);
   display: flex;
@@ -900,7 +898,7 @@ button {
   margin-bottom: var(--space-xs);
 }
 
-/* Name + Allergen-Zeile als vertikaler Stapel links neben dem Preis */
+/* Name und Allergene links, Preis rechts */
 .menu-card__title-group {
   display: flex;
   flex-direction: column;
@@ -940,7 +938,7 @@ button {
 }
 
 /* ============================================
-   Big Wac / Big Mac — 3D Coin Morph Animation
+   Big Wac: "W" dreht sich wie eine Münze zum "M"
    ============================================ */
 .wac-morph {
   display: inline-flex;
@@ -1049,7 +1047,7 @@ button {
   text-shadow: 0 0 15px rgba(225, 136, 52, 0.3);
 }
 
-/* Menü-Badge */
+/* Hinweis "Inkl. Pommes & Fritz-Kola" */
 .menu-card__menu-badge {
   display: inline-flex;
   align-items: center;
@@ -1079,7 +1077,7 @@ button {
   margin-bottom: var(--space-sm);
 }
 
-/* Ingredients & Combo Pills */
+/* Zutaten und Menü-Bestandteile */
 .menu-card__ingredients,
 .menu-card__combo-pills {
   display: flex;
@@ -1114,7 +1112,7 @@ button {
   -webkit-backdrop-filter: blur(8px);
 }
 
-/* Footer Hint at bottom of body */
+/* Hinweis unten in der Karte ("Tippen für …") */
 .menu-card__footer-hint {
   display: flex;
   align-items: center;
@@ -1139,7 +1137,7 @@ button {
   opacity: 1;
 }
 
-/* Accessibility: Reduced Motion */
+/* Weniger Bewegung: Karten wechseln per Überblenden statt Drehen */
 @media (prefers-reduced-motion: reduce) {
   .menu-card {
     perspective: none !important;
@@ -1184,9 +1182,8 @@ button {
   }
 }
 
-/* --- Allergen & Additives Notation ---
-   Eigene Zeile direkt unter dem Produktnamen. Die ganze Klammer ist eine
-   Tippfläche: ein Tipp markiert alle enthaltenen Codes in der Legende. */
+/* --- Allergene und Zusatzstoffe am Produkt ---
+   Stehen unter dem Namen. Tippen markiert alle Codes in der Legende. */
 .product-allergens {
   display: block;
   white-space: nowrap !important;
@@ -1226,7 +1223,7 @@ button {
   }
 }
 
-/* Aktives Produkt: seine Codes sind gerade in der Legende markiert */
+/* Dieses Produkt ist gerade in der Legende markiert */
 .product-allergens.is-active {
   color: var(--accent);
   background: rgba(225, 136, 52, 0.1);
@@ -1249,7 +1246,7 @@ button {
   outline: none;
 }
 
-/* Tooltip via data-tooltip */
+/* Kleine Erklärung beim Darüberfahren */
 .allergen-code[data-tooltip] {
   position: relative;
 }
@@ -1304,8 +1301,8 @@ button {
   transform: translate3d(-50%, 0, 0);
 }
 
-/* Die Klammer steht jetzt linksbündig: Tooltips der ersten Codes nach rechts
-   aufklappen, damit sie nicht am Kartenrand abgeschnitten werden. */
+/* Bei den ersten Codes klappt die Erklärung nach rechts auf,
+   damit sie nicht am Kartenrand abgeschnitten wird. */
 .allergen-code[data-tooltip]:nth-child(-n + 3)::after {
   left: -0.4rem;
   transform: translate3d(0, 6px, 0);
@@ -1316,7 +1313,7 @@ button {
   transform: translate3d(0, 0, 0);
 }
 
-/* --- Fingerfood & Dips (Compact List View) --- */
+/* --- Fingerfood und Dips (Liste) --- */
 .menu__lists-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1491,7 +1488,7 @@ button {
   }
 }
 
-/* --- Allergen & Additive Legend --- */
+/* --- Legende für Allergene und Zusatzstoffe --- */
 .menu__legend-section {
   margin-top: var(--space-2xl);
   margin-bottom: var(--space-xl);
@@ -1646,7 +1643,7 @@ button {
   display: none;
 }
 
-/* --- Allergen Legend: Return to Product Button --- */
+/* --- Button "Zurück zum Produkt" in der Legende --- */
 .legend-card__return {
   margin-bottom: 0.85rem;
   display: flex;
@@ -1738,7 +1735,7 @@ button {
   background: rgba(225, 136, 52, 0.05);
 }
 
-/* --- Mobile Segmented Tabs --- */
+/* --- Reiter in der Legende (Handy) --- */
 .legend-card__tabs {
   display: flex;
   background: rgba(0, 0, 0, 0.45);
@@ -1801,7 +1798,7 @@ button {
   color: #000;
 }
 
-/* Zähler: wie viele markierte Einträge in diesem Tab stecken */
+/* Zähler: wie viele Markierungen im Reiter sind */
 .legend-card__tab-marker {
   display: inline-flex;
   align-items: center;
@@ -1984,7 +1981,7 @@ button {
   font-size: 0.76rem;
 }
 
-/* --- Mobile Specific Ultra-Compact Layout --- */
+/* --- Legende auf dem Handy: kompakter --- */
 @media (max-width: 768px) {
   .legend-card__content {
     padding: 0.75rem 0.75rem 0.9rem;
@@ -2016,12 +2013,12 @@ button {
     }
   }
 
-  /* Redundant column titles hidden on mobile */
+  /* Spaltenüberschriften auf dem Handy ausblenden */
   .legend-card__col-title {
     display: none;
   }
 
-  /* Compact tabs without line break */
+  /* Reiter ohne Zeilenumbruch */
   .legend-card__tab {
     padding: 0.4rem 0.45rem;
     font-size: 0.74rem;
@@ -2040,7 +2037,7 @@ button {
     flex-shrink: 0;
   }
 
-  /* Responsive 2-column or 1-column grid */
+  /* Ein oder zwei Spalten, je nach Platz */
   .legend-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
@@ -2123,7 +2120,7 @@ button {
   }
 }
 
-/* --- Info Section --- */
+/* --- Öffnungszeiten, Karte und News --- */
 .info {
   padding: var(--space-3xl) var(--space-lg);
   background: var(--bg-primary);
@@ -2160,8 +2157,7 @@ button {
   margin: 0 auto;
 }
 
-/* Der 3px-Akzentbalken links ist entfallen: bei 24px Radius lief er sichelförmig aus.
-   Der Akzent sitzt jetzt im Icon-Tile. */
+/* Kästen für Öffnungszeiten, Anschrift und News */
 .info-block {
   background: var(--bg-secondary);
   border-radius: var(--radius-lg);
@@ -2225,7 +2221,7 @@ button {
   font-variant-numeric: tabular-nums;
 }
 
-/* Ruhetag: zurückgenommen statt als Uhrzeit hervorgehoben */
+/* Ruhetag: unauffälliger als die Uhrzeiten */
 .info-block__time--closed {
   font-weight: 500;
   color: var(--text-muted);
@@ -2274,7 +2270,7 @@ button {
   }
 }
 
-/* --- News Block --- */
+/* --- News --- */
 .info-block--news {
   max-width: 600px;
   margin: var(--space-lg) auto 0;
@@ -2417,7 +2413,7 @@ button {
   margin-bottom: var(--space-xl);
 }
 
-/* Press/Hover-Federn kommen aus script.js (transform) */
+/* Federnde Bewegung der Icons kommt aus script.js */
 .footer__social-link {
   display: flex;
   align-items: center;
@@ -2490,8 +2486,8 @@ button {
   }
 }
 
-/* --- Ambient Glow Effect ---
-   Position per transform (Compositor) statt left/top; Follow-Smoothing in script.js */
+/* --- Leuchtender Schein, der der Maus folgt ---
+   Die Bewegung steuert script.js */
 .ambient-glow {
   position: fixed;
   top: 0;
@@ -2512,7 +2508,7 @@ button {
   opacity: 0.6;
 }
 
-/* --- Responsive (Tablet & Desktop) --- */
+/* --- Größere Bildschirme (Tablet und Computer) --- */
 @media (min-width: 768px) {
   .section-padding {
     padding-inline: var(--space-2xl);
@@ -2551,8 +2547,8 @@ button {
   }
 }
 
-/* --- Legal Pages (Datenschutz, Impressum) ---
-   Lesefluss zuerst: schmale Spalte, ruhige Karten pro Abschnitt. */
+/* --- Rechtliche Seiten (Datenschutz, Impressum) ---
+   Schmale Textspalte, jeder Abschnitt in einer eigenen Karte. */
 .legal {
   max-width: 820px;
   margin: 0 auto;
@@ -2726,7 +2722,7 @@ button {
   background: var(--accent);
 }
 
-/* Anschriften als ruhiger Block */
+/* Anschriften */
 .legal__address {
   margin: var(--space-sm) 0;
   padding: var(--space-sm) var(--space-md);
@@ -2753,15 +2749,6 @@ button {
   color: var(--accent);
 }
 
-/* Platzhalter: fällt auf, solange noch keine echten Daten eingetragen sind */
-.legal__placeholder {
-  padding: 0 0.3em;
-  border: 1px dashed rgba(225, 136, 52, 0.55);
-  border-radius: 5px;
-  background: rgba(225, 136, 52, 0.1);
-  color: var(--accent);
-}
-
 .legal__section-footer {
   margin-top: var(--space-xl);
   text-align: center;
@@ -2769,8 +2756,8 @@ button {
   color: var(--text-muted);
 }
 
-/* --- Accessibility: Transparenz & Kontrast ---
-   Glas wird milchig/solide, Ränder werden definiert */
+/* --- Weniger Transparenz / mehr Kontrast ---
+   Für Nutzer, die das in den Systemeinstellungen eingestellt haben */
 @media (prefers-reduced-transparency: reduce) {
 
   .header__inner,
@@ -2807,9 +2794,9 @@ button {
   }
 }
 
-/* --- Reduced Motion ---
-   Keine "kein Feedback"-Variante, sondern die sanfte: Cross-Fades statt Slides,
-   keine Hover-Bewegung, keine endlosen Dekor-Animationen. Farb-/Opacity-Wechsel bleiben. */
+/* --- Weniger Bewegung ---
+   Für Nutzer, die das in den Systemeinstellungen eingestellt haben:
+   Überblenden statt Bewegen, keine Dauer-Animationen. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
