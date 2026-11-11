@@ -786,6 +786,128 @@
     highlightProductAllergens(container);
   });
 
+  // --- Öffnungszeiten: heutigen Tag hervorheben und Live-Status anzeigen ---
+  // Die Zeiten stehen ausschließlich im HTML (data-open / data-close pro Zeile).
+  // Berechnet wird immer mit der Uhrzeit in Bremen, egal wo der Besucher sitzt.
+  const hoursBlock = document.getElementById('info-hours');
+  if (hoursBlock) {
+    const DAY_NAMES = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+    const CLOSING_SOON_MINUTES = 30;
+    const rows = Array.from(hoursBlock.querySelectorAll('.info-block__row[data-day]'));
+    const statusEl = hoursBlock.querySelector('.hours-status');
+    const statusText = statusEl ? statusEl.querySelector('.hours-status__text') : null;
+
+    const toMinutes = (value) => {
+      if (!value) return null;
+      const [h, m] = value.split(':').map(Number);
+      return Number.isFinite(h) && Number.isFinite(m) ? h * 60 + m : null;
+    };
+
+    const schedule = rows.map((row) => ({
+      row,
+      day: Number(row.dataset.day),
+      open: toMinutes(row.dataset.open),
+      close: toMinutes(row.dataset.close),
+    }));
+
+    // Aktuelle Zeit in Bremen (Europe/Berlin), unabhängig von der Zeitzone des Geräts
+    const berlinNow = () => {
+      try {
+        const parts = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'Europe/Berlin',
+          weekday: 'short',
+          hour: 'numeric',
+          minute: 'numeric',
+          hourCycle: 'h23',
+        }).formatToParts(new Date());
+        const get = (type) => (parts.find((p) => p.type === type) || {}).value;
+        const day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(get('weekday'));
+        return { day, minutes: Number(get('hour')) * 60 + Number(get('minute')) };
+      } catch (e) {
+        const d = new Date();
+        return { day: d.getDay(), minutes: d.getHours() * 60 + d.getMinutes() };
+      }
+    };
+
+    const formatTime = (minutes) =>
+      `${String(Math.floor(minutes / 60)).padStart(2, '0')}:${String(minutes % 60).padStart(2, '0')}`;
+
+    const markToday = (day) => {
+      schedule.forEach((entry) => {
+        const isToday = entry.day === day;
+        entry.row.classList.toggle('is-today', isToday);
+        if (isToday) {
+          entry.row.setAttribute('aria-current', 'date');
+          const label = entry.row.querySelector('.info-block__day');
+          if (label && !label.querySelector('.info-block__today')) {
+            const badge = document.createElement('span');
+            badge.className = 'info-block__today';
+            badge.textContent = 'Heute';
+            label.appendChild(badge);
+          }
+        } else {
+          entry.row.removeAttribute('aria-current');
+          const badge = entry.row.querySelector('.info-block__today');
+          if (badge) badge.remove();
+        }
+      });
+    };
+
+    const nextOpening = (fromDay, fromMinutes) => {
+      for (let offset = 0; offset < 7; offset++) {
+        const day = (fromDay + offset) % 7;
+        const entry = schedule.find((e) => e.day === day && e.open !== null);
+        if (!entry) continue;
+        if (offset === 0 && fromMinutes >= entry.open) continue;
+        return { entry, offset };
+      }
+      return null;
+    };
+
+    const setStatus = (modifier, text) => {
+      if (!statusEl || !statusText) return;
+      statusEl.classList.remove('hours-status--open', 'hours-status--closing-soon', 'hours-status--closed');
+      statusEl.classList.add(`hours-status--${modifier}`);
+      statusText.textContent = text;
+      statusEl.hidden = false;
+    };
+
+    const updateHours = () => {
+      const now = berlinNow();
+      if (now.day < 0) return;
+      markToday(now.day);
+
+      const today = schedule.find((e) => e.day === now.day);
+      const isOpenNow = today && today.open !== null && today.close !== null
+        && now.minutes >= today.open && now.minutes < today.close;
+
+      if (isOpenNow) {
+        const remaining = today.close - now.minutes;
+        if (remaining <= CLOSING_SOON_MINUTES) {
+          setStatus('closing-soon', `Schließt bald · bis ${formatTime(today.close)} Uhr`);
+        } else {
+          setStatus('open', `Jetzt geöffnet · bis ${formatTime(today.close)} Uhr`);
+        }
+        return;
+      }
+
+      const next = nextOpening(now.day, now.minutes);
+      if (!next) {
+        setStatus('closed', 'Zurzeit geschlossen');
+        return;
+      }
+      const when = next.offset === 0 ? 'heute' : next.offset === 1 ? 'morgen' : `am ${DAY_NAMES[next.entry.day]}`;
+      setStatus('closed', `Geschlossen · öffnet ${when} um ${formatTime(next.entry.open)} Uhr`);
+    };
+
+    updateHours();
+    // Jede Minute aktualisieren und beim Zurückkehren in den Tab sofort nachziehen
+    setInterval(updateHours, 60 * 1000);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) updateHours();
+    });
+  }
+
   // --- Speisekarten-Daten ---
   // Zahl als Preis anzeigen, z. B. 8.5 -> "8,50 €"
   function formatPreis(wert) {

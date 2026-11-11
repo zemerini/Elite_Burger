@@ -1568,31 +1568,36 @@
             </svg>
           </div>
           <h3 class="info-block__title">Öffnungszeiten</h3>
-          <div class="info-block__row">
+          <!-- Live-Status (wird per JavaScript befüllt, ohne JS unsichtbar) -->
+          <p class="hours-status" role="status" aria-live="polite" hidden>
+            <span class="hours-status__dot" aria-hidden="true"></span>
+            <span class="hours-status__text"></span>
+          </p>
+          <div class="info-block__row" data-day="1">
             <span class="info-block__day">Montag</span>
             <span class="info-block__time info-block__time--closed">Geschlossen</span>
           </div>
-          <div class="info-block__row">
+          <div class="info-block__row" data-day="2" data-open="14:00" data-close="21:00">
             <span class="info-block__day">Dienstag</span>
             <span class="info-block__time">14:00 – 21:00</span>
           </div>
-          <div class="info-block__row">
+          <div class="info-block__row" data-day="3" data-open="14:00" data-close="21:00">
             <span class="info-block__day">Mittwoch</span>
             <span class="info-block__time">14:00 – 21:00</span>
           </div>
-          <div class="info-block__row">
+          <div class="info-block__row" data-day="4" data-open="14:00" data-close="21:00">
             <span class="info-block__day">Donnerstag</span>
-            <span class="info-block__time">12:00 – 21:00</span>
+            <span class="info-block__time">14:00 – 21:00</span>
           </div>
-          <div class="info-block__row">
+          <div class="info-block__row" data-day="5" data-open="16:00" data-close="23:00">
             <span class="info-block__day">Freitag</span>
             <span class="info-block__time">16:00 – 23:00</span>
           </div>
-          <div class="info-block__row">
+          <div class="info-block__row" data-day="6" data-open="14:00" data-close="23:00">
             <span class="info-block__day">Samstag</span>
             <span class="info-block__time">14:00 – 23:00</span>
           </div>
-          <div class="info-block__row">
+          <div class="info-block__row" data-day="0" data-open="14:00" data-close="21:00">
             <span class="info-block__day">Sonntag</span>
             <span class="info-block__time">14:00 – 21:00</span>
           </div>
