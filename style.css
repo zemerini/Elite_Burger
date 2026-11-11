@@ -26,6 +26,7 @@
   --accent-glow: rgba(225, 136, 52, 0.12);
   --accent-glow-strong: rgba(225, 136, 52, 0.22);
   --danger-color: #ff453a;
+  --success-color: #30d158;
 
   /* Schriften: die Systemschrift des Geräts */
   --font-heading: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI Variable Display', 'Segoe UI', system-ui, Roboto, 'Helvetica Neue', sans-serif;
@@ -2270,6 +2271,107 @@ button {
   }
 }
 
+/* --- Öffnungszeiten: Live-Status und heutiger Tag --- */
+.hours-status {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  max-width: 100%;
+  margin: calc(-1 * var(--space-xs)) 0 var(--space-md);
+  padding: 0.4rem 0.85rem 0.4rem 0.7rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.03);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: var(--tracking-ui);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.hours-status[hidden] {
+  display: none;
+}
+
+.hours-status__dot {
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  /* Punkt auf der Mitte der ersten Textzeile halten, auch wenn der Text umbricht */
+  margin-top: calc(0.675em - 3.5px);
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.hours-status--open {
+  border-color: rgba(48, 209, 88, 0.3);
+  background: rgba(48, 209, 88, 0.08);
+  color: var(--text-primary);
+}
+
+.hours-status--open .hours-status__dot {
+  background: var(--success-color);
+  box-shadow: 0 0 0 3px rgba(48, 209, 88, 0.18);
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+.hours-status--closing-soon {
+  border-color: rgba(225, 136, 52, 0.35);
+  background: var(--accent-glow);
+  color: var(--text-primary);
+}
+
+.hours-status--closing-soon .hours-status__dot {
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow-strong);
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+/* Heutige Zeile: dezent hervorgehoben, passend zum Orange der Seite */
+.info-block__row.is-today {
+  position: relative;
+  margin: 2px calc(-1 * var(--space-sm));
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
+  border-radius: var(--radius-sm);
+  border-bottom-color: transparent;
+  background: var(--accent-glow);
+  box-shadow: inset 0 0 0 1px rgba(225, 136, 52, 0.22);
+}
+
+.info-block__row.is-today .info-block__day {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.info-block__row.is-today .info-block__time {
+  color: var(--accent);
+}
+
+.info-block__row.is-today .info-block__time--closed {
+  color: var(--text-secondary);
+}
+
+.info-block__today {
+  display: inline-block;
+  padding: 0.14rem 0.42rem;
+  border: 1px solid rgba(225, 136, 52, 0.28);
+  border-radius: var(--radius-xs);
+  background: rgba(225, 136, 52, 0.14);
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
 /* --- News --- */
 .info-block--news {
   max-width: 600px;
@@ -2792,6 +2894,15 @@ button {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
+
+  .info-block__row.is-today {
+    box-shadow: inset 0 0 0 1px var(--accent);
+  }
+
+  .info-block__today,
+  .hours-status {
+    border-color: currentColor;
+  }
 }
 
 /* --- Weniger Bewegung ---
@@ -2810,6 +2921,7 @@ button {
 
   .hero__scroll-line,
   .hero__badge-dot,
+  .hours-status__dot,
   .menu-card__tag--gold::after {
     animation: none;
   }
