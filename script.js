@@ -864,6 +864,7 @@
       return null;
     };
 
+    // \u00a0 = geschütztes Leerzeichen: „um 14:00 Uhr“ bleibt beim Umbruch zusammen
     const setStatus = (modifier, text) => {
       if (!statusEl || !statusText) return;
       statusEl.classList.remove('hours-status--open', 'hours-status--closing-soon', 'hours-status--closed');
@@ -884,9 +885,9 @@
       if (isOpenNow) {
         const remaining = today.close - now.minutes;
         if (remaining <= CLOSING_SOON_MINUTES) {
-          setStatus('closing-soon', `Schließt bald · bis ${formatTime(today.close)} Uhr`);
+          setStatus('closing-soon', `Schließt bald · bis\u00a0${formatTime(today.close)}\u00a0Uhr`);
         } else {
-          setStatus('open', `Jetzt geöffnet · bis ${formatTime(today.close)} Uhr`);
+          setStatus('open', `Jetzt geöffnet · bis\u00a0${formatTime(today.close)}\u00a0Uhr`);
         }
         return;
       }
@@ -897,7 +898,7 @@
         return;
       }
       const when = next.offset === 0 ? 'heute' : next.offset === 1 ? 'morgen' : `am ${DAY_NAMES[next.entry.day]}`;
-      setStatus('closed', `Geschlossen · öffnet ${when} um ${formatTime(next.entry.open)} Uhr`);
+      setStatus('closed', `Geschlossen · öffnet ${when} um\u00a0${formatTime(next.entry.open)}\u00a0Uhr`);
     };
 
     updateHours();
